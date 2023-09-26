@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>Bonsai - AIND version control library</Title>
+    <Description>A bonsai package for version control and interacting with Git Repository objects.</Description>
+    <Authors>Bruno Cruz</Authors>
+    <Copyright>Copyright ©  2023</Copyright>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/AllenNeuralDynamics/bonsai.version-control</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageIcon></PackageIcon>
+    <PackageOutputPath></PackageOutputPath>
+    <PackageTags>Bonsai Rx VersionControl AllenNeuralDynamics</PackageTags>
+    <TargetFramework>net472</TargetFramework>
+    <Features>strict</Features>
+    <Version>0.1.0-preview230926</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Core" Version="2.8.0" />
+    <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
+    <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="2.0.320" />
+    <PackageReference Include="NuGet.Versioning" Version="6.7.0" />
+  </ItemGroup>
+
+</Project>
