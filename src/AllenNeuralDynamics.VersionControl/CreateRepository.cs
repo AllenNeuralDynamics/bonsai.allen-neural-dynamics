@@ -1,4 +1,4 @@
-using Bonsai;
+﻿using Bonsai;
 using System;
 using System.ComponentModel;
 using System.Reactive.Linq;
@@ -14,7 +14,7 @@ namespace AllenNeuralDynamics.Git
     public class CreateRepository : Source<Repository>
     {
         /// <summary>
-        /// Gets or sets path for the targetted repository.
+        /// Gets or sets path for the targeted repository.
         /// </summary>
         [Editor("Bonsai.Design.FolderNameEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The relative or absolute path of the selected repository root.")]

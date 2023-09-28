@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Authors>Bruno Cruz</Authors>
+    <Copyright>Copyright © 2023 Allen Institute for Neural Dynamics</Copyright>
+    <PackageProjectUrl>https://github.com/AllenNeuralDynamics/bonsai.allen-neural-dynamics</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AllenNeuralDynamics/bonsai.allen-neural-dynamics</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <IncludeSymbols>true</IncludeSymbols>
+    <RepositoryType>git</RepositoryType>
+    <VersionSuffix></VersionSuffix>
+    <LangVersion>9.0</LangVersion>
+    <Features>strict</Features>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\AllenNeuralDynamics.svg">
+		<LogicalName>$(ProjectName).$(ProjectName).svg</LogicalName>
+		</EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\LICENSE" PackagePath="/" />
+    <Content Include="..\..\icon.png" PackagePath="/" />
+    <Content Include="..\..\README.md" PackagePath="/" />
+  </ItemGroup>
+</Project>
