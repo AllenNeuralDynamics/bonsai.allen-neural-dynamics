@@ -4,21 +4,26 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using LibGit2Sharp;
 
-namespace AllenNeuralDynamics.Git{
+namespace AllenNeuralDynamics.VersionControl
+{
+    /// <summary>
+    /// Represents an operator that asserts if a <see cref="Repository"/> object is clean and without untracked local changes.
+    /// </summary>
     [DefaultProperty("IgnoreUntracked")]
     [Description("Determines whether a specified repository is clean or if uncommitted or untracked changes exist")]
     public class IsRepositoryClean : Transform<Repository, bool>
     {
-        private bool ignoreUntracked = false;
-        [Editor("Bonsai.Design.FolderNameEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
-        [Description("The relative or absolute path of the selected repository root.")]
+        /// <summary>
+        /// Optionally ignores untracked changes when determining if a repository is clean.
+        /// </summary>
+        public bool IgnoreUntracked {get; set;} = false;
 
-        public bool IgnoreUntracked
-        {
-            get { return ignoreUntracked; }
-            set { ignoreUntracked = value; }
-        }
-
+        /// <summary>
+        /// Emits a sequence of values indicating whether the repository is clean or not.
+        /// </summary>
+        /// <returns>
+        /// A sequence of <see cref="bool"/> values with assertion outcome.
+        /// </returns>
         public override IObservable<bool> Process(IObservable<Repository> source)
         {
             return source.Select(value =>

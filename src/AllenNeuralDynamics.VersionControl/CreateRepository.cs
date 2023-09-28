@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using LibGit2Sharp;
 
-namespace AllenNeuralDynamics.Git
+namespace AllenNeuralDynamics.VersionControl
 {
     /// <summary>
-    /// Represents an operator that populates a Repository object from a target folder path
+    /// Represents an operator that populates a <see cref="Repository"/> object from a target folder path
     /// </summary>
     [DefaultProperty("Path")]
     [Description("Returns a new Repository object (LibGit2Sharp) for the specified repository root path. Accepts relative or absolute paths.")]
