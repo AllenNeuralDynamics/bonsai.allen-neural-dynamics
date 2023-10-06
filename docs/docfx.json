@@ -41,6 +41,7 @@
       {
         "files": [
           "logo.svg",
+          "full-logo.svg",
           "favicon.ico",
           "images/**",
           "workflows/**"

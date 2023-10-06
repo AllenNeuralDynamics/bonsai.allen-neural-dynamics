@@ -1,6 +1,6 @@
-# version-control
+# AllenNeuralDynamics
 
-A bonsai package for version control and interacting with Git Repository objects.
+A repository for [Bonsai](bonsai-rx.org) packages developed and maintained by the [Allen Institute for Neural Dynamics](https://alleninstitute.org/division/neural-dynamics/).
 
 ## Build the docs
 
