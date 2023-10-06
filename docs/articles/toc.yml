@@ -2,5 +2,5 @@
   items:
   - name: Quickstart
     href: intro.md
-  - name: How to use
-    href: manual.md
+  - name: Version Control
+    href: version-control.md
