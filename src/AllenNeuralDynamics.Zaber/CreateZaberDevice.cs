@@ -22,7 +22,7 @@ namespace AllenNeuralDynamics.Zaber
         public override IObservable<ZaberDevice> Generate()
         {
             return Observable.Using(
-                () => ZaberDeviceManager.ReserveConnection(Name),
+                () => ZaberDeviceManager.ReserveConnection(PortName),
                 resource =>
                 {
                     return Observable.Return(resource.Device)
