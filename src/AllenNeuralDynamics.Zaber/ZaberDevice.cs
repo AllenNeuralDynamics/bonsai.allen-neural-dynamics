@@ -46,8 +46,16 @@ namespace AllenNeuralDynamics.Zaber
         {
             var thisDevice = devices[deviceIdx];
             var thisAxis = thisDevice.GetAxis(axis);
-            thisAxis.MoveAbsolute(value);
+            thisAxis.MoveAbsoluteAsync(value, waitUntilIdle:false);
         }
+
+        public void HomeAxis(int axis)
+        {
+            var thisDevice = devices[deviceIdx];
+            var thisAxis = thisDevice.GetAxis(axis);
+            thisAxis.HomeAsync(false);
+        }
+
 
         public void Open(CancellationToken cancellationToken = default)
         {
