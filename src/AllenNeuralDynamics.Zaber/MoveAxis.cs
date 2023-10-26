@@ -3,26 +3,27 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Bonsai;
-using Zaber.Motion;
-using Zaber.Motion.Ascii;
+
 
 namespace AllenNeuralDynamics.Zaber
 {
-
-    [Description("Writes the sequence of digital state transitions to the specified Zaber output pin.")]
-    public class MoveAxis : Sink<int>
+    [Description("Moves an axis of a Zaber manipulator to a supplied position.")]
+    public class MoveAxis : Sink<double>
     {
-
         [TypeConverter(typeof(PortNameConverter))]
         [Description("The name of the serial port used to communicate with the manipulator.")]
         public string PortName { get; set; }
 
-
-        [Description("The digital output pin number on which to write the state values.")]
+        [Description("The axis index to be actuated.")]
         public int Axis { get; set; }
+
+        [Description("Optional velocity used to generate the movement.")]
+        public double? Velocity { get; set; } = null;
+
+        [Description("Optional acceleration used to generate the movement.")]
+        public double? Acceleration { get; set; } = null;
                 
-  
-        public override IObservable<int> Process(IObservable<int> source)
+        public override IObservable<double> Process(IObservable<double> source)
         {
             return Observable.Using(
                 cancellationToken => ZaberDeviceManager.ReserveConnectionAsync(PortName),
@@ -33,7 +34,9 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.MoveAxis(axis, value);
+                            connection.Device.MoveAxis(axis, value,
+                                Velocity.HasValue ? Velocity.Value : 0,
+                                Acceleration.HasValue ? Acceleration.Value : 0);
                         }
                     }));
                 });

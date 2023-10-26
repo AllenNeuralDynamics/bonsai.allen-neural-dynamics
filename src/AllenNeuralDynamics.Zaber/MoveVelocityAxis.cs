@@ -4,10 +4,11 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Bonsai;
 
+
 namespace AllenNeuralDynamics.Zaber
 {
-    [Description("Homes an axis of a Zaber manipulator.")]
-    public class HomeAxis : Sink
+    [Description("Moves an axis of a Zaber manipulator using the supplied velocity value.")]
+    public class MoveVelocityAxis : Sink<double>
     {
         [TypeConverter(typeof(PortNameConverter))]
         [Description("The name of the serial port used to communicate with the manipulator.")]
@@ -15,19 +16,23 @@ namespace AllenNeuralDynamics.Zaber
 
         [Description("The axis index to be actuated.")]
         public int Axis { get; set; }
-  
-        public override IObservable<TSource> Process<TSource>(IObservable<TSource> source)
+
+        [Description("Optional acceleration used to generate the movement.")]
+        public double? Acceleration { get; set; } = null;
+                
+        public override IObservable<double> Process(IObservable<double> source)
         {
             return Observable.Using(
                 cancellationToken => ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 (connection, cancellationToken) =>
                 {
                     var axis = Axis;
-                    return Task.FromResult(source.Do(_ =>
+                    return Task.FromResult(source.Do(value =>
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.HomeAxis(axis);
+                            connection.Device.MoveVelocityAxis(axis, value,
+                                Acceleration.HasValue ? Acceleration.Value : 0);
                         }
                     }));
                 });

@@ -6,8 +6,8 @@ using Bonsai;
 
 namespace AllenNeuralDynamics.Zaber
 {
-    [Description("Homes an axis of a Zaber manipulator.")]
-    public class HomeAxis : Sink
+    [Description("Stops an axis of a Zaber manipulator.")]
+    public class StopAxis : Sink
     {
         [TypeConverter(typeof(PortNameConverter))]
         [Description("The name of the serial port used to communicate with the manipulator.")]
@@ -15,7 +15,7 @@ namespace AllenNeuralDynamics.Zaber
 
         [Description("The axis index to be actuated.")]
         public int Axis { get; set; }
-  
+
         public override IObservable<TSource> Process<TSource>(IObservable<TSource> source)
         {
             return Observable.Using(
@@ -27,7 +27,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.HomeAxis(axis);
+                            connection.Device.StopAxis(axis);
                         }
                     }));
                 });
