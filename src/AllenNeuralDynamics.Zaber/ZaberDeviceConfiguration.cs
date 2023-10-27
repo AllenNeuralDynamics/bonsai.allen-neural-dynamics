@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
-using Bonsai;
 using Bonsai.IO.Ports;
 
 namespace AllenNeuralDynamics.Zaber
 {
     /// <summary>
-    /// Represents configuration settings used to initialize a Firmata serial connection.
+    /// Represents configuration settings used to initialize a connection with a <see cref="ZaberDevice"/>
     /// </summary>
     public class ZaberDeviceConfiguration
     {

@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
-using Zaber.Motion;
 using Zaber.Motion.Ascii;
 
 namespace AllenNeuralDynamics.Zaber
 {
+    /// <summary>
+    /// Represents an Zaber manipulator communicating with the host computer using the Zaber.Motion SDK.
+    /// </summary>
     public sealed class ZaberDevice : IDisposable
     {
         const int deviceIdx = 0;
@@ -17,6 +17,11 @@ namespace AllenNeuralDynamics.Zaber
         bool disposed;
         string portName;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZaberDevice"/> class using the
+        /// specified port name.
+        /// </summary>
+        /// <param name="portName">The port to use (for example, COM1).</param>
         public ZaberDevice(string portName)
         {
             this.portName = portName;
@@ -91,11 +96,22 @@ namespace AllenNeuralDynamics.Zaber
             return await thisAxis.GetPositionAsync();
         }
 
+        /// <summary>
+        /// Opens a new connection to a <see cref="ZaberDevice"/>.
+        /// </summary>
+        /// <param name="cancellationToken">
+        /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
+        /// </param>
         public void Open(CancellationToken cancellationToken = default)
         {
             RunAsync(cancellationToken);
         }
 
+        /// <summary>
+        /// Closes the port connection, sets the <see cref="IsOpen"/>
+        /// property to <see langword="false"/> and disposes of the
+        /// internal <see cref="Connection"/> object.
+        /// </summary>
         public void Close()
         {
             Dispose(true);
@@ -108,6 +124,7 @@ namespace AllenNeuralDynamics.Zaber
                 if (disposing)
                 {
                     comm.Close();
+                    comm.Dispose();
                     disposed = true;
                 }
             }
