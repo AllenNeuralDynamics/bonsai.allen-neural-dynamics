@@ -53,16 +53,26 @@ namespace AllenNeuralDynamics.Zaber
                 waitUntilIdle: false);
         }
 
+        public void StopAllAxes()
+        {
+            device.AllAxes.StopAsync(false);
+        }
+        
         public void StopAxis(int axis)
         {
             var thisAxis = device.GetAxis(axis);
             thisAxis.StopAsync(false);
         }
 
+        public void HomeAllAxes()
+        {
+            device.AllAxes.HomeAsync(false);
+        }
+
         public void HomeAxis(int axis)
         {
             var thisAxis = device.GetAxis(axis);
-            thisAxis.HomeAsync(waitUntilIdle: false);
+            thisAxis.HomeAsync(false);
         }
 
         public void MoveVelocityAxis(int axis, double velocity, double acceleration)
@@ -79,6 +89,16 @@ namespace AllenNeuralDynamics.Zaber
             return await thisAxis.GetPositionAsync();
         }
 
+        public async Task<bool> IsBusy()
+        {
+            return await device.AllAxes.IsBusyAsync();
+        }
+
+        public async Task<System.Reactive.Unit> WaitUntilIdle ()
+        {
+            await device.AllAxes.WaitUntilIdleAsync();
+            return new System.Reactive.Unit();
+        }
         /// <summary>
         /// Opens a new connection to a <see cref="ZaberDevice"/>.
         /// </summary>

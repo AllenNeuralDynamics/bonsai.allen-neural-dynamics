@@ -23,8 +23,8 @@ namespace AllenNeuralDynamics.Zaber
         /// <summary>
         /// Gets or sets the axis of the manipulator to be controlled.
         /// </summary>
-        [Description("The index of the axis of the manipulator to be controlled.")]
-        public int Axis { get; set; }
+        [Description("The index of the axis of the manipulator to be controlled. If left null, it will home all axes.")]
+        public int? Axis { get; set; } = null;
 
         /// <summary>
         /// Homes the target axis when an event is received.
@@ -43,7 +43,14 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.HomeAxis(axis);
+                            if (axis.HasValue)
+                            {
+                                connection.Device.HomeAxis(axis.Value);
+                            }
+                            else
+                            {
+                                connection.Device.HomeAllAxes();
+                            }
                         }
                     }));
                 });

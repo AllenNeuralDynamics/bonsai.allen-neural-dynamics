@@ -22,8 +22,8 @@ namespace AllenNeuralDynamics.Zaber
         /// <summary>
         /// Gets or sets the axis of the manipulator to be controlled.
         /// </summary>
-        [Description("The index of the axis of the manipulator to be controlled.")]
-        public int Axis { get; set; }
+        [Description("The index of the axis of the manipulator to be controlled. If null, will stop movement on all axes.")]
+        public int? Axis { get; set; } = null;
 
         /// <summary>
         /// Halts the movement of a specified axis when a value is received.
@@ -42,7 +42,14 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.StopAxis(axis);
+                            if (axis.HasValue)
+                            {
+                                connection.Device.StopAxis(axis.Value);
+                            }
+                            else
+                            {
+                                connection.Device.StopAllAxes();
+                            }
                         }
                     }));
                 });
