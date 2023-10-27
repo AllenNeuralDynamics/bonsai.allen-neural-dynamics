@@ -41,10 +41,10 @@ namespace AllenNeuralDynamics.Zaber
 
                     var cancellation = new CancellationTokenSource();
                     var device = new ZaberDevice(serialPortName);
-                    device.Open(cancellation.Token);
+                    device.Open();
                     var dispose = Disposable.Create(() =>
                     {
-                        cancellation.Cancel();
+                        device.Close();
                         openConnections.Remove(portName);
                     });
 

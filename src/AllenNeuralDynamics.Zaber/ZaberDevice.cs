@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Zaber.Motion;
 using Zaber.Motion.Ascii;
 
 namespace AllenNeuralDynamics.Zaber
@@ -30,24 +31,6 @@ namespace AllenNeuralDynamics.Zaber
         public bool IsOpen
         {
             get { return comm.IsConnected; }
-        }
-
-        Task RunAsync(CancellationToken cancellationToken)
-        {
-            comm = Connection.OpenSerialPort(portName);
-            devices = comm.DetectDevices();
-            device = devices[deviceIdx];
-            Thread.Sleep(2000);
-            return Task.Factory.StartNew(() =>
-            {
-                using var cancellation = cancellationToken.Register(comm.Dispose);
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                }
-            },
-            cancellationToken,
-            TaskCreationOptions.LongRunning,
-            TaskScheduler.Default);
         }
 
         public void MoveAxis(int axis, double position, double velocity, double acceleration)
@@ -102,9 +85,11 @@ namespace AllenNeuralDynamics.Zaber
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
-        public void Open(CancellationToken cancellationToken = default)
+        public void Open()
         {
-            RunAsync(cancellationToken);
+            comm = Connection.OpenSerialPort(portName);
+            devices = comm.DetectDevices();
+            device = devices[deviceIdx];
         }
 
         /// <summary>
@@ -123,7 +108,6 @@ namespace AllenNeuralDynamics.Zaber
             {
                 if (disposing)
                 {
-                    comm.Close();
                     comm.Dispose();
                     disposed = true;
                 }
