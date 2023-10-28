@@ -5,7 +5,7 @@
 //----------------------
 
 
-namespace AllenNeuralDynamics.Core
+namespace AllenNeuralDynamics.Core.Logging
 {
     #pragma warning disable // Disable all warnings
 
@@ -85,7 +85,7 @@ namespace AllenNeuralDynamics.Core
     
         private double? _timestamp;
     
-        private SoftwareEventTimestampSource _timestampSource = AllenNeuralDynamics.Core.SoftwareEventTimestampSource.None;
+        private SoftwareEventTimestampSource _timestampSource = AllenNeuralDynamics.Core.Logging.SoftwareEventTimestampSource.None;
     
         private int? _frameIndex;
     

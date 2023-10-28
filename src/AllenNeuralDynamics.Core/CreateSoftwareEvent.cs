@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Bonsai.Harp;
 
-namespace AllenNeuralDynamics.Core { 
+namespace AllenNeuralDynamics.Core.Logging { 
     [Combinator]
     [Description("Creates a fully populated SoftwareEvent a <T> generic object. If a Harp.Timestamped<T> is provided, temporal information will be added.")]
     [WorkflowElementCategory(ElementCategory.Transform)]

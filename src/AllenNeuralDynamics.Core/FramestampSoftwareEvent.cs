@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 
-namespace AllenNeuralDynamics.Core
+namespace AllenNeuralDynamics.Core.Logging
 {
     [Combinator]
     [Description("Injects RenderSynchState information in a SoftwareEvent")]
