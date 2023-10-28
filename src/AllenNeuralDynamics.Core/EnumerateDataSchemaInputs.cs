@@ -7,16 +7,16 @@ using System.Reactive.Linq;
 
 namespace AllenNeuralDynamics.Core
 {
-    public class EnumerateDataSchemas : Source<string>
+    public class EnumerateDataSchemaInputs : Source<string>
     {
-        public FileTypes FileFilter = FileTypes.YAML;
+        public FileTypes FileFilter { get; set; } = FileTypes.YAML;
 
         [Editor("Bonsai.Design.FolderNameEditor, Bonsai.Design", DesignTypes.UITypeEditor)]
         [Description("The relative or absolute path of the selected folder.")]
-        public string Directory = ".";
+        public string Directory { get; set; } = ".";
 
         [TypeConverter(typeof(EnumeratedDataSchemasConverter))]
-        public string DataSchema;
+        public string DataSchema { get; set; }
 
         private static string BuildFullPath(string dir, string file)
         {
@@ -41,7 +41,7 @@ namespace AllenNeuralDynamics.Core
         {
             public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
             {
-                EnumerateDataSchemas outer = (EnumerateDataSchemas)context.Instance;
+                EnumerateDataSchemaInputs outer = (EnumerateDataSchemaInputs)context.Instance;
                 var filterString = getFilterString(outer.FileFilter);
                 var schemaFiles = System.IO.Directory.GetFiles(outer.Directory, filterString).ToList();
                 var filenames = schemaFiles.Select(x => Path.GetFileName(x)).ToList();
