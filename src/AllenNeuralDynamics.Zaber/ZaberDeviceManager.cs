@@ -4,6 +4,9 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Collections.ObjectModel;
 
 namespace AllenNeuralDynamics.Zaber
 {
@@ -39,6 +42,12 @@ namespace AllenNeuralDynamics.Zaber
                     var serialPortName = deviceConfiguration.PortName;
                     if (string.IsNullOrEmpty(serialPortName)) serialPortName = portName;
 
+                    var configuration = new ZaberDeviceConfigurationCollection();
+                    if (configuration.Contains(serialPortName))
+                    {
+                        deviceConfiguration = configuration[serialPortName];
+                    }
+
                     var cancellation = new CancellationTokenSource();
                     var device = new ZaberDevice(serialPortName);
                     device.Open();
@@ -55,6 +64,15 @@ namespace AllenNeuralDynamics.Zaber
                 }
 
                 return new ZaberDeviceDisposable(connection.Item1, connection.Item2.GetDisposable());
+            }
+        }
+
+        public class ZaberDeviceConfigurationCollection : KeyedCollection<string, ZaberDeviceConfiguration>
+        {
+            /// <inheritdoc/>
+            protected override string GetKeyForItem(ZaberDeviceConfiguration item)
+            {
+                return item.PortName;
             }
         }
     }

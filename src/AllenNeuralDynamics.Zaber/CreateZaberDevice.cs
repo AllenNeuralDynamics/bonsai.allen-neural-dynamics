@@ -14,6 +14,8 @@ namespace AllenNeuralDynamics.Zaber
     [Description("Creates a connection to an Zaber manipulator.")]
     public class CreateZaberDevice : Source<ZaberDevice>, INamedElement
     {
+        readonly ZaberDeviceConfiguration configuration = new ZaberDeviceConfiguration();
+
         /// <summary>
         /// Gets or sets the optional alias to be used for the manipulator.
         /// </summary>
@@ -25,7 +27,11 @@ namespace AllenNeuralDynamics.Zaber
         /// </summary>
         [TypeConverter(typeof(SerialPortNameConverter))]
         [Description("The name of the serial port used to communicate with the manipulator.")]
-        public string PortName { get; set; }
+        public string PortName
+        {
+            get { return configuration.PortName; }
+            set { configuration.PortName = value; }
+        }
 
         /// <summary>
         /// Generates an observable with a single <see cref="ZaberDevice"/> resource object.
@@ -36,7 +42,7 @@ namespace AllenNeuralDynamics.Zaber
         public override IObservable<ZaberDevice> Generate()
         {
             return Observable.Using(
-                () => ZaberDeviceManager.ReserveConnection(PortName),
+                () => ZaberDeviceManager.ReserveConnection(Name, configuration),
                 resource =>
                 {
                     return Observable.Return(resource.Device)
