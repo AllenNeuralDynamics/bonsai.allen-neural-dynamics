@@ -1,0 +1,84 @@
+﻿using System.ComponentModel;
+using Bonsai.Spinnaker;
+using SpinnakerNET;
+
+namespace AllenNeuralDynamics.Core
+{
+    [Description("Configures and initializes a Spinnaker camera for triggered acquisition.")]
+    public class AindSpinnakerCapture : SpinnakerCapture
+    {
+        public AindSpinnakerCapture()
+        {
+            ExposureTime = 1e6 / 50 - 1000;
+            Binning = 1;
+        }
+
+        [Description("The duration of each individual exposure, in microseconds. In general, this should be 1 / frameRate - 1 millisecond to prepare for next trigger.")]
+        public double ExposureTime { get; set; }
+
+        [Description("The gain of the sensor.")]
+        public double Gain { get; set; }
+
+        [Description("The size of the binning area of the sensor, e.g. a binning size of 2 specifies a 2x2 binning region.")]
+        public int Binning { get; set; }
+
+        protected override void Configure(IManagedCamera camera)
+        {
+            try { camera.AcquisitionStop.Execute(); }
+            catch { }
+            camera.BinningSelector.Value = BinningSelectorEnums.All.ToString();
+            camera.BinningHorizontalMode.Value = BinningHorizontalModeEnums.Sum.ToString();
+            camera.BinningVerticalMode.Value = BinningVerticalModeEnums.Sum.ToString();
+            camera.BinningHorizontal.Value = Binning;
+            camera.BinningVertical.Value = Binning;
+            camera.AcquisitionFrameRateEnable.Value = false;
+            camera.IspEnable.Value = false;
+            camera.TriggerMode.Value = TriggerModeEnums.On.ToString();
+            camera.TriggerSelector.Value = TriggerSelectorEnums.FrameStart.ToString();
+            camera.TriggerSource.Value = TriggerSourceEnums.Line0.ToString();
+            camera.TriggerOverlap.Value = TriggerOverlapEnums.ReadOut.ToString();
+            camera.TriggerActivation.Value = TriggerActivationEnums.RisingEdge.ToString();
+            camera.ExposureAuto.Value = ExposureAutoEnums.Off.ToString();
+            camera.ExposureMode.Value = ExposureModeEnums.Timed.ToString();
+            camera.ExposureTime.Value = ExposureTime;
+            camera.DeviceLinkThroughputLimit.Value = camera.DeviceLinkThroughputLimit.Max;
+            camera.GainAuto.Value = GainAutoEnums.Off.ToString();
+            camera.Gain.Value = Gain;
+            base.Configure(camera);
+        }
+    }
+}
+
+
+/*
+This file was adapted from https://github.com/SainsburyWellcomeCentre/aeon_acquisition under the following license:
+BSD 3-Clause License
+
+Copyright (c) 2023 University College London
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1.Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
