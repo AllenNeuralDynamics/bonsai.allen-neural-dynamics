@@ -9,13 +9,19 @@
     <PackageTags>Bonsai Rx Zaber AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview28102023</Version>
+    <Version>0.1.0-preview2910202301</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Bonsai.System" Version="2.8.1" />
     <PackageReference Include="Zaber.Motion" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="$(SolutionDir)runtimes\win-x64\native\*.dll" PackagePath="runtimes\win-x64\native" TargetPath="%(Filename)%(Extension)" CopyToOutputDirectory="Always" />
+    <Content Include="$(SolutionDir)runtimes\LICENSE.txt" PackagePath="runtimes\win-x64\native" TargetPath="%(Filename)%(Extension)" CopyToOutputDirectory="Always" />
+
   </ItemGroup>
 
 </Project>
