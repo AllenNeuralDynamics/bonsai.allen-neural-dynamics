@@ -4,3 +4,5 @@
     href: intro.md
   - name: Version Control
     href: version-control.md
+  - name: Core Logging
+    href: core-logging.md
