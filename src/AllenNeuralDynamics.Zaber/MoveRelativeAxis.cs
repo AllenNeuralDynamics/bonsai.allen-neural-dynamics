@@ -11,7 +11,7 @@ namespace AllenNeuralDynamics.Zaber
      /// Represents an operator that instructs a <see cref="ZaberDevice"/> move to a relative position.
      /// </summary>
     [Description("Moves an axis of a Zaber manipulator to a supplied relative position.")]
-    public class MoveRelativeAxis : Sink<double>
+    public class MoveRelative : Sink<double>
     {
         /// <summary>
         /// Gets or sets the COM port or alias of the target <see cref="ZaberDevice"/>
@@ -55,7 +55,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.MoveRelativeAxis(axis, value,
+                            connection.Device.MoveRelative(axis, value,
                                 Velocity.HasValue ? Velocity.Value : 0,
                                 Acceleration.HasValue ? Acceleration.Value : 0);
                         }

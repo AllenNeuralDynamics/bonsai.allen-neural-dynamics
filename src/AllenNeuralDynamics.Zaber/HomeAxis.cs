@@ -11,7 +11,7 @@ namespace AllenNeuralDynamics.Zaber
     /// Represents an operator that instructs a <see cref="ZaberDevice"/> to perform a homing routine.
     /// </summary>
     [Description("Homes the target axis of the manipulator.")]
-    public class HomeAxis : Sink
+    public class Home : Sink
     {
         /// <summary>
         /// Gets or sets the COM port or alias of the target <see cref="ZaberDevice"/>
@@ -43,14 +43,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            if (axis.HasValue)
-                            {
-                                connection.Device.HomeAxis(axis.Value);
-                            }
-                            else
-                            {
-                                connection.Device.HomeAllAxes();
-                            }
+                            connection.Device.Home(axis.Value);
                         }
                     }));
                 });

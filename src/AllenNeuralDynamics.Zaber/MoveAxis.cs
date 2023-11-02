@@ -11,7 +11,7 @@ namespace AllenNeuralDynamics.Zaber
     /// Represents an operator that instructs a <see cref="ZaberDevice"/> move to the target absolute position.
     /// </summary>
     [Description("Moves a target axis to a absolute position")]
-    public class MoveAxis : Sink<double>
+    public class MoveAbsolute : Sink<double>
     {
         /// <summary>
         /// Gets or sets the COM port or alias of the target <see cref="ZaberDevice"/>
@@ -55,7 +55,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.MoveAxis(axis, value,
+                            connection.Device.MoveAbsolute(axis, value,
                                 Velocity.HasValue ? Velocity.Value : 0,
                                 Acceleration.HasValue ? Acceleration.Value : 0);
                         }

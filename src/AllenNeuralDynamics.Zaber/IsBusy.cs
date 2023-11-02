@@ -22,7 +22,7 @@ namespace AllenNeuralDynamics.Zaber
         /// Gets or sets the axis of the manipulator to be controlled.
         /// </summary>
         [Description("The axis index to be actuated.")]
-        public int Axis { get; set; }
+        public int? Axis { get; set; }
 
         /// <summary>
         /// Queries the current state of an axis from the manipulator.
@@ -35,7 +35,7 @@ namespace AllenNeuralDynamics.Zaber
             return Observable.Using(
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => Observable.Return(
-                    await connection.Device.IsBusy()
+                    await connection.Device.IsBusy(Axis)
                     ));
         }
 
@@ -51,7 +51,7 @@ namespace AllenNeuralDynamics.Zaber
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => source.Select( _ => 
                     Observable.FromAsync( async token =>
-                        await connection.Device.IsBusy()
+                        await connection.Device.IsBusy(Axis)
                     )).Concat());
         }
     }

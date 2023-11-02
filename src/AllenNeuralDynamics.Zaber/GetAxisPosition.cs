@@ -9,7 +9,7 @@ namespace AllenNeuralDynamics.Zaber
     /// Represents an operator queries the current position of a <see cref="ZaberDevice"/> axis.
     /// </summary>
     [Description("Returns the current position of a selected axis.")]
-    public class GetAxisPosition : Source<double>
+    public class GetPosition : Source<double>
     {
         /// <summary>
         /// Gets or sets the COM port or alias of the target <see cref="ZaberDevice"/>

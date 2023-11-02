@@ -20,6 +20,12 @@ namespace AllenNeuralDynamics.Zaber
         public string PortName { get; set; }
 
         /// <summary>
+        /// Gets or sets the axis of the manipulator to be controlled.
+        /// </summary>
+        [Description("The index of the axis of the manipulator to be controlled. If null, will stop movement on all axes.")]
+        public int? Axis { get; set; } = null;
+
+        /// <summary>
         /// Queries the idle state of the manipulator
         /// </summary>
         /// <returns>
@@ -30,7 +36,7 @@ namespace AllenNeuralDynamics.Zaber
             return Observable.Using(
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => Observable.Return(
-                     await connection.Device.WaitUntilIdle()
+                     await connection.Device.WaitUntilIdle(Axis)
                     ));
         }
 
@@ -46,7 +52,7 @@ namespace AllenNeuralDynamics.Zaber
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => source.Select( _ => 
                     Observable.FromAsync( async token =>
-                        await connection.Device.WaitUntilIdle()
+                        await connection.Device.WaitUntilIdle(Axis)
                     )).Concat());
         }
     }

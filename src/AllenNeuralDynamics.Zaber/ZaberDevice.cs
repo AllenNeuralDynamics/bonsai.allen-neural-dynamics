@@ -33,7 +33,7 @@ namespace AllenNeuralDynamics.Zaber
             get { return comm.IsConnected; }
         }
 
-        public void MoveAxis(int axis, double position, double velocity, double acceleration)
+        public void MoveAbsolute(int axis, double position, double velocity, double acceleration)
         {
             var thisAxis = device.GetAxis(axis);
             thisAxis.MoveAbsoluteAsync(
@@ -43,7 +43,7 @@ namespace AllenNeuralDynamics.Zaber
                 waitUntilIdle:false);
         }
 
-        public void MoveRelativeAxis(int axis, double position, double velocity, double acceleration)
+        public void MoveRelative(int axis, double position, double velocity, double acceleration)
         {
             var thisAxis = device.GetAxis(axis);
             thisAxis.MoveRelativeAsync(
@@ -52,35 +52,28 @@ namespace AllenNeuralDynamics.Zaber
                 acceleration: acceleration,
                 waitUntilIdle: false);
         }
-
-        public void StopAllAxes()
-        {
-            device.AllAxes.StopAsync(false);
-        }
         
-        public void StopAxis(int axis)
+        public void Stop(int? axis)
         {
-            var thisAxis = device.GetAxis(axis);
-            thisAxis.StopAsync(false);
+             _ = axis.HasValue ? device.GetAxis(axis.Value).StopAsync(false) : device.AllAxes.StopAsync(false);
         }
 
-        public void HomeAllAxes()
+        public void Home(int? axis)
         {
-            device.AllAxes.HomeAsync(false);
+            _ = axis.HasValue ? device.GetAxis(axis.Value).HomeAsync(false) : device.AllAxes.HomeAsync(false);
         }
 
-        public void HomeAxis(int axis)
-        {
-            var thisAxis = device.GetAxis(axis);
-            thisAxis.HomeAsync(false);
-        }
-
-        public void MoveVelocityAxis(int axis, double velocity, double acceleration)
+        public void MoveVelocity(int axis, double velocity, double acceleration)
         {
             var thisAxis = device.GetAxis(axis);
             thisAxis.MoveVelocityAsync(
                 velocity: velocity,
                 acceleration: acceleration);
+        }
+
+        public void GenericCommandNoResponse(int? axis, string command)
+        {
+            device.GenericCommandNoResponseAsync(command, axis.HasValue? axis.Value : 0);
         }
 
         public async Task<double> GetPosition(int axis)
@@ -89,16 +82,40 @@ namespace AllenNeuralDynamics.Zaber
             return await thisAxis.GetPositionAsync();
         }
 
-        public async Task<bool> IsBusy()
+        public async Task<bool> IsBusy(int? axis)
         {
-            return await device.AllAxes.IsBusyAsync();
+            if (axis.HasValue)
+            {
+                return await device.GetAxis(axis.Value).IsBusyAsync();
+            }
+            else
+            {
+                return await device.AllAxes.IsBusyAsync();
+            }
         }
 
-        public async Task<System.Reactive.Unit> WaitUntilIdle ()
+        public async Task<System.Reactive.Unit> WaitUntilIdle(int? axis)
         {
-            await device.AllAxes.WaitUntilIdleAsync();
+            if (axis.HasValue){
+                await device.GetAxis(axis.Value).WaitUntilIdleAsync();
+            }
+            else
+            {
+                await device.AllAxes.WaitUntilIdleAsync();
+            }
             return new System.Reactive.Unit();
         }
+
+        public async Task<Response[]> GenericCommandMultiResponse(int? axis, string command)
+        {
+            return await device.GenericCommandMultiResponseAsync(command, axis.HasValue? axis.Value : 0);
+        }
+
+        public async Task<Response> GenericCommand(int? axis, string command)
+        {
+            return await device.GenericCommandAsync(command, axis.HasValue ? axis.Value : 0);
+        }
+
         /// <summary>
         /// Opens a new connection to a <see cref="ZaberDevice"/>.
         /// </summary>

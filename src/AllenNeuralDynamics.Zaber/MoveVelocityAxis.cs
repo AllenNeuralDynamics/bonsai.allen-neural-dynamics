@@ -11,7 +11,7 @@ namespace AllenNeuralDynamics.Zaber
     /// Represents an operator that instructs a <see cref="ZaberDevice"/> move with a given velocity value.
     /// </summary>
     [Description("Moves an axis of a Zaber manipulator using the supplied velocity value.")]
-    public class MoveVelocityAxis : Sink<double>
+    public class MoveVelocity : Sink<double>
     {
         /// <summary>
         /// Gets or sets the COM port or alias of the target <see cref="ZaberDevice"/>
@@ -49,7 +49,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.MoveVelocityAxis(axis, value,
+                            connection.Device.MoveVelocity(axis, value,
                                 Acceleration.HasValue ? Acceleration.Value : 0);
                         }
                     }));
