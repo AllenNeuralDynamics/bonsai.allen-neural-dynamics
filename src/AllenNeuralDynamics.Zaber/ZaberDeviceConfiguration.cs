@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Bonsai.IO.Ports;
 
+
 namespace AllenNeuralDynamics.Zaber
 {
     /// <summary>

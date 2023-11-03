@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.Reactive.Linq;
 using Bonsai;
- 
+
+
 namespace AllenNeuralDynamics.Zaber
 {
     /// <summary>

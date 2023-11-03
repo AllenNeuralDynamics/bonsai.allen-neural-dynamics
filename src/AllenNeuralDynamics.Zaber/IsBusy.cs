@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.Reactive.Linq;
 using Bonsai;
- 
+
+
 namespace AllenNeuralDynamics.Zaber
 {
     /// <summary>
@@ -49,7 +50,7 @@ namespace AllenNeuralDynamics.Zaber
         {
             return Observable.Using(
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
-                async (connection, cancellationToken) => source.Select( _ => 
+                async (connection, cancellationToken) => source.Select( _ =>
                     Observable.FromAsync( async token =>
                         await connection.Device.IsBusy(Axis)
                     )).Concat());

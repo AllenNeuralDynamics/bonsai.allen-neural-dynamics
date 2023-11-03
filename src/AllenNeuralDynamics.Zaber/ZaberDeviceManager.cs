@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Collections.ObjectModel;
 
+
 namespace AllenNeuralDynamics.Zaber
 {
     internal static class ZaberDeviceManager

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Zaber.Motion;
 using Zaber.Motion.Ascii;
 
+
 namespace AllenNeuralDynamics.Zaber
 {
     /// <summary>
@@ -52,7 +53,15 @@ namespace AllenNeuralDynamics.Zaber
                 acceleration: acceleration,
                 waitUntilIdle: false);
         }
-        
+
+        public void MoveVelocity(int axis, double velocity, double acceleration)
+        {
+            var thisAxis = device.GetAxis(axis);
+            thisAxis.MoveVelocityAsync(
+                velocity: velocity,
+                acceleration: acceleration);
+        }
+
         public void Stop(int? axis)
         {
              _ = axis.HasValue ? device.GetAxis(axis.Value).StopAsync(false) : device.AllAxes.StopAsync(false);
@@ -61,14 +70,6 @@ namespace AllenNeuralDynamics.Zaber
         public void Home(int? axis)
         {
             _ = axis.HasValue ? device.GetAxis(axis.Value).HomeAsync(false) : device.AllAxes.HomeAsync(false);
-        }
-
-        public void MoveVelocity(int axis, double velocity, double acceleration)
-        {
-            var thisAxis = device.GetAxis(axis);
-            thisAxis.MoveVelocityAsync(
-                velocity: velocity,
-                acceleration: acceleration);
         }
 
         public void GenericCommandNoResponse(int? axis, string command)
