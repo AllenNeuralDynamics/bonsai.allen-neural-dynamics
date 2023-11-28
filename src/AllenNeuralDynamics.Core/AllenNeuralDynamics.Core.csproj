@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2023102902</Version>
+    <Version>0.1.0-build2023112801</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +20,7 @@
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.0" />
     <PackageReference Include="Bonsai.Spinnaker" Version="0.7.1" />
+    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
   </ItemGroup>
@@ -32,6 +33,8 @@
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="dotnet tool restore&#xD;&#xA;dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind-logging.json --namespace AllenNeuralDynamics.Core.Logging --root AindLogging --output $(ProjectDir)AindLogging.cs --serializer NewtonsoftJson YamlDotNet" />
+    <Exec Command="dotnet tool restore&#xD;&#xA;dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind-distributions.json --namespace AllenNeuralDynamics.Core.Distrubutions --root AindDistributions --output $(ProjectDir)AindDistributions.cs --serializer NewtonsoftJson YamlDotNet" />
+
   </Target>
 
 </Project>
