@@ -8,8 +8,8 @@ using System.Reactive.Subjects;
 
 namespace AllenNeuralDynamics.Core.Design
 {
-    [TypeVisualizer(typeof(PushButtonVisualizer))]
-    [Description("Generates a sequence of commands to tare a weight scale.")]
+
+    [Description("Generates a sequence of Unit events.")]
     public class PushButton
     {
         readonly Subject<Unit> subject = new Subject<Unit>();

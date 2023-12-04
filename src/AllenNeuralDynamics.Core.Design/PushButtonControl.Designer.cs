@@ -53,14 +53,13 @@
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(388, 228);
             this.button.TabIndex = 0;
-            this.button.Text = "Tare";
-            this.button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button.Text = "Push";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.tareButton_Click);
             // 
             // PushButtonControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
