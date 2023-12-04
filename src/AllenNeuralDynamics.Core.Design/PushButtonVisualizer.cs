@@ -19,6 +19,7 @@ namespace AllenNeuralDynamics.Core.Design
 
             control = new PushButtonControl(source);
             control.Dock = DockStyle.Fill;
+            control.ButtonLabel = source.Label;
 
             var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
             if (visualizerService != null)

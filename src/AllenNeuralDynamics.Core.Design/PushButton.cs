@@ -14,6 +14,8 @@ namespace AllenNeuralDynamics.Core.Design
     {
         readonly Subject<Unit> subject = new Subject<Unit>();
 
+        public string Label { get; set; }
+
         public PushButton() { }
 
         public void OnNext(Unit value) { 

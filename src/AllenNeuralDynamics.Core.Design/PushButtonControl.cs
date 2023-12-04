@@ -6,6 +6,11 @@ namespace AllenNeuralDynamics.Core.Design
 {
     public partial class PushButtonControl : UserControl
     {
+        public string ButtonLabel {
+            get{return button.Text;}
+            set { button.Text = value;} 
+        }
+
         public PushButtonControl(PushButton source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
