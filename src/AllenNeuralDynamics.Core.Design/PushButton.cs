@@ -14,6 +14,23 @@ namespace AllenNeuralDynamics.Core.Design
     [Description("Generates a sequence of Unit events.")]
     public class PushButton
     {
+
+        private EventHandler onEnableChanged;
+        public event EventHandler OnEnableChanged
+        {
+            add{onEnableChanged += value;}
+            remove{onEnableChanged += value;}
+        }
+
+        private bool enable = true;
+        public bool Enable {
+            get { return enable; }
+            set {
+                enable = value;
+                onEnableChanged?.Invoke(this, new EnableStateEventArgs {EnableState = enable }); 
+            } 
+        }
+
         readonly Subject<Unit> subject = new Subject<Unit>();
 
         public string Label { get; set; }
@@ -28,6 +45,11 @@ namespace AllenNeuralDynamics.Core.Design
         {
             return subject.ObserveOn(Scheduler.TaskPool);
         }
+    }
+
+    public class EnableStateEventArgs : EventArgs
+    {
+        public bool EnableState { get; set; }
     }
 }
 

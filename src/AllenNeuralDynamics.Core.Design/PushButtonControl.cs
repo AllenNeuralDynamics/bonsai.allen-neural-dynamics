@@ -11,17 +11,26 @@ namespace AllenNeuralDynamics.Core.Design
             set { button.Text = value;} 
         }
 
+        public PushButton Source { get; }
+
+        private void HandleEnableChanges(object  sender, EventArgs e)
+        {
+            Enabled = ((EnableStateEventArgs) e).EnableState;
+        }
+
         public PushButtonControl(PushButton source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
+            Source.OnEnableChanged += HandleEnableChanges;
             InitializeComponent();
         }
 
-        public PushButton Source { get; }
 
         private void tareButton_Click(object sender, EventArgs e)
         {
             Source.OnNext(Unit.Default);
         }
+
+
     }
 }
