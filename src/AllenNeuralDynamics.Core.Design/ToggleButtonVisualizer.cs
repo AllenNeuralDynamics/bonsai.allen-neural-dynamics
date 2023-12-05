@@ -18,6 +18,8 @@ namespace AllenNeuralDynamics.Core.Design
             control.Dock = DockStyle.Fill;
             control.UncheckedLabel = source.UncheckedLabel;
             control.CheckedLabel = source.CheckedLabel;
+            control.State = source.ToggleState;
+            control.Enabled = source.Enable;
 
             var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
             if (visualizerService != null)

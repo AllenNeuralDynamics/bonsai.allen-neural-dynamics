@@ -10,9 +10,21 @@ namespace AllenNeuralDynamics.Core.Design
         public string CheckedLabel { get; set; }
         public string UncheckedLabel { get; set; }
 
+        private void HandleEnableChanges(object sender, EventArgs e)
+        {
+            Enabled = ((ToggleEnableStateEventArgs)e).EnableState;
+        }
+
+        private void HandleToggleStateChanges(object sender, EventArgs e)
+        {
+            State = ((ToggleStateChangedEventArgs)e).State;
+        }
+
         public ToggleButtonStateControl(ToggleButton source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
+            Source.OnEnableChanged += HandleEnableChanges;
+            Source.OnToggleStateChanged += HandleToggleStateChanges;
             InitializeComponent();
         }
 
