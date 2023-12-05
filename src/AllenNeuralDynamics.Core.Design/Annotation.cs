@@ -9,6 +9,7 @@ namespace AllenNeuralDynamics.Core.Design
 {
     [Combinator]
     [WorkflowElementCategory(ElementCategory.Source)]
+    [TypeVisualizer(typeof(AnnotationSourceVisualizer))]
     public abstract class Annotation<TMetadata>
     {
         readonly Subject<TMetadata> subject = new Subject<TMetadata>();
