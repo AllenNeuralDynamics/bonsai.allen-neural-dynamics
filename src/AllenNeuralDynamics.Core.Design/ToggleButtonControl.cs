@@ -7,9 +7,8 @@ namespace AllenNeuralDynamics.Core.Design
     {
         public ToggleButton Source { get; }
 
-        public string CheckedLabel { get; set; } = "Turn Off";
-        public string UncheckedLabel { get; set; } = "Turn On";
-
+        public string CheckedLabel { get; set; }
+        public string UncheckedLabel { get; set; }
 
         public ToggleButtonStateControl(ToggleButton source)
         {
@@ -30,7 +29,7 @@ namespace AllenNeuralDynamics.Core.Design
             }
         }
 
-        private void maintenanceButton_CheckedChanged(object sender, EventArgs e)
+        private void toggleButton_CheckedChanged(object sender, EventArgs e)
         {
             Source.OnNext(State);
         }

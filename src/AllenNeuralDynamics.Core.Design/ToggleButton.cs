@@ -15,8 +15,8 @@ namespace AllenNeuralDynamics.Core.Design
     {
         readonly Subject<bool> subject = new Subject<bool>();
 
-        public string CheckedLabel { get; set; }
-        public string UncheckedLabel { get; set; }
+        public string CheckedLabel { get; set; } = "Turn On.";
+        public string UncheckedLabel { get; set; } = "Turn Off.";
 
         public ToggleButton() { }
 

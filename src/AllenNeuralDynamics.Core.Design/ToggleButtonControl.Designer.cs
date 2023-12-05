@@ -45,8 +45,8 @@
             // 
             // toggleButton
             // 
-            this.toggleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.toggleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toggleButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.toggleButton.Location = new System.Drawing.Point(6, 6);
@@ -54,14 +54,13 @@
             this.toggleButton.Name = "toggleButton";
             this.toggleButton.Size = new System.Drawing.Size(388, 228);
             this.toggleButton.TabIndex = 0;
-            this.toggleButton.Text = "Maintenance";
             this.toggleButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toggleButton.UseVisualStyleBackColor = true;
-            this.toggleButton.CheckedChanged += new System.EventHandler(this.maintenanceButton_CheckedChanged);
+            this.toggleButton.CheckedChanged += new System.EventHandler(this.toggleButton_CheckedChanged);
             // 
             // ToggleButtonStateControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.togglePanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

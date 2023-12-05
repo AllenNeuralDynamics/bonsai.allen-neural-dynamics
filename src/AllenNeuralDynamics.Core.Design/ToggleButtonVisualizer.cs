@@ -16,7 +16,6 @@ namespace AllenNeuralDynamics.Core.Design
             var source = (ToggleButton)ExpressionBuilder.GetWorkflowElement(visualizerElement.Builder);
             control = new ToggleButtonStateControl(source);
             control.Dock = DockStyle.Fill;
-
             control.UncheckedLabel = source.UncheckedLabel;
             control.CheckedLabel = source.CheckedLabel;
 
