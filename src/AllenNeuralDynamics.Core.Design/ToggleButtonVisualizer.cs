@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace AllenNeuralDynamics.Core.Design
 {
-    public class ToggleButtonStateVisualizer : DialogTypeVisualizer
+    public class ToggleButtonVisualizer : DialogTypeVisualizer
     {
         ToggleButtonStateControl control;
 
@@ -13,8 +13,12 @@ namespace AllenNeuralDynamics.Core.Design
         {
             var context = (ITypeVisualizerContext)provider.GetService(typeof(ITypeVisualizerContext));
             var visualizerElement = ExpressionBuilder.GetVisualizerElement(context.Source);
-            control = new ToggleButtonStateControl();
+            var source = (ToggleButton)ExpressionBuilder.GetWorkflowElement(visualizerElement.Builder);
+            control = new ToggleButtonStateControl(source);
             control.Dock = DockStyle.Fill;
+
+            control.UncheckedLabel = source.UncheckedLabel;
+            control.CheckedLabel = source.CheckedLabel;
 
             var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
             if (visualizerService != null)

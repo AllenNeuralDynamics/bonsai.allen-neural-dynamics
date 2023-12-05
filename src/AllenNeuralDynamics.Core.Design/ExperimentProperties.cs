@@ -3,6 +3,6 @@ using Bonsai.Expressions;
 
 
 [TypeVisualizer(typeof(ExternalizedPropertiesVisualizer))]
-public class ExperimentProperties : UnitBuilder
+public class PropertyGridSource : UnitBuilder
 {
 }

@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Reactive.Linq;
 using System.Windows.Forms;
 
 namespace AllenNeuralDynamics.Core.Design
 {
     public partial class ToggleButtonStateControl : UserControl
     {
-        public ToggleButtonState Source { get; }
+        public ToggleButton Source { get; }
 
-        public ToggleButtonStateControl()
+        public string CheckedLabel { get; set; } = "Turn Off";
+        public string UncheckedLabel { get; set; } = "Turn On";
+
+
+        public ToggleButtonStateControl(ToggleButton source)
         {
-            Source = new ToggleButtonState(); 
+            Source = source ?? throw new ArgumentNullException(nameof(source));
             InitializeComponent();
         }
-
-
 
         public bool State
         {
@@ -25,7 +26,7 @@ namespace AllenNeuralDynamics.Core.Design
             set
             {
                 toggleButton.Checked = value == true;
-                //toggleButton.Text = $"Turn {(toggleButton.Checked ? "Off" : "On")}";
+                toggleButton.Text = toggleButton.Checked ? CheckedLabel : UncheckedLabel;
             }
         }
 

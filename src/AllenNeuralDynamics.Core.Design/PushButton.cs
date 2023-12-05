@@ -8,7 +8,9 @@ using System.Reactive.Subjects;
 
 namespace AllenNeuralDynamics.Core.Design
 {
-
+    [Combinator]
+    [WorkflowElementCategory(ElementCategory.Source)]
+    [TypeVisualizer(typeof(PushButtonVisualizer))]
     [Description("Generates a sequence of Unit events.")]
     public class PushButton
     {

@@ -1,23 +1,24 @@
 ﻿using Bonsai;
 using System;
 using System.ComponentModel;
-using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
 namespace AllenNeuralDynamics.Core.Design
 {
-    [TypeVisualizer(typeof(ToggleButtonStateVisualizer))]
+    [Combinator]
+    [WorkflowElementCategory(ElementCategory.Source)]
+    [TypeVisualizer(typeof(ToggleButtonVisualizer))]
     [Description("Generates a sequence of commands to tare a weight scale.")]
-    public class ToggleButtonState
+    public class ToggleButton
     {
         readonly Subject<bool> subject = new Subject<bool>();
 
-        public string OnLabel { get; set; }
-        public string OffLabel { get; set; }
+        public string CheckedLabel { get; set; }
+        public string UncheckedLabel { get; set; }
 
-        public ToggleButtonState() { }
+        public ToggleButton() { }
 
         public void OnNext(bool value)
         {
