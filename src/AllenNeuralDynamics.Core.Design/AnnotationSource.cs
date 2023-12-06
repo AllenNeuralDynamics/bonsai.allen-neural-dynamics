@@ -1,5 +1,4 @@
-﻿using Bonsai;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace AllenNeuralDynamics.Core.Design
 {

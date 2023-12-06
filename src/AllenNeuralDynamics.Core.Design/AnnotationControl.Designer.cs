@@ -67,7 +67,7 @@
             this.annotationButton.Name = "annotationButton";
             this.annotationButton.Size = new System.Drawing.Size(190, 52);
             this.annotationButton.TabIndex = 5;
-            this.annotationButton.Text = "Annotation";
+            this.annotationButton.Text = "Send";
             this.annotationButton.UseVisualStyleBackColor = true;
             this.annotationButton.Click += new System.EventHandler(this.annotationButton_Click);
             // 
