@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <UseWindowsForms>true</UseWindowsForms>
-    <Title>Bonsai - AIND Core Designlibrary</Title>
+    <Title>Bonsai - AIND Core Design library</Title>
     <Description>A bonsai design package for core primitives used in AIND experiments.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
