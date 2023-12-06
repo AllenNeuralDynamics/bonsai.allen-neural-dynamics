@@ -13,46 +13,16 @@ namespace AllenNeuralDynamics.Core.Design
     [Description("Generates a sequence of commands to tare a weight scale.")]
     public class ToggleButton
     {
-        private EventHandler onToggleStateChanged;
-        public event EventHandler OnToggleStateChanged
-        {
-            add { onToggleStateChanged += value; }
-            remove { onToggleStateChanged += value; }
-        }
-
-        private bool toggleState = true;
-        public bool ToggleState
-        {
-            get { return toggleState; }
-            set
-            {
-                toggleState = value;
-                onToggleStateChanged?.Invoke(this, new ToggleStateChangedEventArgs { State = toggleState});
-            }
-        }
-
-        private EventHandler onEnableChanged;
-        public event EventHandler OnEnableChanged
-        {
-            add { onEnableChanged += value; }
-            remove { onEnableChanged += value; }
-        }
-
-        private bool enable = true;
-        public bool Enable
-        {
-            get { return enable; }
-            set
-            {
-                enable = value;
-                onEnableChanged?.Invoke(this, new ToggleEnableStateEventArgs { EnableState = enable });
-            }
-        }
-
-        readonly Subject<bool> subject = new Subject<bool>();
-
+        [DesignOnly(true)]
         public string CheckedLabel { get; set; } = "Turn Off.";
+        
+        [DesignOnly(true)]
         public string UncheckedLabel { get; set; } = "Turn On.";
+
+        [DesignOnly(true)]
+        public bool IsInitiallyChecked { get; set; } = false;
+        
+        readonly Subject<bool> subject = new Subject<bool>();
 
         public ToggleButton() { }
 
@@ -70,10 +40,5 @@ namespace AllenNeuralDynamics.Core.Design
     public class ToggleStateChangedEventArgs : EventArgs
     {
         public bool State { get; set; }
-    }
-
-    public class ToggleEnableStateEventArgs : EventArgs
-    {
-        public bool EnableState { get; set; }
     }
 }

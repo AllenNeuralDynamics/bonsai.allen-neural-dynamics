@@ -7,25 +7,11 @@ namespace AllenNeuralDynamics.Core.Design
     {
         public ToggleButton Source { get; }
 
-        public string CheckedLabel { get; set; }
-        public string UncheckedLabel { get; set; }
-
-        private void HandleEnableChanges(object sender, EventArgs e)
-        {
-            Enabled = ((ToggleEnableStateEventArgs)e).EnableState;
-        }
-
-        private void HandleToggleStateChanges(object sender, EventArgs e)
-        {
-            State = ((ToggleStateChangedEventArgs)e).State;
-        }
-
         public ToggleButtonStateControl(ToggleButton source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
-            Source.OnEnableChanged += HandleEnableChanges;
-            Source.OnToggleStateChanged += HandleToggleStateChanges;
             InitializeComponent();
+            State = Source.IsInitiallyChecked;
         }
 
         public bool State
@@ -37,7 +23,7 @@ namespace AllenNeuralDynamics.Core.Design
             set
             {
                 toggleButton.Checked = value == true;
-                toggleButton.Text = toggleButton.Checked ? CheckedLabel : UncheckedLabel;
+                toggleButton.Text = toggleButton.Checked ? Source.CheckedLabel : Source.UncheckedLabel;
             }
         }
 
