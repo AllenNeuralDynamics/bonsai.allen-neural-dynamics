@@ -43,7 +43,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.Home(axis.Value);
+                            connection.Device.Home(axis);
                         }
                     }));
                 });
