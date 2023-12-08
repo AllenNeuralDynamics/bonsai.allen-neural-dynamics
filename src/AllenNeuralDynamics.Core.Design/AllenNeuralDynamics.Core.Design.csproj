@@ -10,7 +10,7 @@
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
     <Version>0.1.0</Version>
-    <VersionSuffix>preview2023120601</VersionSuffix>
+    <VersionSuffix>preview2023120801</VersionSuffix>
   </PropertyGroup>
 
   <ItemGroup>
