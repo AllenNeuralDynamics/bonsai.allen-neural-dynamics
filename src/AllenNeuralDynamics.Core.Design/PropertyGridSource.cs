@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 
 namespace AllenNeuralDynamics.Core.Design
 {
-    [TypeVisualizer(typeof(ExternalizedPropertiesVisualizer))]
+    [TypeVisualizer(typeof(PropertyGridVisualizer))]
     [Description("Generates a sequence of string events.")]
     public class PropertyGridSource : Source<Unit> { 
         public PropertyGridSource() { }
