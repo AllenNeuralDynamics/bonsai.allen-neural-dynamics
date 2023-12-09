@@ -57,6 +57,13 @@ public class PropertyGridVisualizer : DialogTypeVisualizer
         return builder is IncludeWorkflowBuilder || builder is GroupWorkflowBuilder;
     }
 
+    static bool IsNested(ExpressionBuilder element)
+    {
+        var groupBuilder = element as IWorkflowExpressionBuilder;
+        var workflowExpressionBuilder = element is WorkflowExpressionBuilder;
+        return groupBuilder is IncludeWorkflowBuilder || groupBuilder is GroupWorkflowBuilder || groupBuilder is Defer || workflowExpressionBuilder;
+    }
+
     static IEnumerable<ExpressionBuilder> SelectContextElements(ExpressionBuilderGraph source, bool recurseGroups)
     {
         foreach (var node in source)
@@ -89,10 +96,9 @@ public class PropertyGridVisualizer : DialogTypeVisualizer
                 contexts.Add(sourceWorkflow);
             }
 
-            var groupBuilder = element as IWorkflowExpressionBuilder;
-
-            if (IsGroup(groupBuilder))
+            if (IsNested(element))
             {
+                var groupBuilder = element as IWorkflowExpressionBuilder;
                 GetContextByElement(groupBuilder.Workflow, targetElement, contexts);
             }
         }
