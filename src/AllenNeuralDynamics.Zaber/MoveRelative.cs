@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Bonsai;
+using Zaber.Motion;
 
 
 namespace AllenNeuralDynamics.Zaber
@@ -39,6 +40,12 @@ namespace AllenNeuralDynamics.Zaber
         public double? Acceleration { get; set; } = null;
 
         /// <summary>
+        /// Gets or sets the Units the manipulator instruction is operating on.
+        /// </summary>
+        [Description("The axis index to be actuated.")]
+        public Units Units { get; set; } = Units.Native;
+
+        /// <summary>
         /// Moves to the target relative position when a valid value is received.
         /// </summary>
         /// <returns>
@@ -57,7 +64,8 @@ namespace AllenNeuralDynamics.Zaber
                         {
                             connection.Device.MoveRelative(axis, value,
                                 Velocity.HasValue ? Velocity.Value : 0,
-                                Acceleration.HasValue ? Acceleration.Value : 0);
+                                Acceleration.HasValue ? Acceleration.Value : 0,
+                                Units);
                         }
                     }));
                 });

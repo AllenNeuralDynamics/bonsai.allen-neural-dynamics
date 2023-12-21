@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reactive.Linq;
 using Bonsai;
+using Zaber.Motion;
 
 
 namespace AllenNeuralDynamics.Zaber
@@ -26,6 +27,12 @@ namespace AllenNeuralDynamics.Zaber
         public int Axis { get; set; }
 
         /// <summary>
+        /// Gets or sets the Units the manipulator instruction is operating on.
+        /// </summary>
+        [Description("The axis index to be actuated.")]
+        public Units Units { get; set; } = Units.Native;
+
+        /// <summary>
         /// Queries the current position of an axis from the manipulator.
         /// </summary>
         /// <returns>
@@ -36,7 +43,7 @@ namespace AllenNeuralDynamics.Zaber
             return Observable.Using(
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => Observable.Return(
-                    await connection.Device.GetPosition(Axis)
+                    await connection.Device.GetPosition(Axis, Units)
                     ));
         }
 
@@ -52,7 +59,7 @@ namespace AllenNeuralDynamics.Zaber
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 async (connection, cancellationToken) => source.Select( _ => 
                     Observable.FromAsync( async token =>
-                        await connection.Device.GetPosition(Axis)
+                        await connection.Device.GetPosition(Axis, Units)
                     )).Concat());
         }
     }

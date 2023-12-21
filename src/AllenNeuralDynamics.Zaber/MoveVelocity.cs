@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Bonsai;
+using Zaber.Motion;
 
 
 namespace AllenNeuralDynamics.Zaber
@@ -33,6 +34,12 @@ namespace AllenNeuralDynamics.Zaber
         public double? Acceleration { get; set; } = null;
 
         /// <summary>
+        /// Gets or sets the Units the manipulator instruction is operating on.
+        /// </summary>
+        [Description("The axis index to be actuated.")]
+        public Units Units { get; set; } = Units.Native;
+
+        /// <summary>
         /// Instructs the manipulator axis to move at a constant specified velocity.
         /// </summary>
         /// <returns>
@@ -50,7 +57,8 @@ namespace AllenNeuralDynamics.Zaber
                         lock (connection.Device)
                         {
                             connection.Device.MoveVelocity(axis, value,
-                                Acceleration.HasValue ? Acceleration.Value : 0);
+                                Acceleration.HasValue ? Acceleration.Value : 0,
+                                Units);
                         }
                     }));
                 });
