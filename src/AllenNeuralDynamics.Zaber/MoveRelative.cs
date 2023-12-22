@@ -46,10 +46,25 @@ namespace AllenNeuralDynamics.Zaber
         public double? Acceleration { get; set; } = null;
 
         /// <summary>
-        /// Gets or sets the Units the manipulator instruction is operating on.
+        /// Gets or sets the Units of position the manipulator instruction is operating on.
         /// </summary>
+        [TypeConverter(typeof(PositionUnitsConverter))]
         [Description("The axis index to be actuated.")]
         public Units Units { get; set; } = Units.Native;
+
+        /// <summary>
+        /// Gets or sets the Units of velocity the manipulator instruction is operating on.
+        /// </summary>
+        [TypeConverter(typeof(VelocityUnitsConverter))]
+        [Description("The axis index to be actuated.")]
+        public Units VelocityUnits { get; set; } = Units.Native;
+
+        /// <summary>
+        /// Gets or sets the Units of acceleration the manipulator instruction is operating on.
+        /// </summary>
+        [TypeConverter(typeof(AccelerationUnitsConverter))]
+        [Description("The axis index to be actuated.")]
+        public Units AccelerationUnits { get; set; } = Units.Native;
 
         /// <summary>
         /// Moves to the target relative position when a valid value is received.
@@ -70,7 +85,7 @@ namespace AllenNeuralDynamics.Zaber
                             connection.Device.MoveRelative(Device, Axis, value,
                                 Velocity.HasValue ? Velocity.Value : 0,
                                 Acceleration.HasValue ? Acceleration.Value : 0,
-                                Units, Units, Units);
+                                Units, VelocityUnits, AccelerationUnits);
                         }
                     }));
                 });

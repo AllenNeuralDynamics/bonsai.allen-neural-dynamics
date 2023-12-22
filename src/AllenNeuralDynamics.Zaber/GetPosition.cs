@@ -33,8 +33,9 @@ namespace AllenNeuralDynamics.Zaber
         public int Axis { get; set; }
 
         /// <summary>
-        /// Gets or sets the Units the manipulator instruction is operating on.
+        /// Gets or sets the Units of position the manipulator instruction is operating on.
         /// </summary>
+        [TypeConverter(typeof(PositionUnitsConverter))]
         [Description("The axis index to be actuated.")]
         public Units Units { get; set; } = Units.Native;
 
@@ -63,7 +64,7 @@ namespace AllenNeuralDynamics.Zaber
         {
             return Observable.Using(
                 async token => await ZaberDeviceManager.ReserveConnectionAsync(PortName),
-                async (connection, cancellationToken) => source.Select( _ => 
+                async (connection, cancellationToken) => source.Select( _ =>
                     Observable.FromAsync( async token =>
                         await connection.Device.GetPosition(Device, Axis, Units)
                     )).Concat());
