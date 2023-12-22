@@ -13,10 +13,8 @@ namespace AllenNeuralDynamics.Zaber
     /// </summary>
     public sealed class ZaberDevice : IDisposable
     {
-        const int deviceIdx = 0;
         private Connection comm;
         private Device[] devices;
-        private Device device;
         bool disposed;
         string portName;
 
@@ -35,58 +33,63 @@ namespace AllenNeuralDynamics.Zaber
             get { return comm.IsConnected; }
         }
 
-        public void MoveAbsolute(int axis, double position, double velocity, double acceleration, Units unit)
+        public void MoveAbsolute(int? deviceIndex, int axis, double position, double velocity, double acceleration, Units unit, Units velocityUnit, Units accelerationUnit)
         {
-            var thisAxis = device.GetAxis(axis);
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
             thisAxis.MoveAbsoluteAsync(
                 position:position,
                 velocity:velocity,
                 acceleration:acceleration,
                 waitUntilIdle:false,
-                unit: unit, velocityUnit: unit, accelerationUnit: unit);
+                unit: unit, velocityUnit: velocityUnit, accelerationUnit: accelerationUnit);
         }
 
-        public void MoveRelative(int axis, double position, double velocity, double acceleration, Units unit)
+        public void MoveRelative(int? deviceIndex, int axis, double position, double velocity, double acceleration, Units unit, Units velocityUnit, Units accelerationUnit)
         {
-            var thisAxis = device.GetAxis(axis);
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
             thisAxis.MoveRelativeAsync(
                 position: position,
                 velocity: velocity,
                 acceleration: acceleration,
                 waitUntilIdle: false,
-                unit:unit, velocityUnit: unit, accelerationUnit: unit);
+                unit: unit, velocityUnit: velocityUnit, accelerationUnit: accelerationUnit);
         }
 
-        public void MoveVelocity(int axis, double velocity, double acceleration, Units unit)
+        public void MoveVelocity(int? deviceIndex, int axis, double velocity, double acceleration, Units velocityUnit, Units accelerationUnit)
         {
-            var thisAxis = device.GetAxis(axis);
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
             thisAxis.MoveVelocityAsync(
-            velocity: velocity,
-            acceleration: acceleration, unit: unit, accelerationUnit: unit);
+                velocity: velocity,
+                acceleration: acceleration,
+                unit: velocityUnit, accelerationUnit: accelerationUnit);
         }
-        public void Stop(int? axis)
+        public void Stop(int? deviceIndex, int? axis)
         {
-             _ = axis.HasValue ? device.GetAxis(axis.Value).StopAsync(false) : device.AllAxes.StopAsync(false);
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
+            _ = axis.HasValue ? device.GetAxis(axis.Value).StopAsync(false) : device.AllAxes.StopAsync(false);
         }
 
-        public void Home(int? axis)
+        public void Home(int? deviceIndex, int? axis)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             _ = axis.HasValue ? device.GetAxis(axis.Value).HomeAsync(false) : device.AllAxes.HomeAsync(false);
         }
 
-        public void GenericCommandNoResponse(int? axis, string command)
+        public void GenericCommandNoResponse(int? deviceIndex, int? axis, string command)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             device.GenericCommandNoResponseAsync(command, axis.HasValue? axis.Value : 0);
         }
 
-        public async Task<double> GetPosition(int axis, Units unit)
+        public async Task<double> GetPosition(int? deviceIndex, int axis, Units unit)
         {
-            var thisAxis = device.GetAxis(axis);
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
             return await thisAxis.GetPositionAsync(unit:unit);
         }
 
-        public async Task<bool> IsBusy(int? axis)
+        public async Task<bool> IsBusy(int? deviceIndex, int? axis)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             if (axis.HasValue)
             {
                 return await device.GetAxis(axis.Value).IsBusyAsync();
@@ -97,8 +100,9 @@ namespace AllenNeuralDynamics.Zaber
             }
         }
 
-        public async Task<Unit> WaitUntilIdle(int? axis)
+        public async Task<Unit> WaitUntilIdle(int? deviceIndex, int? axis)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             if (axis.HasValue){
                 await device.GetAxis(axis.Value).WaitUntilIdleAsync();
             }
@@ -109,13 +113,15 @@ namespace AllenNeuralDynamics.Zaber
             return new Unit();
         }
 
-        public async Task<Response[]> GenericCommandMultiResponse(int? axis, string command)
+        public async Task<Response[]> GenericCommandMultiResponse(int? deviceIndex, int? axis, string command)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             return await device.GenericCommandMultiResponseAsync(command, axis.HasValue? axis.Value : 0);
         }
 
-        public async Task<Response> GenericCommand(int? axis, string command)
+        public async Task<Response> GenericCommand(int? deviceIndex, int? axis, string command)
         {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
             return await device.GenericCommandAsync(command, axis.HasValue ? axis.Value : 0);
         }
 
@@ -129,7 +135,6 @@ namespace AllenNeuralDynamics.Zaber
         {
             comm = Connection.OpenSerialPort(portName);
             devices = comm.DetectDevices();
-            device = devices[deviceIdx];
         }
 
         /// <summary>
