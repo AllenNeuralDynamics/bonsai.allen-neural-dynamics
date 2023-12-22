@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reactive.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Bonsai;
 using Zaber.Motion;
@@ -20,6 +21,12 @@ namespace AllenNeuralDynamics.Zaber
         [TypeConverter(typeof(PortNameConverter))]
         [Description("The name of the serial port used to communicate with the manipulator.")]
         public string PortName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the device to be controlled. Defaults to 0.
+        /// </summary>
+        [Description("The axis index to be actuated.")]
+        public int Device { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the axis of the manipulator to be controlled.
@@ -57,15 +64,14 @@ namespace AllenNeuralDynamics.Zaber
                 cancellationToken => ZaberDeviceManager.ReserveConnectionAsync(PortName),
                 (connection, cancellationToken) =>
                 {
-                    var axis = Axis;
                     return Task.FromResult(source.Do(value =>
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.MoveAbsolute(axis, value,
+                            connection.Device.MoveAbsolute(Device, Axis, value,
                                 Velocity.HasValue ? Velocity.Value : 0,
                                 Acceleration.HasValue ? Acceleration.Value : 0,
-                                Units);
+                                Units, Units, Units);
                         }
                     }));
                 });

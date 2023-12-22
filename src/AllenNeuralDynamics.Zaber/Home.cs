@@ -21,6 +21,12 @@ namespace AllenNeuralDynamics.Zaber
         public string PortName { get; set; }
 
         /// <summary>
+        /// Gets or sets the device to be controlled. Defaults to 0.
+        /// </summary>
+        [Description("The axis index to be actuated.")]
+        public int Device { get; set; } = 0;
+
+        /// <summary>
         /// Gets or sets the axis of the manipulator to be controlled.
         /// </summary>
         [Description("The index of the axis of the manipulator to be controlled. If left null, it will home all axes.")]
@@ -43,7 +49,7 @@ namespace AllenNeuralDynamics.Zaber
                     {
                         lock (connection.Device)
                         {
-                            connection.Device.Home(axis);
+                            connection.Device.Home(Device, axis);
                         }
                     }));
                 });
