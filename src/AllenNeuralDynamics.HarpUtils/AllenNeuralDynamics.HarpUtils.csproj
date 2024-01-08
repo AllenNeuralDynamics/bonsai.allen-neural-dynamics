@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>AllenNeuralDynamics.HarpUtils</Title>
+    <Description>A package with utlities for the Harp devices and Harp protocol.</Description>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
+    <TargetFramework>net472</TargetFramework>
+    <Features>strict</Features>
+    <Version>0.1.0-preview2024010801</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Core" Version="2.8.0" />
+    <PackageReference Include="Bonsai.Harp" Version="3.5.0" />
+  </ItemGroup>
+
+</Project>
