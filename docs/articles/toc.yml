@@ -6,3 +6,5 @@
     href: version-control.md
   - name: Core Logging
     href: core-logging.md
+  - name: Harp Utilities
+    href: harp-utils.md
