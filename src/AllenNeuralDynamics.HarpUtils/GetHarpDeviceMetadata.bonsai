@@ -5,7 +5,6 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:p1="clr-namespace:AllenNeuralDynamics.HarpUtils;assembly=AllenNeuralDynamics.HarpUtils"
-                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -150,15 +149,6 @@ Item6 as SerialNumber)</scr:Expression>
         <scr:Name>Serialize</scr:Name>
         <scr:Expression>it.Serialize()</scr:Expression>
       </Expression>
-      <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Path" />
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:WriteAllText">
-          <io:Overwrite>false</io:Overwrite>
-          <io:Append>false</io:Append>
-        </Combinator>
-      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Take">
           <rx:Count>1</rx:Count>
@@ -201,10 +191,8 @@ Item6 as SerialNumber)</scr:Expression>
       <Edge From="25" To="26" Label="Source1" />
       <Edge From="26" To="27" Label="Source1" />
       <Edge From="27" To="28" Label="Source1" />
-      <Edge From="28" To="30" Label="Source1" />
-      <Edge From="29" To="30" Label="Source2" />
-      <Edge From="30" To="31" Label="Source1" />
-      <Edge From="31" To="32" Label="Source1" />
+      <Edge From="28" To="29" Label="Source1" />
+      <Edge From="29" To="30" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
