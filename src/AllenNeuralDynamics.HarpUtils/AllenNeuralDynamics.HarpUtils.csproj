@@ -12,9 +12,18 @@
     <Version>0.1.0-preview2024010801</Version>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.bonsai" />
+  </ItemGroup>
+  
+  
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.0" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  
+  
 
 </Project>

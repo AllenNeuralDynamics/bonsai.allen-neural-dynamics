@@ -15,7 +15,7 @@ namespace AllenNeuralDynamics.HarpUtils {
 
         [XmlIgnore]
         [Description("The Firmware metadata specifications expected to be found in the target device.")]
-        public FirmwareMetadata FirmwareMetadata { get; set; } = null;
+        public HarpDeviceMetadata HarpMetadata { get; set; }
 
         [Description("The name of the serial port used to communicate with the Harp device.")]
         [TypeConverter(typeof(PortNameConverter))]
@@ -57,9 +57,10 @@ namespace AllenNeuralDynamics.HarpUtils {
 
         Device CreateDevice()
         {
-            if (FirmwareMetadata != null)
+            FirmwareMetadata firmwareMetadata = HarpMetadata.ToFirmwareMetadata();
+            if (firmwareMetadata != null)
             {
-                return new Device(WhoAmI, FirmwareMetadata)
+                return new Device(WhoAmI, firmwareMetadata)
                 {
                     PortName = PortName,
                     DumpRegisters = DumpRegisters,

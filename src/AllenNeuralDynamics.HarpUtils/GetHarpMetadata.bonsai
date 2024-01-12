@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.8.1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
+                 xmlns:p1="clr-namespace:AllenNeuralDynamics.HarpUtils;assembly=AllenNeuralDynamics.HarpUtils"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
+        <rx:Name>Commands</rx:Name>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="PortName" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="harp:Device">
+          <harp:OperationMode>Active</harp:OperationMode>
+          <harp:OperationLed>On</harp:OperationLed>
+          <harp:DumpRegisters>false</harp:DumpRegisters>
+          <harp:VisualIndicators>On</harp:VisualIndicators>
+          <harp:Heartbeat>Disabled</harp:Heartbeat>
+          <harp:IgnoreErrors>false</harp:IgnoreErrors>
+          <harp:PortName>COMx</harp:PortName>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Events</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Events</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Delay">
+          <rx:DueTime>PT0.1S</rx:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>1</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="harp:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="harp:CreateOperationControlPayload">
+          <harp:OperationMode>Standby</harp:OperationMode>
+          <harp:DumpRegisters>true</harp:DumpRegisters>
+          <harp:MuteReplies>false</harp:MuteReplies>
+          <harp:VisualIndicators>Off</harp:VisualIndicators>
+          <harp:OperationLed>Off</harp:OperationLed>
+          <harp:Heartbeat>Disabled</harp:Heartbeat>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:RepeatCount">
+          <rx:Count>5</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Commands</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Events</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="harp:FilterMessageType">
+          <harp:FilterType>Include</harp:FilterType>
+          <harp:MessageType>Read</harp:MessageType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:WhoAmI" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:CoreVersionHigh" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:CoreVersionLow" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:FirmwareVersionHigh" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:FirmwareVersionLow" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:HardwareVersionHigh" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:HardwareVersionLow" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:DeviceName" />
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Register xsi:type="harp:SerialNumber" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="scr:ExpressionTransform">
+        <scr:Expression>new(
+Item1 as WhoAmI,
+Item2 as CoreVersion,
+Item3 as FirmwareVersion,
+Item4 as HardwareVersion,
+Item5 as DeviceName,
+Item6 as SerialNumber)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="InputMapping">
+        <PropertyMappings>
+          <Property Name="DeviceName" Selector="DeviceName" />
+          <Property Name="MajorFirmwareVersion" Selector="FirmwareVersion.Item1" />
+          <Property Name="MinorFirmwareVersion" Selector="FirmwareVersion.Item2" />
+          <Property Name="MajorCoreVersion" Selector="CoreVersion.Item1" />
+          <Property Name="MinorCoreVersion" Selector="CoreVersion.Item2" />
+          <Property Name="MajorHardwareVersion" Selector="HardwareVersion.Item1" />
+          <Property Name="MinorHardwareVersion" Selector="HardwareVersion.Item2" />
+          <Property Name="WhoAmI" Selector="WhoAmI" />
+          <Property Name="SerialNumber" Selector="SerialNumber" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:CreateHarpMetadata">
+          <p1:MajorFirmwareVersion xsi:nil="true" />
+          <p1:MinorFirmwareVersion xsi:nil="true" />
+          <p1:MajorCoreVersion xsi:nil="true" />
+          <p1:MinorCoreVersion xsi:nil="true" />
+          <p1:MajorHardwareVersion xsi:nil="true" />
+          <p1:MinorHardwareVersion xsi:nil="true" />
+          <p1:AssemblyVersion xsi:nil="true" />
+          <p1:PrereleaseVersion xsi:nil="true" />
+          <p1:WhoAmI xsi:nil="true" />
+          <p1:SerialNumber xsi:nil="true" />
+          <p1:FirmwareTag xsi:nil="true" />
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="scr:ExpressionTransform">
+        <scr:Name>Serialize</scr:Name>
+        <scr:Expression>it.Serialize()</scr:Expression>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Path" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:WriteAllText">
+          <io:Overwrite>false</io:Overwrite>
+          <io:Append>false</io:Append>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>1</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="WorkflowOutput" />
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="2" Label="Source1" />
+      <Edge From="1" To="2" Label="Source2" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="6" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source1" />
+      <Edge From="11" To="13" Label="Source1" />
+      <Edge From="11" To="14" Label="Source1" />
+      <Edge From="11" To="16" Label="Source1" />
+      <Edge From="11" To="17" Label="Source1" />
+      <Edge From="11" To="19" Label="Source1" />
+      <Edge From="11" To="20" Label="Source1" />
+      <Edge From="11" To="22" Label="Source1" />
+      <Edge From="11" To="23" Label="Source1" />
+      <Edge From="12" To="24" Label="Source1" />
+      <Edge From="13" To="15" Label="Source1" />
+      <Edge From="14" To="15" Label="Source2" />
+      <Edge From="15" To="24" Label="Source2" />
+      <Edge From="16" To="18" Label="Source1" />
+      <Edge From="17" To="18" Label="Source2" />
+      <Edge From="18" To="24" Label="Source3" />
+      <Edge From="19" To="21" Label="Source1" />
+      <Edge From="20" To="21" Label="Source2" />
+      <Edge From="21" To="24" Label="Source4" />
+      <Edge From="22" To="24" Label="Source5" />
+      <Edge From="23" To="24" Label="Source6" />
+      <Edge From="24" To="25" Label="Source1" />
+      <Edge From="25" To="26" Label="Source1" />
+      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="27" To="28" Label="Source1" />
+      <Edge From="28" To="30" Label="Source1" />
+      <Edge From="29" To="30" Label="Source2" />
+      <Edge From="30" To="31" Label="Source1" />
+      <Edge From="31" To="32" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
