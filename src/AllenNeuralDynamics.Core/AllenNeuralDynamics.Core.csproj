@@ -15,11 +15,7 @@
   <ItemGroup>
     <EmbeddedResource Include="**\*.bonsai" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="CameraLogger.bonsai" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Bonsai.Design" Version="2.8.0" />
