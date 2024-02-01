@@ -55,7 +55,7 @@
             this.button.TabIndex = 0;
             this.button.Text = "Push";
             this.button.UseVisualStyleBackColor = true;
-            this.button.Click += new System.EventHandler(this.tareButton_Click);
+            this.button.Click += new System.EventHandler(this.button_click);
             // 
             // PushButtonControl
             // 
