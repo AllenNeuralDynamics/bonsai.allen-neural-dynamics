@@ -41,6 +41,7 @@ public class PropertyGridVisualizer : DialogTypeVisualizer
 
     public override void Show(object value)
     {
+        control.Refresh();
     }
 
     public override void Unload()

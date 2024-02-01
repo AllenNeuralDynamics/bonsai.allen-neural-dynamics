@@ -2,6 +2,8 @@
 using Bonsai.Design;
 using Bonsai.Expressions;
 using System.Windows.Forms;
+using Bonsai;
+using static System.Windows.Forms.AxHost;
 
 namespace AllenNeuralDynamics.Core.Design
 {
@@ -16,6 +18,9 @@ namespace AllenNeuralDynamics.Core.Design
             var source = (ToggleButton)ExpressionBuilder.GetWorkflowElement(visualizerElement.Builder);
             control = new ToggleButtonStateControl(source);
             control.Dock = DockStyle.Fill;
+            control.UncheckedLabel = source.UncheckedLabel;
+            control.CheckedLabel = source.CheckedLabel;
+            control.State = source.IsInitiallyChecked;
 
             var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
             if (visualizerService != null)
@@ -26,7 +31,7 @@ namespace AllenNeuralDynamics.Core.Design
 
         public override void Show(object value)
         {
-            control.State = (bool) value;
+            control.State = (bool)value;
         }
 
         public override void Unload()
