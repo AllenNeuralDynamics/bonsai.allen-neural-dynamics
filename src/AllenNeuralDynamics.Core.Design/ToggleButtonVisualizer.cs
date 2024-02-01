@@ -2,8 +2,6 @@
 using Bonsai.Design;
 using Bonsai.Expressions;
 using System.Windows.Forms;
-using Bonsai;
-using static System.Windows.Forms.AxHost;
 
 namespace AllenNeuralDynamics.Core.Design
 {
