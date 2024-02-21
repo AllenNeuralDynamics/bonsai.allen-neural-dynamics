@@ -9,13 +9,12 @@
     <PackageTags>Bonsai Rx VersionControl AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview230926</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.0" />
     <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
-    <PackageReference Include="NuGet.Versioning" Version="6.7.0" />
   </ItemGroup>
 
 </Project>
