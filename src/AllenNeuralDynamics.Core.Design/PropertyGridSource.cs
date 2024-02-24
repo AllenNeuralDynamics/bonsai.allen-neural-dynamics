@@ -16,7 +16,7 @@ namespace AllenNeuralDynamics.Core.Design
 
         public override IObservable<Unit> Generate()
         {
-            return Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(0.2)).Select(x => new Unit());
+            return Observable.Never(new Unit());
         }
 
         public IObservable<Unit> Generate<TSource>(IObservable<TSource> source)
