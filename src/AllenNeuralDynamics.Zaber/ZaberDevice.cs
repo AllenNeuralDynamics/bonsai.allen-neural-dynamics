@@ -69,6 +69,18 @@ namespace AllenNeuralDynamics.Zaber
             _ = axis.HasValue ? device.GetAxis(axis.Value).StopAsync(false) : device.AllAxes.StopAsync(false);
         }
 
+        public void Park(int? deviceIndex, int? axis)
+        {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
+            _ = axis.HasValue ? device.GetAxis(axis.Value).ParkAsync() : device.AllAxes.ParkAsync();
+        }
+
+        public void Unpark(int? deviceIndex, int? axis)
+        {
+            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
+            _ = axis.HasValue ? device.GetAxis(axis.Value).UnparkAsync() : device.AllAxes.UnparkAsync();
+        }
+
         public void Home(int? deviceIndex, int? axis)
         {
             var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
