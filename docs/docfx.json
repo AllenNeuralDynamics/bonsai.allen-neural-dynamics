@@ -64,16 +64,19 @@
       "_gitContribute": {
         "branch": "main",
         "apiSpecFolder": "docs/apidoc"
-      }
+      },
+      "_enableSearch": true,
+      "pdf": true
     },
     "dest": "_site",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
       "default",
-      "templates/html"
+      "modern",
+      "bonsai/template",
+      "template"
     ],
-    "postProcessors": [ "ExtractSearchIndex" ],
     "markdownEngineName": "markdig",
     "markdownEngineProperties": {
       "markdigExtensions": [
@@ -85,7 +88,6 @@
     "keepFileLink": false,
     "cleanupCacheHistory": false,
     "disableGitFeatures": false,
-    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ],
     "xref": [
       "https://horizongir.github.io/opencv.net/xrefmap.yml",
       "https://horizongir.github.io/ZedGraph/xrefmap.yml",
