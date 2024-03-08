@@ -6,7 +6,7 @@ foreach ($folderPath in $folderPaths) {
         Write-Host ("Building: " + $snlPath)
         $command = ("msbuild -t:restore " + $snlPath)
         Invoke-Expression $command
-        $command = ("msbuild" + $snlPath + " /p:Configuration=Release")
+        $command = ("msbuild " + $snlPath + " /p:Configuration=Release")
         Invoke-Expression $command
     }
 }
