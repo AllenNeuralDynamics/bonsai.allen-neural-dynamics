@@ -1,6 +1,5 @@
 ﻿using Bonsai.Harp;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AllenNeuralDynamics.HarpUtils
 {

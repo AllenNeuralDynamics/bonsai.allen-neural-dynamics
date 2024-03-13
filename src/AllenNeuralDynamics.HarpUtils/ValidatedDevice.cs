@@ -4,7 +4,8 @@ using System.ComponentModel;
 using Bonsai.Harp;
 using System.Xml.Serialization;
 
-namespace AllenNeuralDynamics.HarpUtils { 
+namespace AllenNeuralDynamics.HarpUtils 
+{ 
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
     [Description("Dynamically creates Harp devices with the specified WhoAmI and Firmware metadata.")]
