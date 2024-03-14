@@ -17,6 +17,7 @@
       <Expression xsi:type="ExternalizedMapping">
         <Property Name="LoggerName" />
         <Property Name="SubjectName" />
+        <Property Name="Modality" />
       </Expression>
       <Expression xsi:type="rx:SelectMany">
         <Name>Demux</Name>
