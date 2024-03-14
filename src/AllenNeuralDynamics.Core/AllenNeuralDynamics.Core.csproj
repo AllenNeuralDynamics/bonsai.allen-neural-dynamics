@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2024031401</Version>
+    <Version>0.1.0-preview2024031402</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +30,10 @@
     <Resource Include="DataSchemas\aind-logging.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

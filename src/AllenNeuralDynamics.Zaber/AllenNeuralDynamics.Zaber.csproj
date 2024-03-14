@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Bonsai - AIND Zaber library</Title>
+    <Title>AllenNeuralDynamics.Zaber</Title>
     <Description>A bonsai package for controlling Zaber micromanipulators.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Zaber AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.4.1</Version>
+    <Version>0.4.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +21,10 @@
   <ItemGroup>
     <Content Include="$(SolutionDir)runtimes\win-x64\native\*.dll" PackagePath="runtimes\win-x64\native" TargetPath="%(Filename)%(Extension)" CopyToOutputDirectory="Always" />
     <Content Include="$(SolutionDir)runtimes\LICENSE.txt" PackagePath="runtimes\win-x64\native" TargetPath="%(Filename)%(Extension)" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
 </Project>

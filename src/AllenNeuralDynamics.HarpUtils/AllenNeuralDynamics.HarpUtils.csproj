@@ -2,28 +2,28 @@
 
   <PropertyGroup>
     <Title>AllenNeuralDynamics.HarpUtils</Title>
-    <Description>A package with utlities for the Harp devices and Harp protocol.</Description>
+    <Description>A package with utilities for the Harp devices and Harp protocol.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2024031302</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
-
 
   <ItemGroup>
     <EmbeddedResource Include="**\*.bonsai" />
   </ItemGroup>
-  
-  
+
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.0" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   
-  
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
+  </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Bonsai - AIND version control library</Title>
+    <Title>AllenNeuralDynamics.VersionControl</Title>
     <Description>A bonsai package for version control and interacting with Git Repository objects.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,12 +9,16 @@
     <PackageTags>Bonsai Rx VersionControl AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.0" />
     <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
 </Project>
