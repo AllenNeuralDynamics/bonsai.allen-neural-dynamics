@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <UseWindowsForms>true</UseWindowsForms>
-    <Title>Bonsai - AIND Core Design library</Title>
+    <Title>AllenNeuralDynamics.Core.Design</Title>
     <Description>A bonsai design package for core primitives used in AIND experiments.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,13 +9,17 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.4-preview20240223</Version>
+    <Version>0.1.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AllenNeuralDynamics.Core" Version="0.1.0-preview2024012401" />
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Bonsai.Design" Version="2.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
 </Project>

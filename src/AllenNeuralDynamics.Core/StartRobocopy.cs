@@ -53,6 +53,7 @@ namespace AllenNeuralDynamics.Core
             var command = $"\"{Source}\" \"{Destination}\" {Arguments} {log_arg}";
             return command;
         }
+
         public override IObservable<Unit> Generate()
         {
             var process = new Process();

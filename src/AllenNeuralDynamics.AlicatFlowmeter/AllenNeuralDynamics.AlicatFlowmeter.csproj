@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Bonsai - AIND Alicat Flowmeter library</Title>
+    <Title>AllenNeuralDynamics.AlicatFlowmeter</Title>
     <Description>A bonsai package for communicating with Alicat Scientific Flowmeter.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Alicat Flowmeter AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview0501202402</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="**\*.bonsai" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
 </Project>

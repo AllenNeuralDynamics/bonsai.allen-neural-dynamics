@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Bonsai - AIND Core library</Title>
+    <Title>AllenNeuralDynamics.Core</Title>
     <Description>A bonsai package for core primitives used in AIND experiments.</Description>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2024012401</Version>
+    <Version>0.1.0-preview2024031402</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +30,10 @@
     <Resource Include="DataSchemas\aind-logging.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
