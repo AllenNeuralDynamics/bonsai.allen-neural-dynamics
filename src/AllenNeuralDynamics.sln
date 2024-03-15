@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.Core.Design", "AllenNeuralDynamics.Core.Design\AllenNeuralDynamics.Core.Design.csproj", "{E892A34A-9547-41E6-B687-F8C70C0A4B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllenNeuralDynamics.HarpUtils", "AllenNeuralDynamics.HarpUtils\AllenNeuralDynamics.HarpUtils.csproj", "{C57A22CE-C639-4022-A262-8FD5E4882221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.HarpUtils", "AllenNeuralDynamics.HarpUtils\AllenNeuralDynamics.HarpUtils.csproj", "{C57A22CE-C639-4022-A262-8FD5E4882221}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.AlicatFlowmeter", "AllenNeuralDynamics.AlicatFlowmeter\AllenNeuralDynamics.AlicatFlowmeter.csproj", "{712EE544-7615-4ED2-8EAE-E30B174EAFA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{C57A22CE-C639-4022-A262-8FD5E4882221}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C57A22CE-C639-4022-A262-8FD5E4882221}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C57A22CE-C639-4022-A262-8FD5E4882221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{712EE544-7615-4ED2-8EAE-E30B174EAFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{712EE544-7615-4ED2-8EAE-E30B174EAFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{712EE544-7615-4ED2-8EAE-E30B174EAFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{712EE544-7615-4ED2-8EAE-E30B174EAFA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
