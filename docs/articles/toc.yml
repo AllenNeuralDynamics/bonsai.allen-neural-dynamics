@@ -10,3 +10,7 @@
     href: harp-utils.md
   - name: LicketySplitLickDetector
     href: lickety-split-lick-detector.md
+  - name: SniffDetector
+    href: sniff-detector.md
+  - name: Treadmill
+    href: treadmill.md
