@@ -48,12 +48,14 @@ foreach ($folderPath in $folderPaths) {
 }
 
 # find device assemblies
-$sufix = "bin\Release\net472"
+$sufix = "bin\Release\netstandard2.0"
 
-$harp_solutions = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln
+$harp_solutions = Get-ChildItem .\docs\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln
 foreach ($solution in $harp_solutions) {
-    $libPath = Join-Path -Path $folderPath.FullName -ChildPath $sufix # grab the lib
-    $packages += $solution
+    $parent = Split-Path -Path $solution -Parent
+    $solution_folder = Get-ChildItem -Path $parent -Directory
+    $libPath = Join-Path -Path (Join-Path -Path $parent  -ChildPath $solution_folder[0]) -ChildPath $sufix # grab the lib
+    $packages += $libPath
 }
 
 
