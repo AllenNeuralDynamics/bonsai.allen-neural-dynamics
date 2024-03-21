@@ -24,7 +24,7 @@ foreach ($folderPath in $folderPaths) {
 }
 
 # find device assemblies
-$sufix = "bin\Release\netstandard2.0"
+$sufix = "bin\Release\net462"
 
 $harp_solutions = Get-ChildItem .\docs\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln
 foreach ($solution in $harp_solutions) {
