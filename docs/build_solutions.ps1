@@ -13,7 +13,7 @@ foreach ($folderPath in $folderPaths) {
 }
 
 # Build Harp Interfaces
-$harp_solutions = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln
+$harp_solutions = Get-ChildItem "..\docs\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln"
 foreach ($slnPath in $harp_solutions) {
     Write-Host ("Building: " + $slnPath)
     $command = ("msbuild -t:restore " + $slnPath)
