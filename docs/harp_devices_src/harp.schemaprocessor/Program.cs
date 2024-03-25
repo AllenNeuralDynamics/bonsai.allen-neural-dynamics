@@ -4,6 +4,7 @@ using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 var fileName = args[0];
+var readmePath = args[2];
 var yaml = File.ReadAllText(fileName);
 var deserializer = new Deserializer();
 var parser = new MergingParser(new Parser(new StringReader(yaml)));
@@ -86,7 +87,7 @@ if (args.Length > 1)
 uid: Harp.{deviceModel.device}
 ---
 
-[!include[README](~/src/device.{deviceModel.device.ToLowerInvariant()}/README.md)]
+[!include[README]({readmePath})]
 
 [!include[RegisterTables](./Harp_{deviceModel.device}_Device.md)]");
 }

@@ -4,9 +4,10 @@
       "src": [
         {
           "files": [
-            "**/**.csproj"
+            "src/**/**.csproj",
+            "docs/harp_devices_src/software/bonsai/interface/**/**.csproj"
           ],
-          "src": "../src",
+          "src": "../.",
           "exclude": [
             "**/bin/**",
             "**/obj/**",
@@ -32,6 +33,7 @@
         "files": [
           "articles/**.md",
           "articles/**/toc.yml",
+          "harp_devices_spec/**.md",
           "toc.yml",
           "*.md"
         ]
@@ -44,14 +46,17 @@
           "full-logo.svg",
           "favicon.ico",
           "images/**",
-          "workflows/**"
+          "workflows/**",
+          "harp_devices_src/harp.device.*/notes/images/*.png",
+          "harp_devices_src/harp.device.*/notes/images/*.jpg",
         ]
       }
     ],
     "overwrite": [
       {
         "files": [
-          "apidoc/**.md"
+          "apidoc/**.md",
+          "harp_devices_spec/**.md"
         ],
         "exclude": [
           "obj/**",
