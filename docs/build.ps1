@@ -4,7 +4,9 @@ foreach ($file in $files)
 {
     Write-Output "Generating schema tables for $file..."
     $readmePath =  (get-item $file ).Directory.Parent.Parent.FullName + "\README.md"
-    dotnet run --project .\harp_devices_src\harp.schemaprocessor $file .\harp_devices_spec ("." + (Resolve-Path -Relative $readmePath))
+    $readmePath = ("." + (Resolve-Path -Relative $readmePath))
+    $readmePath = $readmePath.Replace("\", "/")
+    dotnet run --project .\harp_devices_src\harp.schemaprocessor $file .\harp_devices_spec $readmePath
 }
 
 
