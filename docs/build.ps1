@@ -3,7 +3,7 @@ $files = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\device.y
 foreach ($file in $files)
 {
     Write-Output "Generating schema tables for $file..."
-    $readmePath = $file -replace "software\bonsai\device.yml", "README.md"
+    $readmePath =  (get-item $file ).Directory.Parent.Parent.FullName + "\README.md"
     dotnet run --project .\harp_devices_src\harp.schemaprocessor $file .\harp_devices_spec ("." + (Resolve-Path -Relative $readmePath))
 }
 
@@ -37,7 +37,7 @@ foreach ($solution in $harp_solutions) {
 
 
 Write-Host ("Found the following packages: " + $packages)
-.\bonsai\modules\Export-Image.ps1 $packages
+#.\bonsai\modules\Export-Image.ps1 $packages
 
 # Build documentation
 dotnet docfx @args
