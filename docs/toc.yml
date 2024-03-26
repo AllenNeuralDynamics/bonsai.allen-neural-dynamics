@@ -2,3 +2,5 @@
   href: articles/
 - name: Reference
   href: api/
+- name: Harp Devices
+  href: harp_devices_spec/

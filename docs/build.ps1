@@ -10,6 +10,8 @@ foreach ($file in $files)
 }
 
 
+
+
 # Find assemblies to build workflows
 $baseDir = (Get-Item -Path "..\src" -Verbose).FullName
 $folderPaths = Get-ChildItem -Path $baseDir -Directory

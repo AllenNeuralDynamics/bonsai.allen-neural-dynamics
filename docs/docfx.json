@@ -24,6 +24,9 @@
       },
       {
         "files": ["articles/**.md", "articles/**/toc.yml", "toc.yml", "*.md"]
+      },
+      {
+        "files": ["harp_devices_spec/**.md", "harp_devices_spec/toc.yml"]
       }
     ],
     "resource": [
@@ -33,7 +36,11 @@
           "full-logo.svg",
           "favicon.ico",
           "images/**",
-          "workflows/**",
+          "workflows/**"
+        ]
+      },
+      {
+        "files": [
           "harp_devices_src/harp.device.*/notes/images/*.png",
           "harp_devices_src/harp.device.*/notes/images/*.jpg"
         ]
@@ -41,7 +48,7 @@
     ],
     "overwrite": [
       {
-        "files": ["apidoc/**.md", "harp_devices_spec/**.md"],
+        "files": ["apidoc/**.md"],
         "exclude": ["obj/**", "_site/**"]
       }
     ],
