@@ -175,7 +175,12 @@ namespace AllenNeuralDynamics.HarpUtils
                     MessageTypeModified = value.Item1.MessageType;
                 }
                 var Payload = ParsePayload(value.Item1);
-                return BuildTimestampedMessage(Payload, (int)address, (MessageType)MessageTypeModified, GetTimestampedPayloadType(value.Item1.PayloadType), value.Item2);
+                return BuildTimestampedMessage(
+                    Payload,
+                    (int)address,
+                    (MessageType)MessageTypeModified,
+                    value.Item1.IsTimestamped ? value.Item1.PayloadType : GetTimestampedPayloadType(value.Item1.PayloadType),
+                    value.Item2);
             });
         }
     }
