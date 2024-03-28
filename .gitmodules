@@ -1,3 +1,12 @@
 [submodule "docs/bonsai"]
 	path = docs/bonsai
 	url = https://github.com/bonsai-rx/docfx-tools
+[submodule "docs/harp_devices_src/harp.device.lickety-split"]
+	path = docs/harp_devices_src/harp.device.lickety-split
+	url = https://github.com/AllenNeuralDynamics/harp.device.lickety-split
+[submodule "docs/harp_devices_src/harp.device.sniff-detector"]
+	path = docs/harp_devices_src/harp.device.sniff-detector
+	url = https://github.com/AllenNeuralDynamics/harp.device.sniff-detector
+[submodule "docs/harp_devices_src/harp.device.treadmill"]
+	path = docs/harp_devices_src/harp.device.treadmill
+	url = https://github.com/AllenNeuralDynamics/harp.device.treadmill
