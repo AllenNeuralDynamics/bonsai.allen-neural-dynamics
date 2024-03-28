@@ -9,15 +9,11 @@ foreach ($file in $files)
     dotnet run --project .\harp_devices_src\harp.schemaprocessor $file .\harp_devices_spec $readmePath
 }
 
-
-
-
 # Find assemblies to build workflows
 $baseDir = (Get-Item -Path "..\src" -Verbose).FullName
 $folderPaths = Get-ChildItem -Path $baseDir -Directory
 $sufix = "bin\Release\net472"
 $packages = @()
-
 
 # find package assemblies
 foreach ($folderPath in $folderPaths) {
@@ -39,9 +35,8 @@ foreach ($solution in $harp_solutions) {
     $packages += $libPath
 }
 
-
 Write-Host ("Found the following packages: " + $packages)
-#.\bonsai\modules\Export-Image.ps1 $packages
+.\bonsai\modules\Export-Image.ps1 $packages
 
 # Build documentation
 dotnet docfx @args
