@@ -25,13 +25,9 @@ foreach ($folderPath in $folderPaths) {
 }
 
 # find device assemblies
-$sufix = "bin\Release\net462"
 
-$harp_solutions = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\Interface\*.sln
-foreach ($solution in $harp_solutions) {
-    $parent = Split-Path -Path $solution -Parent
-    $solution_folder = Get-ChildItem -Path $parent -Directory
-    $libPath = Join-Path -Path (Join-Path -Path $parent  -ChildPath $solution_folder[0]) -ChildPath $sufix # grab the lib
+$harp_solutions = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\Interface\**\bin\Release\net4* -Directory
+foreach ($libPath in $harp_solutions) {
     $packages += $libPath
 }
 
