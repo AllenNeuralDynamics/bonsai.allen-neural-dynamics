@@ -28,7 +28,7 @@ foreach ($folderPath in $folderPaths) {
 
 $harp_solutions = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\Interface\**\bin\Release\net4* -Directory
 foreach ($libPath in $harp_solutions) {
-    $packages += $libPath
+    $packages += $(Resolve-Path($libPath) -Relative)
 }
 
 Write-Host ("Found the following packages: " + $packages)
