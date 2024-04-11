@@ -15,6 +15,10 @@
   <ItemGroup>
     <EmbeddedResource Include="**\*.bonsai" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="FilterNotNull.bonsai" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
