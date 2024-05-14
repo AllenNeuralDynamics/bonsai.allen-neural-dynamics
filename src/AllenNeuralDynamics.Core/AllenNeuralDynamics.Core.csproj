@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2024042302</Version>
+    <Version>0.1.0-preview2024051401</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,7 @@
     <PackageReference Include="Bonsai.Harp" Version="3.5.2" />
     <PackageReference Include="Bonsai.Scripting.Expressions" Version="2.8.0" />
     <PackageReference Include="Bonsai.Spinnaker" Version="0.7.1" />
+    <PackageReference Include="Bonsai.Vision" Version="2.8.1" />
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
