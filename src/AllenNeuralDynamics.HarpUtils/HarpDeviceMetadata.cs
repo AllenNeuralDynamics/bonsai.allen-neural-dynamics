@@ -1,8 +1,11 @@
 ﻿using Bonsai.Harp;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace AllenNeuralDynamics.HarpUtils
 {
+    [Description("A data structure representing metadata associated with a Harp Device.")]
+
     public class HarpDeviceMetadata
     {
         public string DeviceName { get; set; }
