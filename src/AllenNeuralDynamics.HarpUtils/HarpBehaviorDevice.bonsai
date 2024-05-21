@@ -54,7 +54,7 @@
         <Name>HarpBehaviorCommands</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
-        <Name>HarpBehaviorHeartBeat</Name>
+        <Name>HarpBehaviorEvents</Name>
       </Expression>
       <Expression xsi:type="beh:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
