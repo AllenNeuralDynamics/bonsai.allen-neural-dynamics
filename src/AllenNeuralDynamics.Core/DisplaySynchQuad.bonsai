@@ -20,8 +20,8 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Lower" />
-        <Property Name="Upper" />
+        <Property Name="Lower" DisplayName="Minimum" Category="TogglePeriod" />
+        <Property Name="Upper" DisplayName="Maximum" Category="TogglePeriod" />
       </Expression>
       <Expression xsi:type="rx:Defer">
         <Name>RandomInterval</Name>
@@ -233,6 +233,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Zip" />
       </Expression>
+      <Expression xsi:type="WorkflowOutput" />
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -272,6 +273,7 @@
       <Edge From="32" To="33" Label="Source1" />
       <Edge From="33" To="34" Label="Source1" />
       <Edge From="34" To="35" Label="Source2" />
+      <Edge From="35" To="36" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
