@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Collections.Generic;
 
 namespace AllenNeuralDynamics.Core.Logging
 {
@@ -16,9 +17,28 @@ namespace AllenNeuralDynamics.Core.Logging
         {
             return source.Select(value =>
             {
-                return Path.Combine(value, Modality.HasValue ? Modality.ToString() : "");
+                return Path.Combine(value, Modality.HasValue ? modalityDirectories[Modality.Value] : "");
             });
         }
+
+        private readonly Dictionary<Modality, string> modalityDirectories = new Dictionary<Modality, string>()
+        {
+                {Logging.Modality.Other, "other"},
+                {Logging.Modality.Behavior, "behavior"},
+                {Logging.Modality.Confocal, "confocal"},
+                {Logging.Modality.Ecephys, "ecephys"},
+                {Logging.Modality.BehaviorVideos, "behavior-videos"},
+                {Logging.Modality.Electromyography, "EMG"},
+                {Logging.Modality.Fib, "fib"},
+                {Logging.Modality.Fmost, "fMOST"},
+                {Logging.Modality.Icephys, "icephys"},
+                {Logging.Modality.Isi, "ISI"},
+                {Logging.Modality.Merfish, "merfish"},
+                {Logging.Modality.Mri, "MRI"},
+                {Logging.Modality.POphys, "ophys"},
+                {Logging.Modality.Slap, "slap"},
+                {Logging.Modality.Spim, "SPIM"}
+        };
     }
 
     public enum Modality
