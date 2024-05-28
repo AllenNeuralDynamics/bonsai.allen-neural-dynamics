@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>AllenNeuralDynamics.AindManipulator</Title>
+    <Description>A package with utilities for interfacing with the AIND manipulator</Description>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Bonsai Rx Manipulator AllenNeuralDynamics</PackageTags>
+    <TargetFramework>net472</TargetFramework>
+    <Features>strict</Features>
+    <Version>0.1.0-preview2024052801</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.bonsai" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Harp.StepperDriver" Version="0.3.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Resource Include="DataSchemas\aind_manipulator_calibration_rig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="
+	dotnet tool restore
+	dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json --root CalibrationRig --namespace AllenNeuralDynamics.AindManipulator --output AindManipulatorSchema.cs --serializer NewtonsoftJson" />
+  </Target>
+
+</Project>
