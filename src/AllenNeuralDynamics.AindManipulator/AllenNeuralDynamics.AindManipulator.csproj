@@ -13,16 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="**\*.bonsai" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="README.md" PackagePath="/" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Bonsai.Gui" Version="0.1.0" />
+    <PackageReference Include="Bonsai.Scripting.Expressions" Version="2.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Harp.StepperDriver" Version="0.3.0" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.bonsai" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,9 +31,8 @@
     <Folder Include="DataSchemas\" />
   </ItemGroup>
 
-  
-  
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/0.7.5/src/DataSchemas/schemas/aind_manipulator_calibration_rig.json -o $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json --root CalibrationRig --namespace AllenNeuralDynamics.AindManipulator --output AindManipulatorSchema.cs --serializer NewtonsoftJson" />  </Target>
+    <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/0.7.5/src/DataSchemas/schemas/aind_manipulator_calibration_rig.json -o $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json --root CalibrationRig --namespace AllenNeuralDynamics.AindManipulator --output AindManipulatorSchema.cs --serializer NewtonsoftJson" />
+  </Target>
 
 </Project>
