@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.8.2"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:p1="clr-namespace:AllenNeuralDynamics.AindManipulator;assembly=AllenNeuralDynamics.AindManipulator"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="WorkflowInput">
+        <Name>Source1</Name>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="X" DisplayName="FullStepToMmX" Category="FullStepToMm" />
+        <Property Name="Y1" DisplayName="FullStepToMmY1" Category="FullStepToMm" />
+        <Property Name="Y2" DisplayName="FullStepToMmY2" Category="FullStepToMm" />
+        <Property Name="Z" DisplayName="FullStepToMmZ" Category="FullStepToMm" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:ManipulatorPosition">
+          <p1:X>0.1</p1:X>
+          <p1:Y1>0.1</p1:Y1>
+          <p1:Y2>0.1</p1:Y2>
+          <p1:Z>0.1</p1:Z>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FullStepToMm" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="X" DisplayName="InitialPositionX" Category="InitialPosition" />
+        <Property Name="Y1" DisplayName="InitialPositionY1" Category="InitialPosition" />
+        <Property Name="Y2" DisplayName="InitialPositionY2" Category="InitialPosition" />
+        <Property Name="Z" DisplayName="InitialPositionZ" Category="InitialPosition" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:ManipulatorPosition">
+          <p1:X>0</p1:X>
+          <p1:Y1>0</p1:Y1>
+          <p1:Y2>0</p1:Y2>
+          <p1:Z>0</p1:Z>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="InitialPosition" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="AxisConfiguration" Category="AxisConfiguration" />
+        <Property Name="HomingOrder" Category="HomingOrder" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:AindManipulatorCalibrationInput" />
+      </Expression>
+      <Expression xsi:type="WorkflowOutput" />
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="8" Label="Source1" />
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="8" Label="Source2" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="6" Label="Source1" />
+      <Edge From="6" To="8" Label="Source3" />
+      <Edge From="7" To="8" Label="Source4" />
+      <Edge From="8" To="9" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
