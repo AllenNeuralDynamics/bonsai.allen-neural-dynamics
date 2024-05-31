@@ -280,7 +280,7 @@
                           <Combinator xsi:type="rx:Concat" />
                         </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:Last" />
+                          <Combinator xsi:type="rx:LastOrDefault" />
                         </Expression>
                         <Expression xsi:type="WorkflowOutput" />
                       </Nodes>
@@ -778,8 +778,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>-X</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>-1</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -790,8 +824,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>+X</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>1</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -814,8 +882,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>-Y1</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>-1</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -826,8 +928,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>+Y1</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>1</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -850,8 +986,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>-Y2</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>-1</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -862,8 +1032,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>+Y2</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>1</p2:Y2>
+                                  <p2:Z>0</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -886,8 +1090,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>-Z</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>-1</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -898,8 +1136,42 @@
                           <gui:Visible>true</gui:Visible>
                           <gui:Text>+Z</gui:Text>
                         </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>UIOffset</Name>
+                        <Expression xsi:type="rx:Sink">
+                          <Name>MoveRelative</Name>
+                          <Workflow>
+                            <Nodes>
+                              <Expression xsi:type="WorkflowInput">
+                                <Name>Source1</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="p2:ManipulatorPosition">
+                                  <p2:X>0</p2:X>
+                                  <p2:Y1>0</p2:Y1>
+                                  <p2:Y2>0</p2:Y2>
+                                  <p2:Z>1</p2:Z>
+                                </Combinator>
+                              </Expression>
+                              <Expression xsi:type="SubscribeSubject">
+                                <Name>OffsetGain</Name>
+                              </Expression>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
+                              </Expression>
+                              <Expression xsi:type="Multiply" />
+                              <Expression xsi:type="MulticastSubject">
+                                <Name>MoveRelativePosition</Name>
+                              </Expression>
+                              <Expression xsi:type="WorkflowOutput" />
+                            </Nodes>
+                            <Edges>
+                              <Edge From="0" To="1" Label="Source1" />
+                              <Edge From="1" To="3" Label="Source1" />
+                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="3" To="4" Label="Source1" />
+                              <Edge From="4" To="5" Label="Source1" />
+                              <Edge From="5" To="6" Label="Source1" />
+                            </Edges>
+                          </Workflow>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
@@ -940,7 +1212,7 @@
                         </Expression>
                         <Expression xsi:type="gui:TableLayoutPanelBuilder">
                           <gui:Name>ManipulatorOffset</gui:Name>
-                          <gui:Enabled>true</gui:Enabled>
+                          <gui:Enabled>false</gui:Enabled>
                           <gui:Visible>true</gui:Visible>
                           <gui:ColumnCount>1</gui:ColumnCount>
                           <gui:RowCount>2</gui:RowCount>
@@ -958,17 +1230,6 @@
                           <gui:CellSpans />
                         </Expression>
                         <Expression xsi:type="WorkflowOutput" />
-                        <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:String">
-                          <rx:Name>UIOffset</rx:Name>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Name>DetermineSign</scr:Name>
-                          <scr:Expression>it[0] == '+' ? 1.0 : -1.0</scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Name>RemoveSign</scr:Name>
-                          <scr:Expression>it.substring(1)</scr:Expression>
-                        </Expression>
                         <Expression xsi:type="ExternalizedMapping">
                           <Property Name="X" Category="OffsetGain" />
                           <Property Name="Y1" Category="OffsetGain" />
@@ -977,42 +1238,14 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p2:ManipulatorPosition">
-                            <p2:X>0</p2:X>
-                            <p2:Y1>0</p2:Y1>
-                            <p2:Y2>0</p2:Y2>
-                            <p2:Z>0</p2:Z>
+                            <p2:X>1000</p2:X>
+                            <p2:Y1>1000</p2:Y1>
+                            <p2:Y2>1000</p2:Y2>
+                            <p2:Z>1000</p2:Z>
                           </Combinator>
                         </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:Zip" />
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Name>DetermineAxis</scr:Name>
-                          <scr:Expression>new(
-Item2 == "Y1" ? Item1 * Item3.Y1 : 0 as Y1,
-Item2 == "Y2" ? Item1 * Item3.Y2: 0 as Y2,
-Item2 == "X" ? Item1 * Item3.X: 0 as X,
-Item2 == "Z" ? Item1 * Item3.Z: 0 as Z)
-</scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="InputMapping">
-                          <PropertyMappings>
-                            <Property Name="X" Selector="X" />
-                            <Property Name="Y1" Selector="Y1" />
-                            <Property Name="Y2" Selector="Y2" />
-                            <Property Name="Z" Selector="Z" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="p2:ManipulatorPosition">
-                            <p2:X>0</p2:X>
-                            <p2:Y1>0</p2:Y1>
-                            <p2:Y2>0</p2:Y2>
-                            <p2:Z>0</p2:Z>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>GoToPosition</Name>
+                        <Expression xsi:type="rx:BehaviorSubject">
+                          <Name>OffsetGain</Name>
                         </Expression>
                       </Nodes>
                       <Edges>
@@ -1056,16 +1289,7 @@ Item2 == "Z" ? Item1 * Item3.Z: 0 as Z)
                         <Edge From="37" To="38" Label="Source3" />
                         <Edge From="38" To="39" Label="Source1" />
                         <Edge From="40" To="41" Label="Source1" />
-                        <Edge From="40" To="42" Label="Source1" />
-                        <Edge From="40" To="44" Label="Source2" />
-                        <Edge From="41" To="45" Label="Source1" />
-                        <Edge From="42" To="45" Label="Source2" />
-                        <Edge From="43" To="44" Label="Source1" />
-                        <Edge From="44" To="45" Label="Source3" />
-                        <Edge From="45" To="46" Label="Source1" />
-                        <Edge From="46" To="47" Label="Source1" />
-                        <Edge From="47" To="48" Label="Source1" />
-                        <Edge From="48" To="49" Label="Source1" />
+                        <Edge From="41" To="42" Label="Source1" />
                       </Edges>
                     </Workflow>
                   </Expression>
@@ -1146,7 +1370,7 @@ Item2 == "Z" ? Item1 * Item3.Z: 0 as Z)
                         </Expression>
                         <Expression xsi:type="gui:PropertyGridBuilder">
                           <gui:Name>CurrentPosition</gui:Name>
-                          <gui:Enabled>false</gui:Enabled>
+                          <gui:Enabled>true</gui:Enabled>
                           <gui:Visible>true</gui:Visible>
                           <gui:Font>Microsoft Sans Serif, 22pt</gui:Font>
                           <gui:HelpVisible>false</gui:HelpVisible>
@@ -1166,7 +1390,7 @@ Item2 == "Z" ? Item1 * Item3.Z: 0 as Z)
                         </Expression>
                         <Expression xsi:type="gui:ButtonBuilder">
                           <gui:Name>SetPosition</gui:Name>
-                          <gui:Enabled>true</gui:Enabled>
+                          <gui:Enabled>false</gui:Enabled>
                           <gui:Visible>true</gui:Visible>
                           <gui:Font>Microsoft Sans Serif, 36pt</gui:Font>
                           <gui:Text>Set position</gui:Text>
@@ -1194,7 +1418,7 @@ Item2 == "Z" ? Item1 * Item3.Z: 0 as Z)
                           <gui:Enabled>false</gui:Enabled>
                           <gui:Visible>true</gui:Visible>
                           <gui:Font>Microsoft Sans Serif, 36pt</gui:Font>
-                          <gui:Text>Moving...</gui:Text>
+                          <gui:Text>Idle</gui:Text>
                         </Expression>
                         <Expression xsi:type="VisualizerMapping">
                           <VisualizerType xsi:type="TypeMapping" TypeArguments="gui:ButtonVisualizer" />
