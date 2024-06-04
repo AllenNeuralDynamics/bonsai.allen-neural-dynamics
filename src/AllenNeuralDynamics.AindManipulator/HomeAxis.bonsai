@@ -354,9 +354,13 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>StepperDriverEvents</Name>
+                  </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="IntProperty">
-                      <Value>0</Value>
+                    <Combinator xsi:type="harp:FilterMessageType">
+                      <harp:FilterType>Exclude</harp:FilterType>
+                      <harp:MessageType>Read</harp:MessageType>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="p1:CreateMessage">
@@ -382,6 +386,7 @@
                   <Edge From="8" To="9" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                   <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="12" To="13" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
