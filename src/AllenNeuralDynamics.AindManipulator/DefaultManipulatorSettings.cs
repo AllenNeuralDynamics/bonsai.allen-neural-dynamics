@@ -1,4 +1,6 @@
 ﻿using Bonsai;
+using Bonsai.Harp;
+using Harp.StepperDriver;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -7,29 +9,31 @@ using System.Reactive.Linq;
 
 namespace AllenNeuralDynamics.AindManipulator
 {
+    
     public class DefaultManipulatorSettings : Source<AindManipulatorCalibrationInput>
     {
 
-        public int InitialPositionX { get; set; } = 0;
-        public int InitialPositionY1 { get; set; } = 0;
-        public int InitialPositionY2 { get; set; } = 0;
-        public int InitialPositionZ { get; set; } = 0;
+        [TypeConverter(typeof(NumericRecordConverter))]
+        public AindManipulatorPosition InitialPosition { get; set; } = new AindManipulatorPosition();
+
+        [TypeConverter(typeof(NumericRecordConverter))]
+        public AindManipulatorPosition StepToMm { get; set; } = new AindManipulatorPosition();
 
         [TypeConverter(typeof(UnidimensionalArrayConverter))]
-        public Axis[] HomingOrder { get; set; } = new Axis[] { Axis._1, Axis._2, Axis._3, Axis._4 };
+        public AindManipulatorAxis[] HomingOrder { get; set; } = new AindManipulatorAxis[] {AindManipulatorAxis.Y1, AindManipulatorAxis.Y2, AindManipulatorAxis.X, AindManipulatorAxis.Z};
 
         [TypeConverter(typeof(UnidimensionalArrayConverter))]
-        public Axis[] EnabledAxis { get; set; } = new Axis[] { Axis._1, Axis._2, Axis._3, Axis._4 };
+        public AindManipulatorAxis[] EnabledAxis { get; set; } = new AindManipulatorAxis[] { AindManipulatorAxis.Y1, AindManipulatorAxis.Y2, AindManipulatorAxis.X, AindManipulatorAxis.Z };
 
         public int StepAccelerationInterval { get; set; } = 100;
 
         public int StepInterval { get; set; } = 100;
 
-        public MicrostepResolution MicrostepResolution { get; set; } = 0;
+        public Harp.StepperDriver.MicrostepResolution MicrostepResolution { get; set; } = 0;
 
         public int MaximumStepInterval { get; set; } = 2000;
 
-        public MotorOperationMode MotorOperationMode { get; set; } = 0;
+        public Harp.StepperDriver.MotorOperationMode MotorOperationMode { get; set; } = 0;
 
         public int MaxLimit { get; set; } = 24000;
 
@@ -40,23 +44,23 @@ namespace AllenNeuralDynamics.AindManipulator
         {
             return Observable.Return(new AindManipulatorCalibrationInput()
             {
-                InitialPosition = new ManipulatorPosition() { X = InitialPositionX, Y1 = InitialPositionY1, Y2 = InitialPositionY2, Z = InitialPositionZ},
-                FullStepToMm = new ManipulatorPosition(),
-                HomingOrder = HomingOrder.ToList(),
+                InitialPosition = InitialPosition.ToManipulatorPosition(),
+                FullStepToMm = StepToMm.ToManipulatorPosition(),
+                HomingOrder = HomingOrder.Select(x => (Axis) x).ToList(),
                 AxisConfiguration = EnabledAxis.Select(x => DefaultAxisConfiguration(x)).ToList()
             });
         }
 
-        private AxisConfiguration DefaultAxisConfiguration(Axis axis)
+        private AxisConfiguration DefaultAxisConfiguration(AindManipulatorAxis axis)
         {
             return new AxisConfiguration()
             {
-                Axis = axis,
+                Axis = (Axis) axis,
                 StepAccelerationInterval = StepAccelerationInterval,
                 StepInterval = StepInterval,
-                MicrostepResolution = MicrostepResolution,
+                MicrostepResolution = (MicrostepResolution) MicrostepResolution,
                 MaximumStepInterval = MaximumStepInterval,
-                MotorOperationMode = MotorOperationMode,
+                MotorOperationMode = (MotorOperationMode) MotorOperationMode,
                 MaxLimit = MaxLimit,
                 MinLimit = MinLimit
             };
