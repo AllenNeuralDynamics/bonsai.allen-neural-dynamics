@@ -85,7 +85,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_3</Value>
+                      <Value>Y2</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -202,7 +202,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_3</Value>
+                      <Value>Y2</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -577,7 +577,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_2</Value>
+                      <Value>Y1</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -694,7 +694,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_2</Value>
+                      <Value>Y1</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -823,7 +823,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_4</Value>
+                      <Value>Z</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -940,7 +940,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_4</Value>
+                      <Value>Z</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
