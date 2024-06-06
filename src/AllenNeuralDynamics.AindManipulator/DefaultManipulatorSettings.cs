@@ -1,6 +1,4 @@
 ﻿using Bonsai;
-using Bonsai.Harp;
-using Harp.StepperDriver;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -46,7 +44,7 @@ namespace AllenNeuralDynamics.AindManipulator
             {
                 InitialPosition = InitialPosition.ToManipulatorPosition(),
                 FullStepToMm = StepToMm.ToManipulatorPosition(),
-                HomingOrder = HomingOrder.Select(x => (Axis) x).ToList(),
+                HomingOrder = HomingOrder.ToList(),
                 AxisConfiguration = EnabledAxis.Select(x => DefaultAxisConfiguration(x)).ToList()
             });
         }
@@ -55,7 +53,7 @@ namespace AllenNeuralDynamics.AindManipulator
         {
             return new AxisConfiguration()
             {
-                Axis = (Axis) axis,
+                Axis = axis,
                 StepAccelerationInterval = StepAccelerationInterval,
                 StepInterval = StepInterval,
                 MicrostepResolution = (MicrostepResolution) MicrostepResolution,
