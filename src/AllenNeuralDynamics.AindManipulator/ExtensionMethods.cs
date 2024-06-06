@@ -46,15 +46,6 @@
         }
     }
 
-    public enum AindManipulatorAxis
-    {
-        None = Axis._0,
-        X = Axis._3,
-        Y1 = Axis._1,
-        Y2 = Axis._2,
-        Z = Axis._4
-    }
-
     public class AindManipulatorPosition
     {
         public double X;

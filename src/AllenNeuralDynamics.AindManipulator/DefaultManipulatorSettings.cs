@@ -20,10 +20,10 @@ namespace AllenNeuralDynamics.AindManipulator
         public AindManipulatorPosition StepToMm { get; set; } = new AindManipulatorPosition();
 
         [TypeConverter(typeof(UnidimensionalArrayConverter))]
-        public AindManipulatorAxis[] HomingOrder { get; set; } = new AindManipulatorAxis[] {AindManipulatorAxis.Y1, AindManipulatorAxis.Y2, AindManipulatorAxis.X, AindManipulatorAxis.Z};
+        public Axis[] HomingOrder { get; set; } = new Axis[] {Axis.Y1, Axis.Y2, Axis.X, Axis.Z};
 
         [TypeConverter(typeof(UnidimensionalArrayConverter))]
-        public AindManipulatorAxis[] EnabledAxis { get; set; } = new AindManipulatorAxis[] { AindManipulatorAxis.Y1, AindManipulatorAxis.Y2, AindManipulatorAxis.X, AindManipulatorAxis.Z };
+        public Axis[] EnabledAxis { get; set; } = new Axis[] { Axis.Y1, Axis.Y2, Axis.X, Axis.Z };
 
         public int StepAccelerationInterval { get; set; } = 100;
 
@@ -51,7 +51,7 @@ namespace AllenNeuralDynamics.AindManipulator
             });
         }
 
-        private AxisConfiguration DefaultAxisConfiguration(AindManipulatorAxis axis)
+        private AxisConfiguration DefaultAxisConfiguration(Axis axis)
         {
             return new AxisConfiguration()
             {
