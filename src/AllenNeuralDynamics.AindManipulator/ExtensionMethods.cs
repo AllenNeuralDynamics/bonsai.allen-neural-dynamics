@@ -1,4 +1,7 @@
-﻿namespace AllenNeuralDynamics.AindManipulator {
+﻿using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
+
+namespace AllenNeuralDynamics.AindManipulator {
     public partial class ManipulatorPosition
     {
         public static ManipulatorPosition operator +(ManipulatorPosition el1, ManipulatorPosition el2)
@@ -44,6 +47,38 @@
             };
 
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is ManipulatorPosition)
+            {
+                var other = obj as ManipulatorPosition;
+                return X == other.X && Y1 == other.Y1 && Y2 == other.Y2 && Z == other.Z;
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y1.GetHashCode() ^ Y2.GetHashCode() ^ Z.GetHashCode();
+        }
+
+        public static bool operator ==(ManipulatorPosition x, ManipulatorPosition y)
+        {
+            return Equals(x, y);
+        }
+
+        public static bool operator !=(ManipulatorPosition x, ManipulatorPosition y)
+        {
+            return !Equals(x, y);
+        }
+
+        public static bool Equals(ManipulatorPosition el1, ManipulatorPosition el2)
+        {
+            return el1.X == el2.X && el1.Y1 == el2.Y1 && el1.Y2 == el2.Y2 && el1.Z == el2.Z;
+        }
     }
 
     public class AindManipulatorPosition
@@ -87,8 +122,38 @@
                 Z = Z
             };
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is AindManipulatorPosition)
+            {
+                var other = obj as AindManipulatorPosition;
+                return X == other.X && Y1 == other.Y1 && Y2 == other.Y2 && Z == other.Z;
+            }
+            else {
+                return base.Equals(obj); 
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y1.GetHashCode() ^ Y2.GetHashCode() ^ Z.GetHashCode() ;
+        }
+
+        public static bool operator ==(AindManipulatorPosition x, AindManipulatorPosition y)
+        {
+            return Equals(x,y);
+        }
+
+        public static bool operator !=(AindManipulatorPosition x, AindManipulatorPosition y)
+        {
+            return !Equals(x, y);
+        }
+
+        public static bool Equals(AindManipulatorPosition el1, AindManipulatorPosition el2)
+        {
+            return el1.X == el2.X && el1.Y1 == el2.Y1 && el1.Y2 == el2.Y2 && el1.Z == el2.Z;
+        }
+
     }
-
-
-
 }
