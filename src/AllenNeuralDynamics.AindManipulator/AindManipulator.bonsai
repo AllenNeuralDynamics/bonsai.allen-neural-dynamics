@@ -326,7 +326,7 @@
                         </Expression>
                         <Expression xsi:type="Subtract">
                           <Operand xsi:type="WorkflowProperty" TypeArguments="p2:Axis">
-                            <Value>_1</Value>
+                            <Value>Y1</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -533,7 +533,7 @@
                               </Expression>
                               <Expression xsi:type="Subtract">
                                 <Operand xsi:type="WorkflowProperty" TypeArguments="p2:Axis">
-                                  <Value>_1</Value>
+                                  <Value>Y1</Value>
                                 </Operand>
                               </Expression>
                               <Expression xsi:type="Combinator">

@@ -331,7 +331,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_1</Value>
+                      <Value>Y1</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -448,7 +448,7 @@
                   </Expression>
                   <Expression xsi:type="Equal">
                     <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                      <Value>_1</Value>
+                      <Value>Y1</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
