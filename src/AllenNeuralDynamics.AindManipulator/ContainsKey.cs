@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 
-namespace AllenNeuralDynamics.Core
+namespace AllenNeuralDynamics.AindManipulator
 {
     [Combinator]
     [Description("Returns true if the dictionary contains the specified key.")]
     [WorkflowElementCategory(ElementCategory.Transform)]
+    [DesignTimeVisible(false)]
+
     public class ContainsKey
     {
         public IObservable<bool> Process<TKey, TValue>(IObservable<Tuple<TKey, IDictionary<TKey, TValue>>> source)

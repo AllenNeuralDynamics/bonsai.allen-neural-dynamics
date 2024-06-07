@@ -5,9 +5,8 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:p1="clr-namespace:Harp.StepperDriver;assembly=Harp.StepperDriver"
                  xmlns:p2="clr-namespace:AllenNeuralDynamics.AindManipulator;assembly=AllenNeuralDynamics.AindManipulator"
-                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:p3="clr-namespace:System.Reactive;assembly=System.Reactive.Core"
-                 xmlns:p4="clr-namespace:AllenNeuralDynamics.Core;assembly=AllenNeuralDynamics.AindManipulator"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
                  xmlns="https://bonsai-rx.org/2018/workflow">
@@ -39,7 +38,65 @@
       <Expression xsi:type="rx:PublishSubject">
         <Name>StepperDriverEvents</Name>
       </Expression>
-      <Expression xsi:type="WorkflowInput">
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:ManipulatorPosition">
+        <rx:Name>GoToPosition</rx:Name>
+      </Expression>
+      <Expression xsi:type="InputMapping">
+        <PropertyMappings>
+          <Property Name="Motor0" Selector="X" />
+          <Property Name="Motor1" Selector="Y1" />
+          <Property Name="Motor2" Selector="Y2" />
+          <Property Name="Motor3" Selector="Z" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateMoveAbsolutePayload">
+          <p1:Motor0>0</p1:Motor0>
+          <p1:Motor1>0</p1:Motor1>
+          <p1:Motor2>0</p1:Motor2>
+          <p1:Motor3>0</p1:Motor3>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>StepperDriverCommands</Name>
+      </Expression>
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:ManipulatorPosition">
+        <rx:Name>MoveRelativePosition</rx:Name>
+      </Expression>
+      <Expression xsi:type="InputMapping">
+        <PropertyMappings>
+          <Property Name="Motor0" Selector="X" />
+          <Property Name="Motor1" Selector="Y1" />
+          <Property Name="Motor2" Selector="Y2" />
+          <Property Name="Motor3" Selector="Z" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateMoveRelativePayload">
+          <p1:Motor0>0</p1:Motor0>
+          <p1:Motor1>0</p1:Motor1>
+          <p1:Motor2>0</p1:Motor2>
+          <p1:Motor3>0</p1:Motor3>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>StepperDriverCommands</Name>
+      </Expression>
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p3:Unit">
+        <rx:Name>StopMotors</rx:Name>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateStopMotorsPayload">
+          <p1:StopMotors>Motor0 Motor1 Motor2 Motor3</p1:StopMotors>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>StepperDriverCommands</Name>
+      </Expression>
+      <Expression xsi:type="WorkflowInput" TypeArguments="p2:AindManipulatorCalibrationInput">
         <Name>Source1</Name>
       </Expression>
       <Expression xsi:type="rx:Defer">
@@ -71,52 +128,6 @@
               <Name>OperationControl</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:ManipulatorPosition">
-                    <rx:Name>GoToPosition</rx:Name>
-                  </Expression>
-                  <Expression xsi:type="InputMapping">
-                    <PropertyMappings>
-                      <Property Name="Motor0" Selector="X" />
-                      <Property Name="Motor1" Selector="Y1" />
-                      <Property Name="Motor2" Selector="Y2" />
-                      <Property Name="Motor3" Selector="Z" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="p1:CreateMessage">
-                    <harp:MessageType>Write</harp:MessageType>
-                    <harp:Payload xsi:type="p1:CreateMoveAbsolutePayload">
-                      <p1:Motor0>0</p1:Motor0>
-                      <p1:Motor1>0</p1:Motor1>
-                      <p1:Motor2>0</p1:Motor2>
-                      <p1:Motor3>0</p1:Motor3>
-                    </harp:Payload>
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>StepperDriverCommands</Name>
-                  </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:ManipulatorPosition">
-                    <rx:Name>MoveRelativePosition</rx:Name>
-                  </Expression>
-                  <Expression xsi:type="InputMapping">
-                    <PropertyMappings>
-                      <Property Name="Motor0" Selector="X" />
-                      <Property Name="Motor1" Selector="Y1" />
-                      <Property Name="Motor2" Selector="Y2" />
-                      <Property Name="Motor3" Selector="Z" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="p1:CreateMessage">
-                    <harp:MessageType>Write</harp:MessageType>
-                    <harp:Payload xsi:type="p1:CreateMoveRelativePayload">
-                      <p1:Motor0>0</p1:Motor0>
-                      <p1:Motor1>0</p1:Motor1>
-                      <p1:Motor2>0</p1:Motor2>
-                      <p1:Motor3>0</p1:Motor3>
-                    </harp:Payload>
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>StepperDriverCommands</Name>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>StepperDriverEvents</Name>
                   </Expression>
@@ -480,7 +491,7 @@
                                 <Name>Source1</Name>
                               </Expression>
                               <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="p4:ContainsKey" />
+                                <Combinator xsi:type="p2:ContainsKey" />
                               </Expression>
                               <Expression xsi:type="WorkflowOutput" />
                             </Nodes>
@@ -772,43 +783,37 @@
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
                   <Edge From="2" To="3" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
                   <Edge From="4" To="5" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="9" To="16" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                   <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
                   <Edge From="14" To="15" Label="Source1" />
+                  <Edge From="15" To="16" Label="Source2" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="24" Label="Source1" />
+                  <Edge From="17" To="18" Label="Source1" />
                   <Edge From="18" To="19" Label="Source1" />
                   <Edge From="19" To="20" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
                   <Edge From="22" To="23" Label="Source1" />
-                  <Edge From="23" To="24" Label="Source2" />
-                  <Edge From="24" To="25" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                   <Edge From="25" To="26" Label="Source1" />
                   <Edge From="26" To="27" Label="Source1" />
-                  <Edge From="27" To="28" Label="Source1" />
                   <Edge From="28" To="29" Label="Source1" />
+                  <Edge From="29" To="30" Label="Source1" />
                   <Edge From="30" To="31" Label="Source1" />
                   <Edge From="31" To="32" Label="Source1" />
+                  <Edge From="32" To="33" Label="Source1" />
+                  <Edge From="32" To="34" Label="Source2" />
                   <Edge From="33" To="34" Label="Source1" />
                   <Edge From="34" To="35" Label="Source1" />
+                  <Edge From="35" To="36" Label="Source1" />
                   <Edge From="36" To="37" Label="Source1" />
-                  <Edge From="37" To="38" Label="Source1" />
-                  <Edge From="38" To="39" Label="Source1" />
-                  <Edge From="39" To="40" Label="Source1" />
-                  <Edge From="40" To="41" Label="Source1" />
-                  <Edge From="40" To="42" Label="Source2" />
-                  <Edge From="41" To="42" Label="Source1" />
-                  <Edge From="42" To="43" Label="Source1" />
-                  <Edge From="43" To="44" Label="Source1" />
-                  <Edge From="44" To="45" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2306,6 +2311,14 @@
       <Edge From="2" To="3" Label="Source1" />
       <Edge From="4" To="5" Label="Source1" />
       <Edge From="5" To="6" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="9" To="10" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="12" To="13" Label="Source1" />
+      <Edge From="13" To="14" Label="Source1" />
+      <Edge From="15" To="16" Label="Source1" />
+      <Edge From="16" To="17" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
