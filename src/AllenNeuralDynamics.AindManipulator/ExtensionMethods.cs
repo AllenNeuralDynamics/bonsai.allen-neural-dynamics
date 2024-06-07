@@ -1,7 +1,4 @@
-﻿using System.Reactive.Linq;
-using System.Runtime.CompilerServices;
-
-namespace AllenNeuralDynamics.AindManipulator {
+﻿namespace AllenNeuralDynamics.AindManipulator {
     public partial class ManipulatorPosition
     {
         public static ManipulatorPosition operator +(ManipulatorPosition el1, ManipulatorPosition el2)
