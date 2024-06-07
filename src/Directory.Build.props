@@ -2,8 +2,8 @@
 <Project>
   <PropertyGroup>
     <Authors>Bruno Cruz</Authors>
-    <Copyright>Copyright © 2023 Allen Institute for Neural Dynamics</Copyright>
-    <PackageProjectUrl>https://github.com/AllenNeuralDynamics/bonsai.allen-neural-dynamics</PackageProjectUrl>
+    <Copyright>Copyright © 2024 Allen Institute for Neural Dynamics</Copyright>
+    <PackageProjectUrl>https://allenneuraldynamics.github.io/Bonsai.AllenNeuralDynamics/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AllenNeuralDynamics/bonsai.allen-neural-dynamics</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

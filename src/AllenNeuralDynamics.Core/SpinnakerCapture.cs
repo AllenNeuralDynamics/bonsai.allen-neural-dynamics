@@ -11,6 +11,11 @@ namespace AllenNeuralDynamics.Core
         {
             ExposureTime = 1e6 / 50 - 1000;
             Binning = 1;
+            Gain = 0;
+            Binning = 1;
+            PixelFormat = PixelFormatEnums.Mono8;
+            Gamma = null;
+
         }
 
         [Description("The duration of each individual exposure, in microseconds. In general, this should be 1 / frameRate - 1 millisecond to prepare for next trigger.")]
@@ -21,6 +26,12 @@ namespace AllenNeuralDynamics.Core
 
         [Description("The size of the binning area of the sensor, e.g. a binning size of 2 specifies a 2x2 binning region.")]
         public int Binning { get; set; }
+
+        [Description("Parameter used for gamma correction. If null, gamma correction is disabled.")]
+        public double? Gamma { get; set; }
+
+        [Description("Sensor pixel format.")]
+        public PixelFormatEnums PixelFormat { get; set; }
 
         protected override void Configure(IManagedCamera camera)
         {
@@ -44,6 +55,9 @@ namespace AllenNeuralDynamics.Core
             camera.DeviceLinkThroughputLimit.Value = camera.DeviceLinkThroughputLimit.Max;
             camera.GainAuto.Value = GainAutoEnums.Off.ToString();
             camera.Gain.Value = Gain;
+            camera.Gamma.Value = Gamma.HasValue ? Gamma.Value : 1.0;
+            camera.GammaEnable.Value = Gamma.HasValue;
+            camera.PixelFormat.Value = PixelFormat.ToString();
             base.Configure(camera);
         }
     }
