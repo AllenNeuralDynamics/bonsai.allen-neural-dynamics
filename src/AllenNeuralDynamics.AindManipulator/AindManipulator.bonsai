@@ -2191,10 +2191,10 @@
                         </Expression>
                         <Expression xsi:type="PropertyMapping">
                           <PropertyMappings>
-                            <Property Name="X" />
-                            <Property Name="Y1" />
-                            <Property Name="Y2" />
-                            <Property Name="Z" />
+                            <Property Name="X" Selector="X" />
+                            <Property Name="Y1" Selector="Y1" />
+                            <Property Name="Y2" Selector="Y2" />
+                            <Property Name="Z" Selector="Z" />
                           </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="Combinator">

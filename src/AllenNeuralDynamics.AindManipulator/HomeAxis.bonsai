@@ -89,13 +89,14 @@
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="IntProperty">
-                      <Value>0</Value>
+                    <Combinator xsi:type="rx:Timer">
+                      <rx:DueTime>PT0S</rx:DueTime>
+                      <rx:Period>PT0.1S</rx:Period>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
+                      <rx:Count>10</rx:Count>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="p1:CreateMessage">
@@ -135,6 +136,11 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
                   </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Take">
+                      <rx:Count>1</rx:Count>
+                    </Combinator>
+                  </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
                 <Edges>
@@ -150,6 +156,7 @@
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source2" />
                   <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="12" To="13" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
