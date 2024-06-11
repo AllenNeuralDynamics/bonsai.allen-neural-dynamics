@@ -8,6 +8,7 @@ using Bonsai;
 
 namespace AllenNeuralDynamics.Core.Design
 {
+    [Obsolete]
     [Combinator]
     [WorkflowElementCategory(ElementCategory.Source)]
     [TypeVisualizer(typeof(PushButtonVisualizer))]
