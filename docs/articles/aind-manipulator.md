@@ -42,4 +42,31 @@ Finally, each end-of-travel switch follows the color code below:
 
 To interface with the motors, the user can choose to use the Harp package for the [Harp.StepperDriver](https://github.com/harp-tech/device.stepperdriver). For simplicity, we maintain our own wrapper with core functionality and user-interface. The user can install it from the [Aind Nuget feed](https://www.nuget.org/packages/AllenNeuralDynamics.AindManipulator/).
 
-(To be continued...)
+The interface with the manipulator is handled by a single operator: `AindManipulator`. This operator is responsible for the following:
+
+- Setting initial settings of the manipulator
+- Implementing `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` operations.
+- Implementing a front-end interface for the user to interact with the manipulator.
+
+#### Load a configuration
+The operator expects settings to be passed via a `AindManipulatorCalibrationInput` class. This class can defined using the respective schema in [`Aind.Behavior.Services` repository](https://github.com/AllenNeuralDynamics/Aind.Behavior.Services). An example on how to generate a configuration file [can be found here](https://github.com/AllenNeuralDynamics/Aind.Behavior.Services/blob/main/examples/aind_manipulator.py). The Json file can be passed to the operator using the following pattern:
+
+:::workflow
+![AindManipulatorFromJson](~/workflows/AindManipulatorFromJson.bonsai)
+:::
+
+Alternatively, an operator is provided for quickly defining the settings in the workflow directly. This can be done using the following pattern:
+
+:::workflow
+![AindManipulatorFromDefault](~/workflows/AindManipulatorFromDefault.bonsai)
+:::
+
+#### Front-end interface
+
+The operator also provides a front-end interface for the user to interact with the manipulator. This can be accessed by double-clicking the `AindManipulator` while the workflow is running.
+
+#### Controlling the manipulator
+
+The easiest way to control the manipulator without using the user-interface is to directly interact with the `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` subjects.
+
+If the user wants to control the manipulator using the Harp interface, `StepperMotorCommands` and `StepperMotorEvents` can be used to send and receive commands and events respectively.
