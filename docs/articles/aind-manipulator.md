@@ -44,9 +44,9 @@ To interface with the motors, the user can choose to use the Harp package for th
 
 The interface with the manipulator is handled by a single operator: `AindManipulator`. This operator is responsible for the following:
 
-    - Setting initial settings of the manipulator
-    - Implementing `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` operations.
-    - Implementing a front-end interface for the user to interact with the manipulator.
+- Setting initial settings of the manipulator
+- Implementing `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` operations.
+- Implementing a front-end interface for the user to interact with the manipulator.
 
 #### Load a configuration
 The operator expects settings to be passed via a `AindManipulatorCalibrationInput` class. This class can defined using the respective schema in [`Aind.Behavior.Services` repository](https://github.com/AllenNeuralDynamics/Aind.Behavior.Services). An example on how to generate a configuration file [can be found here](https://github.com/AllenNeuralDynamics/Aind.Behavior.Services/blob/main/examples/aind_manipulator.py). The Json file can be passed to the operator using the following pattern:
