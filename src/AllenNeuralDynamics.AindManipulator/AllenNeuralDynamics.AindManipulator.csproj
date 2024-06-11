@@ -7,12 +7,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Bonsai Rx Manipulator AllenNeuralDynamics</PackageTags>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net480</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0-preview2024061101</Version>
+    <Version>0.1.0-preview2024061102</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bonsai" Version="2.8.3" />
     <PackageReference Include="Bonsai.Gui" Version="0.1.0" />
     <PackageReference Include="Bonsai.Scripting.Expressions" Version="2.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
