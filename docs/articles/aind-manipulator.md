@@ -45,7 +45,7 @@ To interface with the motors, the user can choose to use the Harp package for th
 The interface with the manipulator is handled by a single operator: `AindManipulator`. This operator is responsible for the following:
 
 - Setting initial settings of the manipulator
-- Implementing `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` operations.
+- Implementing `StopMotors`, `HomeMotors`, `MoveTo` and `MoveBy` operations.
 - Implementing a front-end interface for the user to interact with the manipulator.
 
 #### Load a configuration
@@ -67,6 +67,6 @@ The operator also provides a front-end interface for the user to interact with t
 
 #### Controlling the manipulator
 
-The easiest way to control the manipulator without using the user-interface is to directly interact with the `Stop`, `Home`, `GoToPosition` and `MoveRelativePosition` subjects.
+The easiest way to control the manipulator without using the user-interface is to directly interact with the  `StopMotors`, `HomeMotors`, `MoveTo` and `MoveBy` subjects.
 
 If the user wants to control the manipulator using the Harp interface, `StepperMotorCommands` and `StepperMotorEvents` can be used to send and receive commands and events respectively.
