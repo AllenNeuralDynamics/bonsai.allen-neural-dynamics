@@ -12,15 +12,18 @@ foreach ($file in $files)
 # Find assemblies to build workflows
 $baseDir = (Get-Item -Path "..\src" -Verbose).FullName
 $folderPaths = Get-ChildItem -Path $baseDir -Directory
-$sufix = "bin\Release\net472"
+$suffix = "bin\Release\net*"
 $packages = @()
 
 # find package assemblies
 foreach ($folderPath in $folderPaths) {
-    $snlPath = Join-Path -Path $folderPath.FullName -ChildPath ($folderPath.Name + ".sln")
-    if (Test-Path -Path $snlPath) {
-        $libPath = Join-Path -Path $folderPath.FullName -ChildPath $sufix
-        $packages += $libPath
+    $slnPath = Join-Path -Path $folderPath.FullName -ChildPath ($folderPath.Name + ".sln")
+    if (Test-Path -Path $slnPath) {
+        $libPath = Join-Path -Path $folderPath.FullName -ChildPath $suffix
+        $matchingFolders = Get-ChildItem -Path $libPath -Directory | Where-Object { $_.Name -match "^net\d+" }
+        if ($matchingFolders) {
+            $packages += $matchingFolders.FullName
+        }
     }
 }
 
