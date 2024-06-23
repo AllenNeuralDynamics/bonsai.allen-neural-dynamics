@@ -89,8 +89,9 @@ namespace AllenNeuralDynamics.Zaber
 
         public void GenericCommandNoResponse(int? deviceIndex, int? axis, string command)
         {
-            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
-            device.GenericCommandNoResponseAsync(command, axis.HasValue? axis.Value : 0);
+            comm.GenericCommandNoResponseAsync(command,
+                deviceIndex.HasValue ? deviceIndex.Value : 0,
+                axis.HasValue? axis.Value : 0);
         }
 
         public async Task<double> GetPosition(int? deviceIndex, int axis, Units unit)
@@ -127,14 +128,18 @@ namespace AllenNeuralDynamics.Zaber
 
         public async Task<Response[]> GenericCommandMultiResponse(int? deviceIndex, int? axis, string command)
         {
-            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
-            return await device.GenericCommandMultiResponseAsync(command, axis.HasValue? axis.Value : 0);
+                return await comm.GenericCommandMultiResponseAsync(
+                    command,
+                    deviceIndex.HasValue ? deviceIndex.Value : 0,
+                    axis.HasValue ? axis.Value : 0);
         }
 
         public async Task<Response> GenericCommand(int? deviceIndex, int? axis, string command)
         {
-            var device = devices[deviceIndex.HasValue ? deviceIndex.Value : 0];
-            return await device.GenericCommandAsync(command, axis.HasValue ? axis.Value : 0);
+            return await comm.GenericCommandAsync(
+                command,
+                deviceIndex.HasValue ? deviceIndex.Value : 0,
+                axis.HasValue ? axis.Value : 0);
         }
 
         /// <summary>
