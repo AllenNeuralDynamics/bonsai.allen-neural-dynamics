@@ -37,6 +37,7 @@ namespace AllenNeuralDynamics.Core
         {
             try { camera.AcquisitionStop.Execute(); }
             catch { }
+            camera.PixelFormat.Value = PixelFormat.ToString();
             camera.BinningSelector.Value = BinningSelectorEnums.All.ToString();
             camera.BinningHorizontalMode.Value = BinningHorizontalModeEnums.Sum.ToString();
             camera.BinningVerticalMode.Value = BinningVerticalModeEnums.Sum.ToString();
@@ -55,9 +56,15 @@ namespace AllenNeuralDynamics.Core
             camera.DeviceLinkThroughputLimit.Value = camera.DeviceLinkThroughputLimit.Max;
             camera.GainAuto.Value = GainAutoEnums.Off.ToString();
             camera.Gain.Value = Gain;
-            camera.Gamma.Value = Gamma.HasValue ? Gamma.Value : 1.0;
-            camera.GammaEnable.Value = Gamma.HasValue;
-            camera.PixelFormat.Value = PixelFormat.ToString();
+
+            if (Gamma.HasValue){
+                camera.GammaEnable.Value = true;
+                camera.Gamma.Value = Gamma.Value;
+            }
+            else{
+                camera.GammaEnable.Value = false;
+            }
+
             base.Configure(camera);
         }
     }
