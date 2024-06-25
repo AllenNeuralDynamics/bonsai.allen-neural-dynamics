@@ -1,7 +1,7 @@
 #version 400
 
-uniform float brightness = 1.0;
-uniform float contrast = 1.0;
+uniform float brightness = 0.0; // -1.0 to 1.0. 0.0 is no change
+uniform float contrast = 1.0; // -1.0 to 1.0. 1.0 is maximum contrast, 0.0 is gray, -1.0 is maximum inverted contrast
 uniform vec2 shift;
 uniform vec2 scale = vec2(1, 1);
 
