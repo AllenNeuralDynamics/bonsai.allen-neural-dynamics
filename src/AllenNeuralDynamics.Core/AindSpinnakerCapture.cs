@@ -55,8 +55,15 @@ namespace AllenNeuralDynamics.Core
             camera.DeviceLinkThroughputLimit.Value = camera.DeviceLinkThroughputLimit.Max;
             camera.GainAuto.Value = GainAutoEnums.Off.ToString();
             camera.Gain.Value = Gain;
-            camera.Gamma.Value = Gamma.HasValue ? Gamma.Value : 1.0;
-            camera.GammaEnable.Value = Gamma.HasValue;
+
+            if (Gamma.HasValue){
+                camera.GammaEnable.Value = true;
+                camera.Gamma.Value = Gamma.Value;
+            }
+            else{
+                camera.GammaEnable.Value = false;
+            }
+
             camera.PixelFormat.Value = PixelFormat.ToString();
             base.Configure(camera);
         }
