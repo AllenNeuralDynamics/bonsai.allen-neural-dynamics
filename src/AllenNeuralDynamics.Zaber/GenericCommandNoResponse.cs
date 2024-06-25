@@ -24,7 +24,7 @@ namespace AllenNeuralDynamics.Zaber
         /// Gets or sets the device to be controlled. Defaults to 0.
         /// </summary>
         [Description("The axis index to be actuated.")]
-        public int Device { get; set; } = 0;
+        public int? Device { get; set; }
 
         /// <summary>
         /// Gets or sets the axis of the manipulator to be controlled.

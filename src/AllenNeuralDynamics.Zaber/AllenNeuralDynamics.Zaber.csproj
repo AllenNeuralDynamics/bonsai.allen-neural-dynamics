@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Zaber AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.4.2</Version>
+    <Version>0.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
