@@ -37,6 +37,7 @@ namespace AllenNeuralDynamics.Core
         {
             try { camera.AcquisitionStop.Execute(); }
             catch { }
+            camera.PixelFormat.Value = PixelFormat.ToString();
             camera.BinningSelector.Value = BinningSelectorEnums.All.ToString();
             camera.BinningHorizontalMode.Value = BinningHorizontalModeEnums.Sum.ToString();
             camera.BinningVerticalMode.Value = BinningVerticalModeEnums.Sum.ToString();
@@ -64,7 +65,6 @@ namespace AllenNeuralDynamics.Core
                 camera.GammaEnable.Value = false;
             }
 
-            camera.PixelFormat.Value = PixelFormat.ToString();
             base.Configure(camera);
         }
     }
