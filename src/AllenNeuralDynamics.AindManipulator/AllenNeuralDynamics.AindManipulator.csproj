@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Manipulator AllenNeuralDynamics</PackageTags>
     <TargetFramework>net480</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/0.7.7/src/DataSchemas/schemas/aind_manipulator_calibration_rig.json -o $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json --root CalibrationRig --namespace AllenNeuralDynamics.AindManipulator --output AindManipulatorSchema.cs --serializer NewtonsoftJson" />
+    <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/0.7.11/src/DataSchemas/schemas/aind_manipulator_calibration_rig.json -o $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_manipulator_calibration_rig.json --root CalibrationRig --namespace AllenNeuralDynamics.AindManipulator --output AindManipulatorSchema.cs --serializer NewtonsoftJson" />
   </Target>
 
 </Project>
