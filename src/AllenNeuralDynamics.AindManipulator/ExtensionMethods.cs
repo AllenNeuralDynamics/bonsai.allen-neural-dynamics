@@ -1,6 +1,59 @@
-﻿namespace AllenNeuralDynamics.AindManipulator {
+﻿using System;
+
+namespace AllenNeuralDynamics.AindManipulator {
     public partial class ManipulatorPosition
     {
+        public double this[Axis axis]
+        {
+            get
+            {
+                switch (axis)
+                {
+                    case Axis.None:
+                        return double.NaN;
+                    case Axis.X:
+                        return X;
+                    case Axis.Y1:
+                        return Y1;
+                    case Axis.Y2:
+                        return Y2;
+                    case Axis.Z:
+                        return Z;
+                    default:
+                        throw new IndexOutOfRangeException($"Unknown {axis} axis.");
+                }
+            }
+
+            set
+            {
+                switch (axis)
+                {
+                    case Axis.None:
+                        throw new IndexOutOfRangeException("None axis is not allowed to be set.");
+                    case Axis.X:
+                        X = value;
+                        break;
+                    case Axis.Y1:
+                        Y1 = value;
+                        break;
+                    case Axis.Y2:
+                        Y2 = value;
+                        break;
+                    case Axis.Z:
+                        Z = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException("Unknown axis.");
+                }
+            }
+        }
+
+        public double this[int axisIndex]
+        {
+            get { return this[(Axis)axisIndex]; }
+            set { this[(Axis)axisIndex] = value; }
+        }
+
         public static ManipulatorPosition operator +(ManipulatorPosition el1, ManipulatorPosition el2)
         {
             return new ManipulatorPosition()
