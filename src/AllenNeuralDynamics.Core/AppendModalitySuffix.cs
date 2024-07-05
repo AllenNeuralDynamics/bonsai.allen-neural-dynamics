@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Collections.Generic;
 
-namespace AllenNeuralDynamics.Core.Logging
+namespace AllenNeuralDynamics.Core
 {
     [Description("Outputs a known data modality string from a dropdown list.")]
     public class AppendModalitySuffix : Transform<string, string>
@@ -23,21 +23,21 @@ namespace AllenNeuralDynamics.Core.Logging
 
         private readonly Dictionary<Modality, string> modalityDirectories = new Dictionary<Modality, string>()
         {
-                {Logging.Modality.Other, "other"},
-                {Logging.Modality.Behavior, "behavior"},
-                {Logging.Modality.Confocal, "confocal"},
-                {Logging.Modality.Ecephys, "ecephys"},
-                {Logging.Modality.BehaviorVideos, "behavior-videos"},
-                {Logging.Modality.Electromyography, "EMG"},
-                {Logging.Modality.Fib, "fib"},
-                {Logging.Modality.Fmost, "fMOST"},
-                {Logging.Modality.Icephys, "icephys"},
-                {Logging.Modality.Isi, "ISI"},
-                {Logging.Modality.Merfish, "merfish"},
-                {Logging.Modality.Mri, "MRI"},
-                {Logging.Modality.POphys, "ophys"},
-                {Logging.Modality.Slap, "slap"},
-                {Logging.Modality.Spim, "SPIM"}
+                {Core.Modality.Other, "other"},
+                {Core.Modality.Behavior, "behavior"},
+                {Core.Modality.Confocal, "confocal"},
+                {Core.Modality.Ecephys, "ecephys"},
+                {Core.Modality.BehaviorVideos, "behavior-videos"},
+                {Core.Modality.Electromyography, "EMG"},
+                {Core.Modality.Fib, "fib"},
+                {Core.Modality.Fmost, "fMOST"},
+                {Core.Modality.Icephys, "icephys"},
+                {Core.Modality.Isi, "ISI"},
+                {Core.Modality.Merfish, "merfish"},
+                {Core.Modality.Mri, "MRI"},
+                {Core.Modality.POphys, "ophys"},
+                {Core.Modality.Slap, "slap"},
+                {Core.Modality.Spim, "SPIM"}
         };
     }
 

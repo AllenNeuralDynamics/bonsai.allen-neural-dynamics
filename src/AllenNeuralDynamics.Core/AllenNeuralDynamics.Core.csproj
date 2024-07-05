@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.6</Version>
+    <Version>0.2.0-preview01</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,17 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DataSchemas\aind-logging.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="dotnet tool restore&#xD;&#xA;dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind-logging.json --namespace AllenNeuralDynamics.Core.Logging --root AindLogging --output $(ProjectDir)AindLogging.cs --serializer NewtonsoftJson YamlDotNet" />
-  </Target>
+      <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/feat-add-types/src/DataSchemas/schemas/aind_behavior_data_types.json -o $(ProjectDir)DataSchemas/aind_behavior_data_types.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_behavior_data_types.json --namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes --output AindBehaviorServicesDataTypes.cs --serializer NewtonsoftJson" />  </Target>
 
 </Project>

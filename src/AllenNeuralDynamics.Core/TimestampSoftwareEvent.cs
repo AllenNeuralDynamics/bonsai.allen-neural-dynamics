@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using Bonsai.Harp;
+using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
 namespace AllenNeuralDynamics.Core.Logging
 {
@@ -21,7 +22,7 @@ namespace AllenNeuralDynamics.Core.Logging
                 {
                     Data = msg.Data,
                     Timestamp = value.Seconds,
-                    TimestampSource = SoftwareEventTimestampSource.Harp,
+                    TimestampSource = TimestampSource.Harp,
                     FrameIndex = msg.FrameIndex,
                     FrameTimestamp = msg.FrameTimestamp,
                     Name = msg.Name,
@@ -39,7 +40,7 @@ namespace AllenNeuralDynamics.Core.Logging
                 {
                     Data = msg.Data,
                     Timestamp = value.Item2,
-                    TimestampSource = SoftwareEventTimestampSource.Harp,
+                    TimestampSource = TimestampSource.Harp,
                     FrameIndex = msg.FrameIndex,
                     FrameTimestamp = msg.FrameTimestamp,
                     Name = msg.Name,
@@ -57,7 +58,7 @@ namespace AllenNeuralDynamics.Core.Logging
                 {
                     Data = msg.Data,
                     Timestamp = value.Item2.IsTimestamped ? value.Item2.GetTimestamp() : (double?)null,
-                    TimestampSource = SoftwareEventTimestampSource.Harp,
+                    TimestampSource = TimestampSource.Harp,
                     FrameIndex = msg.FrameIndex,
                     FrameTimestamp = msg.FrameTimestamp,
                     Name = msg.Name,
