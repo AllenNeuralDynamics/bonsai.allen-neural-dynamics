@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using Bonsai.Harp;
 using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
-namespace AllenNeuralDynamics.Core.Logging
+namespace AllenNeuralDynamics.Core
 {
     [Combinator]
     [Description("Injects timestamp information in a SoftwareEvent from a Harp.Timestamped<SoftwareEvent> object.")]
