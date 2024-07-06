@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bonsai.Core" Version="2.8.1" />
-    <PackageReference Include="Bonsai.Design" Version="2.8.0" />
+    <PackageReference Include="Bonsai.Core" Version="2.8.2" />
+    <PackageReference Include="Bonsai.Design" Version="2.8.1" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.2" />
     <PackageReference Include="Bonsai.Scripting.Expressions" Version="2.8.0" />
     <PackageReference Include="Bonsai.Spinnaker" Version="0.7.1" />
@@ -29,17 +29,12 @@
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
+    <PackageReference Include="AllenNeuralDynamics.AindBehaviorServices" Version="0.7.12" />
+
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DataSchemas\" />
-  </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-      <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/0.7.12/src/DataSchemas/schemas/aind_behavior_data_types.json -o $(ProjectDir)DataSchemas/aind_behavior_data_types.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_behavior_data_types.json --namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes --output AindBehaviorServicesDataTypes.cs --serializer NewtonsoftJson" />  </Target>
 
 </Project>
