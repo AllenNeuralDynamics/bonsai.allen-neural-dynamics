@@ -3,8 +3,9 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
+using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
-namespace AllenNeuralDynamics.Core.Logging
+namespace AllenNeuralDynamics.Core
 {
     [Combinator]
     [Description("Injects RenderSynchState information in a SoftwareEvent")]

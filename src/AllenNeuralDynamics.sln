@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.AlicatF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.AindManipulator", "AllenNeuralDynamics.AindManipulator\AllenNeuralDynamics.AindManipulator.csproj", "{3E75B5E2-5D87-4711-A18D-FC6720433C97}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllenNeuralDynamics.AindBehaviorServices", "AllenNeuralDynamics.AindBehaviorServices\AllenNeuralDynamics.AindBehaviorServices.csproj", "{500565A9-C221-46BD-8DCC-7FF7E37804E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{3E75B5E2-5D87-4711-A18D-FC6720433C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E75B5E2-5D87-4711-A18D-FC6720433C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E75B5E2-5D87-4711-A18D-FC6720433C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{500565A9-C221-46BD-8DCC-7FF7E37804E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{500565A9-C221-46BD-8DCC-7FF7E37804E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{500565A9-C221-46BD-8DCC-7FF7E37804E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{500565A9-C221-46BD-8DCC-7FF7E37804E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using Bonsai.Harp;
+using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
-namespace AllenNeuralDynamics.Core.Logging { 
+namespace AllenNeuralDynamics.Core { 
     [Combinator]
     [Description("Creates a fully populated SoftwareEvent a <T> generic object. If a Harp.Timestamped<T> is provided, temporal information will be added.")]
     [WorkflowElementCategory(ElementCategory.Transform)]
@@ -21,7 +22,7 @@ namespace AllenNeuralDynamics.Core.Logging {
                 {
                     Data = value.Value,
                     Timestamp = value.Seconds,
-                    TimestampSource = SoftwareEventTimestampSource.Harp,
+                    TimestampSource = TimestampSource.Harp,
                     FrameIndex = null,
                     FrameTimestamp = null,
                     Name = thisName,
@@ -38,7 +39,7 @@ namespace AllenNeuralDynamics.Core.Logging {
                 {
                     Data = value,
                     Timestamp = null,
-                    TimestampSource = SoftwareEventTimestampSource.None,
+                    TimestampSource = TimestampSource.Null,
                     FrameIndex = null,
                     FrameTimestamp = null,
                     Name = thisName,
@@ -47,31 +48,31 @@ namespace AllenNeuralDynamics.Core.Logging {
             });
         }
 
-        private static SoftwareEventDataType getDataType<T>(T value)
+        private static DataType getDataType<T>(T value)
         {
             double parsed;
             if (value == null)
             {
-                return SoftwareEventDataType.Null;
+                return DataType.Null;
             }
             if (double.TryParse(value.ToString(), out parsed))
             {
-                return SoftwareEventDataType.Number;
+                return DataType.Number;
             }
             var type = value.GetType();
             if (type == typeof(string))
             {
-                return SoftwareEventDataType.String;
+                return DataType.String;
             }
             if (type == typeof(bool))
             {
-                return SoftwareEventDataType.Boolean;
+                return DataType.Boolean;
             }
             if (type.IsArray)
             {
-                return SoftwareEventDataType.Array;
+                return DataType.Array;
             }
-            return SoftwareEventDataType.Object;
+            return DataType.Object;
         }
     }
 }

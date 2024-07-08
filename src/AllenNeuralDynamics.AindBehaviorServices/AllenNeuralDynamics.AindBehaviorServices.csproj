@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>AllenNeuralDynamics.AindBehaviorServices</Title>
+    <Description>A bonsai package automatically generated data classes from Aind.Behavior.Services repository. The package version is locked to the python package version.</Description>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Bonsai Rx Services AllenNeuralDynamics</PackageTags>
+    <TargetFramework>net472</TargetFramework>
+    <Features>strict</Features>
+    <Version>0.7.12</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.bonsai" />
+    <EmbeddedResource Include="Shaders\*.frag" />
+    <EmbeddedResource Include="Shaders\*.vert" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Core" Version="2.8.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataSchemas\" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="&#xD;&#xA;          curl --url https://raw.githubusercontent.com/AllenNeuralDynamics/Aind.Behavior.Services/$(Version)/src/DataSchemas/schemas/aind_behavior_data_types.json -o $(ProjectDir)DataSchemas/aind_behavior_data_types.json&#xD;&#xA;          dotnet tool restore&#xD;&#xA;          dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind_behavior_data_types.json --namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes --output AindBehaviorServicesDataTypes.cs --serializer NewtonsoftJson" />  </Target>
+
+</Project>

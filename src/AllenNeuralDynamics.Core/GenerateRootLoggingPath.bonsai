@@ -27,7 +27,7 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Value" />
+        <Property Name="Value" DisplayName="DateTimeOffset" />
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="DateTimeOffsetProperty">

@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.6</Version>
+    <Version>0.2.0-preview04</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bonsai.Core" Version="2.8.1" />
-    <PackageReference Include="Bonsai.Design" Version="2.8.0" />
+    <PackageReference Include="Bonsai.Core" Version="2.8.2" />
+    <PackageReference Include="Bonsai.Design" Version="2.8.1" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.2" />
     <PackageReference Include="Bonsai.Scripting.Expressions" Version="2.8.0" />
     <PackageReference Include="Bonsai.Spinnaker" Version="0.7.1" />
@@ -29,20 +29,12 @@
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
-  </ItemGroup>
+    <PackageReference Include="AllenNeuralDynamics.AindBehaviorServices" Version="0.7.12" />
 
-  <ItemGroup>
-    <Resource Include="DataSchemas\aind-logging.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="README.md" PackagePath="/" />
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="dotnet tool restore&#xD;&#xA;dotnet tool run bonsai.sgen --schema $(ProjectDir)DataSchemas/aind-logging.json --namespace AllenNeuralDynamics.Core.Logging --root AindLogging --output $(ProjectDir)AindLogging.cs --serializer NewtonsoftJson YamlDotNet" />
-  </Target>
 
 </Project>

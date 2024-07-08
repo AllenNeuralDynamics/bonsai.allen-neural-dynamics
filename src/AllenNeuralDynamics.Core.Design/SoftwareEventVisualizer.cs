@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Reactive;
 using System.Text.RegularExpressions;
 using System.Linq;
-using AllenNeuralDynamics.Core.Logging;
-using AllenNeuralDynamics.Core.Design;
 using Bonsai;
+using AllenNeuralDynamics.Core.Design;
+using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
 [assembly: TypeVisualizer(typeof(SoftwareEventVisualizer), Target = typeof(SoftwareEvent))]
 

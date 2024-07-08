@@ -9,13 +9,11 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.5</Version>
+    <Version>0.2.0-preview01</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AllenNeuralDynamics.Core" Version="0.1.0-preview2024012401" />
-    <PackageReference Include="Bonsai.Core" Version="2.8.1" />
-    <PackageReference Include="Bonsai.Design" Version="2.8.0" />
+    <PackageReference Include="AllenNeuralDynamics.Core" Version="0.2.0-preview03" />
   </ItemGroup>
 
   <ItemGroup>
