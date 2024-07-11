@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace AllenNeuralDynamics.AindManipulator {
+
     public partial class ManipulatorPosition
     {
         public double this[Axis axis]
@@ -97,6 +98,19 @@ namespace AllenNeuralDynamics.AindManipulator {
             };
 
         }
+
+        public static ManipulatorPosition operator /(ManipulatorPosition el1, ManipulatorPosition el2)
+        {
+            return new ManipulatorPosition()
+            {
+                X = el1.X / el2.X,
+                Y1 = el1.Y1 / el2.Y1,
+                Y2 = el1.Y2 / el2.Y2,
+                Z = el1.Z / el2.Z
+            };
+
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is ManipulatorPosition)
