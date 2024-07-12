@@ -33,9 +33,9 @@ namespace AllenNeuralDynamics.AindManipulator
 
         public Harp.StepperDriver.MotorOperationMode MotorOperationMode { get; set; } = 0;
 
-        public int MaxLimit { get; set; } = 24000;
+        public double MaxLimit { get; set; } = 30;
 
-        public int MinLimit { get; set; } = 100;
+        public double MinLimit { get; set; } = -0.01;
 
 
         public override IObservable<AindManipulatorCalibrationInput> Generate()
