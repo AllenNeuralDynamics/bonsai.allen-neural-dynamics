@@ -8,7 +8,11 @@
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
-      <Expression xsi:type="Unit" />
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="IntProperty">
+          <Value>0</Value>
+        </Combinator>
+      </Expression>
       <Expression xsi:type="rx:Visualizer">
         <Name>AindManipulatorGUI</Name>
         <Workflow>
@@ -176,7 +180,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -293,7 +297,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -422,7 +426,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -539,7 +543,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -668,7 +672,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -785,7 +789,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -914,7 +918,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
@@ -1031,7 +1035,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>Settings</Name>
+                          <Name>AindManipulatorSettings</Name>
                         </Expression>
                         <Expression xsi:type="MemberSelector">
                           <Selector>AxisConfiguration</Selector>
