@@ -12,10 +12,10 @@ namespace AllenNeuralDynamics.AindManipulator
     {
 
         [TypeConverter(typeof(NumericRecordConverter))]
-        public AindManipulatorPosition InitialPosition { get; set; } = new AindManipulatorPosition();
+        public AindManipulatorPosition InitialPosition { get; set; } = new AindManipulatorPosition() { X = 0, Y1 = 0, Y2 = 0, Z = 0 };
 
         [TypeConverter(typeof(NumericRecordConverter))]
-        public AindManipulatorPosition StepToMm { get; set; } = new AindManipulatorPosition();
+        public AindManipulatorPosition FullStepToMm { get; set; } = new AindManipulatorPosition() { X = 0.01, Y1 = 0.01, Y2 = 0.01, Z = 0.01};
 
         [TypeConverter(typeof(UnidimensionalArrayConverter))]
         public Axis[] HomingOrder { get; set; } = new Axis[] {Axis.Y1, Axis.Y2, Axis.X, Axis.Z};
@@ -33,9 +33,9 @@ namespace AllenNeuralDynamics.AindManipulator
 
         public Harp.StepperDriver.MotorOperationMode MotorOperationMode { get; set; } = 0;
 
-        public int MaxLimit { get; set; } = 24000;
+        public double MaxLimit { get; set; } = 30;
 
-        public int MinLimit { get; set; } = 100;
+        public double MinLimit { get; set; } = -0.01;
 
 
         public override IObservable<AindManipulatorCalibrationInput> Generate()
@@ -43,7 +43,7 @@ namespace AllenNeuralDynamics.AindManipulator
             return Observable.Return(new AindManipulatorCalibrationInput()
             {
                 InitialPosition = InitialPosition.ToManipulatorPosition(),
-                FullStepToMm = StepToMm.ToManipulatorPosition(),
+                FullStepToMm = FullStepToMm.ToManipulatorPosition(),
                 HomingOrder = HomingOrder.ToList(),
                 AxisConfiguration = EnabledAxis.Select(x => DefaultAxisConfiguration(x)).ToList()
             });
