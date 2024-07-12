@@ -6,7 +6,8 @@ using System.Reactive.Linq;
 using Bonsai.Harp;
 using AllenNeuralDynamics.AindBehaviorServices.DataTypes;
 
-namespace AllenNeuralDynamics.Core { 
+namespace AllenNeuralDynamics.Core
+{
     [Combinator]
     [Description("Creates a fully populated SoftwareEvent a <T> generic object. If a Harp.Timestamped<T> is provided, temporal information will be added.")]
     [WorkflowElementCategory(ElementCategory.Transform)]
@@ -17,7 +18,8 @@ namespace AllenNeuralDynamics.Core {
         public IObservable<SoftwareEvent> Process<TSource>(IObservable<Timestamped<TSource>> source)
         {
             var thisName = EventName;
-            return source.Select(value => {
+            return source.Select(value =>
+            {
                 return new SoftwareEvent
                 {
                     Data = value.Value,
@@ -26,7 +28,8 @@ namespace AllenNeuralDynamics.Core {
                     FrameIndex = null,
                     FrameTimestamp = null,
                     Name = thisName,
-                    DataType = getDataType(value.Value)
+                    DataType = getDataType(value.Value),
+                    DataTypeHint = getDataTypeHint(value.Value)
                 };
             });
         }
@@ -34,7 +37,8 @@ namespace AllenNeuralDynamics.Core {
         public IObservable<SoftwareEvent> Process<TSource>(IObservable<TSource> source)
         {
             var thisName = EventName;
-            return source.Select(value => {
+            return source.Select(value =>
+            {
                 return new SoftwareEvent
                 {
                     Data = value,
@@ -43,7 +47,8 @@ namespace AllenNeuralDynamics.Core {
                     FrameIndex = null,
                     FrameTimestamp = null,
                     Name = thisName,
-                    DataType = getDataType(value)
+                    DataType = getDataType(value),
+                    DataTypeHint = getDataTypeHint(value)
                 };
             });
         }
@@ -73,6 +78,11 @@ namespace AllenNeuralDynamics.Core {
                 return DataType.Array;
             }
             return DataType.Object;
+        }
+
+        private static string getDataTypeHint<T>(T value)
+        {
+            return value.GetType().ToString();
         }
     }
 }

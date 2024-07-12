@@ -169,6 +169,8 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
     
         private DataType _dataType = AllenNeuralDynamics.AindBehaviorServices.DataTypes.DataType.Null;
     
+        private string _dataTypeHint;
+    
         public SoftwareEvent()
         {
         }
@@ -182,6 +184,7 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
             _frameTimestamp = other._frameTimestamp;
             _data = other._data;
             _dataType = other._dataType;
+            _dataTypeHint = other._dataTypeHint;
         }
     
         /// <summary>
@@ -205,7 +208,7 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
         /// The timestamp of the event
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonPropertyAttribute("timestamp", Required=Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonPropertyAttribute("timestamp")]
         [System.ComponentModel.DescriptionAttribute("The timestamp of the event")]
         public double? Timestamp
         {
@@ -277,7 +280,7 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
         /// The data of the event
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonPropertyAttribute("data", Required=Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonPropertyAttribute("data")]
         [System.ComponentModel.DescriptionAttribute("The data of the event")]
         public object Data
         {
@@ -309,6 +312,23 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
             }
         }
     
+        /// <summary>
+        /// The data type hint of the event
+        /// </summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("data_type_hint")]
+        [System.ComponentModel.DescriptionAttribute("The data type hint of the event")]
+        public string DataTypeHint
+        {
+            get
+            {
+                return _dataTypeHint;
+            }
+            set
+            {
+                _dataTypeHint = value;
+            }
+        }
+    
         public System.IObservable<SoftwareEvent> Process()
         {
             return System.Reactive.Linq.Observable.Defer(() => System.Reactive.Linq.Observable.Return(new SoftwareEvent(this)));
@@ -327,7 +347,8 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
             stringBuilder.Append("frame_index = " + _frameIndex + ", ");
             stringBuilder.Append("frame_timestamp = " + _frameTimestamp + ", ");
             stringBuilder.Append("data = " + _data + ", ");
-            stringBuilder.Append("dataType = " + _dataType);
+            stringBuilder.Append("dataType = " + _dataType + ", ");
+            stringBuilder.Append("data_type_hint = " + _dataTypeHint);
             return true;
         }
     
@@ -366,7 +387,7 @@ namespace AllenNeuralDynamics.AindBehaviorServices.DataTypes
     public abstract partial class DataTypes
     {
     
-        private string _version = "0.1.0";
+        private string _version = "0.1.1";
     
         private SoftwareEvent _softwareEvent = new SoftwareEvent();
     
