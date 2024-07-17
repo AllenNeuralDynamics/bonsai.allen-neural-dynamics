@@ -87,11 +87,23 @@ namespace AllenNeuralDynamics.Zaber
             _ = axis.HasValue ? device.GetAxis(axis.Value).HomeAsync(false) : device.AllAxes.HomeAsync(false);
         }
 
+        public void SetSetting(int? deviceIndex, int axis, string setting, double value, Units units = Units.Native)
+        {
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
+            thisAxis.Settings.SetAsync(setting, value, units);
+        }
+
         public void GenericCommandNoResponse(int? deviceIndex, int? axis, string command)
         {
             comm.GenericCommandNoResponseAsync(command,
                 deviceIndex.HasValue ? deviceIndex.Value : 0,
                 axis.HasValue? axis.Value : 0);
+        }
+
+        public async Task<double> GetSetting(int? deviceIndex, int axis, string setting, Units unit)
+        {
+            Axis thisAxis = devices[deviceIndex.HasValue ? deviceIndex.Value : 0].GetAxis(axis);
+            return await thisAxis.Settings.GetAsync(setting, unit);
         }
 
         public async Task<double> GetPosition(int? deviceIndex, int axis, Units unit)
