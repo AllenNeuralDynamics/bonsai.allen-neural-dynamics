@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.8.4+2bab12753e452fa02540eb20e93664d41b112590"
+<WorkflowBuilder Version="2.8.5"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
@@ -196,7 +196,7 @@
                         </Expression>
                         <Expression xsi:type="Equal">
                           <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                            <Value>Y2</Value>
+                            <Value>X</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="rx:Condition">
@@ -313,7 +313,7 @@
                         </Expression>
                         <Expression xsi:type="Equal">
                           <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                            <Value>Y2</Value>
+                            <Value>X</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="rx:Condition">
@@ -688,7 +688,7 @@
                         </Expression>
                         <Expression xsi:type="Equal">
                           <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                            <Value>Y1</Value>
+                            <Value>Y2</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="rx:Condition">
@@ -805,7 +805,7 @@
                         </Expression>
                         <Expression xsi:type="Equal">
                           <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Axis">
-                            <Value>Y1</Value>
+                            <Value>Y2</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="rx:Condition">
