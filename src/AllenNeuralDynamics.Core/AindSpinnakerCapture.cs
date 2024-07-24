@@ -74,14 +74,23 @@ namespace AllenNeuralDynamics.Core
         private void SetRegionOfInterest(IManagedCamera camera)
         {
             if (!(RegionOfInterest.Width == 0 || RegionOfInterest.Height == 0))
-            {
-                camera.OffsetX.Value = RegionOfInterest.X;
-                camera.OffsetY.Value = RegionOfInterest.Y;
+            { 
+                // Ensure that offsets are 0 before setting width and height
+                camera.OffsetX.Value = 0;
+                camera.OffsetY.Value = 0;
+
                 camera.Width.Value = RegionOfInterest.Width;
                 camera.Height.Value = RegionOfInterest.Height;
+
+                // Set the offset to the top left corner of the region of interest
+                // Passing a valid value is the responsibility of the user
+                camera.OffsetX.Value = RegionOfInterest.X;
+                camera.OffsetY.Value = RegionOfInterest.Y;
             }
             else
             {
+                // If the region of interest is not set, set the width and height to the maximum values
+                // allowed by the sensor
                 camera.Width.Value = camera.WidthMax.Value;
                 camera.Height.Value = camera.HeightMax.Value;
             }
