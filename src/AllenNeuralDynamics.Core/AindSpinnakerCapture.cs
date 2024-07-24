@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Bonsai.Spinnaker;
 using SpinnakerNET;
+using OpenCV.Net;
 
 namespace AllenNeuralDynamics.Core
 {
@@ -32,6 +33,8 @@ namespace AllenNeuralDynamics.Core
 
         [Description("Sensor pixel format.")]
         public PixelFormatEnums PixelFormat { get; set; }
+
+        public Rect RegionOfInterest { get; set; } = new Rect(0,0,0,0);
 
         protected override void Configure(IManagedCamera camera)
         {
@@ -66,6 +69,22 @@ namespace AllenNeuralDynamics.Core
             }
 
             base.Configure(camera);
+        }
+
+        private void SetRegionOfInterest(IManagedCamera camera)
+        {
+            if (!(RegionOfInterest.Width == 0 || RegionOfInterest.Height == 0))
+            {
+                camera.OffsetX.Value = RegionOfInterest.X;
+                camera.OffsetY.Value = RegionOfInterest.Y;
+                camera.Width.Value = RegionOfInterest.Width;
+                camera.Height.Value = RegionOfInterest.Height;
+            }
+            else
+            {
+                camera.Width.Value = camera.WidthMax.Value;
+                camera.Height.Value = camera.HeightMax.Value;
+            }
         }
     }
 }
