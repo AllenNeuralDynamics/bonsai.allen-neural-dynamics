@@ -2,6 +2,7 @@
 using Bonsai.Spinnaker;
 using SpinnakerNET;
 using OpenCV.Net;
+using System;
 
 namespace AllenNeuralDynamics.Core
 {
@@ -75,8 +76,20 @@ namespace AllenNeuralDynamics.Core
 
         private void SetRegionOfInterest(IManagedCamera camera)
         {
-            if (!(RegionOfInterest.Width == 0 || RegionOfInterest.Height == 0))
-            { 
+            if ((RegionOfInterest.Height == 0) || (RegionOfInterest.Width == 0))
+            {
+                if (RegionOfInterest.X != 0 || RegionOfInterest.Y != 0 || RegionOfInterest.Height != 0 || RegionOfInterest.Width != 0)
+                {
+                    throw new InvalidOperationException("If Heigh or Width is 0, all size arguments must be 0.");
+                }
+
+                // If the region of interest is not set, set the width and height to the maximum values
+                // allowed by the sensor
+                camera.Width.Value = camera.WidthMax.Value;
+                camera.Height.Value = camera.HeightMax.Value;
+            }
+            else
+            {
                 // Ensure that offsets are 0 before setting width and height
                 camera.OffsetX.Value = 0;
                 camera.OffsetY.Value = 0;
@@ -88,13 +101,6 @@ namespace AllenNeuralDynamics.Core
                 // Passing a valid value is the responsibility of the user
                 camera.OffsetX.Value = RegionOfInterest.X;
                 camera.OffsetY.Value = RegionOfInterest.Y;
-            }
-            else
-            {
-                // If the region of interest is not set, set the width and height to the maximum values
-                // allowed by the sensor
-                camera.Width.Value = camera.WidthMax.Value;
-                camera.Height.Value = camera.HeightMax.Value;
             }
         }
     }
