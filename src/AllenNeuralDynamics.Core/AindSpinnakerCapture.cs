@@ -49,6 +49,7 @@ namespace AllenNeuralDynamics.Core
             camera.AcquisitionFrameRateEnable.Value = false;
             camera.IspEnable.Value = false;
             camera.TriggerMode.Value = TriggerModeEnums.On.ToString();
+            camera.TriggerDelay.Value = camera.TriggerDelay.Min;
             camera.TriggerSelector.Value = TriggerSelectorEnums.FrameStart.ToString();
             camera.TriggerSource.Value = TriggerSourceEnums.Line0.ToString();
             camera.TriggerOverlap.Value = TriggerOverlapEnums.ReadOut.ToString();
@@ -67,6 +68,7 @@ namespace AllenNeuralDynamics.Core
             else{
                 camera.GammaEnable.Value = false;
             }
+            SetRegionOfInterest(camera);
 
             base.Configure(camera);
         }
