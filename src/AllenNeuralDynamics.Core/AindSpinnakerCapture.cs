@@ -85,15 +85,13 @@ namespace AllenNeuralDynamics.Core
 
                 // If the region of interest is not set, set the width and height to the maximum values
                 // allowed by the sensor
+                camera.OffsetX.Value = 0;
+                camera.OffsetY.Value = 0;
                 camera.Width.Value = camera.WidthMax.Value;
                 camera.Height.Value = camera.HeightMax.Value;
             }
             else
             {
-                // Ensure that offsets are 0 before setting width and height
-                camera.OffsetX.Value = 0;
-                camera.OffsetY.Value = 0;
-
                 camera.Width.Value = RegionOfInterest.Width;
                 camera.Height.Value = RegionOfInterest.Height;
 
