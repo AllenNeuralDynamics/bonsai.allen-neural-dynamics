@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using Bonsai.Spinnaker;
 using SpinnakerNET;
+using OpenCV.Net;
+using System;
 
 namespace AllenNeuralDynamics.Core
 {
@@ -33,6 +35,8 @@ namespace AllenNeuralDynamics.Core
         [Description("Sensor pixel format.")]
         public PixelFormatEnums PixelFormat { get; set; }
 
+        public Rect RegionOfInterest { get; set; } = new Rect(0,0,0,0);
+
         protected override void Configure(IManagedCamera camera)
         {
             try { camera.AcquisitionStop.Execute(); }
@@ -46,6 +50,7 @@ namespace AllenNeuralDynamics.Core
             camera.AcquisitionFrameRateEnable.Value = false;
             camera.IspEnable.Value = false;
             camera.TriggerMode.Value = TriggerModeEnums.On.ToString();
+            camera.TriggerDelay.Value = camera.TriggerDelay.Min;
             camera.TriggerSelector.Value = TriggerSelectorEnums.FrameStart.ToString();
             camera.TriggerSource.Value = TriggerSourceEnums.Line0.ToString();
             camera.TriggerOverlap.Value = TriggerOverlapEnums.ReadOut.ToString();
@@ -64,8 +69,37 @@ namespace AllenNeuralDynamics.Core
             else{
                 camera.GammaEnable.Value = false;
             }
+            SetRegionOfInterest(camera);
 
             base.Configure(camera);
+        }
+
+        private void SetRegionOfInterest(IManagedCamera camera)
+        {
+            if ((RegionOfInterest.Height == 0) || (RegionOfInterest.Width == 0))
+            {
+                if (RegionOfInterest.X != 0 || RegionOfInterest.Y != 0 || RegionOfInterest.Height != 0 || RegionOfInterest.Width != 0)
+                {
+                    throw new InvalidOperationException("If Heigh or Width is 0, all size arguments must be 0.");
+                }
+
+                // If the region of interest is not set, set the width and height to the maximum values
+                // allowed by the sensor
+                camera.OffsetX.Value = 0;
+                camera.OffsetY.Value = 0;
+                camera.Width.Value = camera.WidthMax.Value;
+                camera.Height.Value = camera.HeightMax.Value;
+            }
+            else
+            {
+                camera.Width.Value = RegionOfInterest.Width;
+                camera.Height.Value = RegionOfInterest.Height;
+
+                // Set the offset to the top left corner of the region of interest
+                // Passing a valid value is the responsibility of the user
+                camera.OffsetX.Value = RegionOfInterest.X;
+                camera.OffsetY.Value = RegionOfInterest.Y;
+            }
         }
     }
 }
