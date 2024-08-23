@@ -48,7 +48,7 @@ namespace AllenNeuralDynamics.Core
                     FrameTimestamp = null,
                     Name = thisName,
                     DataType = getDataType(value),
-                    DataTypeHint = getDataTypeHint(value)
+                    DataTypeHint = value is null ? "null" : getDataTypeHint(value)
                 };
             });
         }
