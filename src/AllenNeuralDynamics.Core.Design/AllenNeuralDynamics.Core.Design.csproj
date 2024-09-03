@@ -13,7 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AllenNeuralDynamics.Core" Version="0.2.0-preview03" />
+    <PackageReference Include="AllenNeuralDynamics.Core" Version="0.2.3" />
+    <PackageReference Include="Bonsai.Vision" Version="2.8.1" />
+    <PackageReference Include="Bonsai.Vision.Design" Version="2.8.1" />
   </ItemGroup>
 
   <ItemGroup>
