@@ -142,6 +142,31 @@
       <Expression xsi:type="rx:AsyncSubject">
         <Name>AxesConfiguration</Name>
       </Expression>
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:ManipulatorPosition">
+        <rx:Name>SingleAxisMoveTo</rx:Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>AindManipulatorSettings</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Calibration" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p2:ManipulatorSiUnitConverter">
+          <p2:ConverterMode>MmToStep</p2:ConverterMode>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p2:MoveAbsoluteSingleAxis">
+          <p2:Axis>Y1</p2:Axis>
+          <p2:MessageType>Write</p2:MessageType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>StepperDriverCommands</Name>
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>OperationControl</Name>
         <Workflow>
@@ -966,6 +991,11 @@
       <Edge From="24" To="25" Label="Source1" />
       <Edge From="25" To="26" Label="Source1" />
       <Edge From="26" To="27" Label="Source1" />
+      <Edge From="28" To="31" Label="Source1" />
+      <Edge From="29" To="30" Label="Source1" />
+      <Edge From="30" To="31" Label="Source2" />
+      <Edge From="31" To="32" Label="Source1" />
+      <Edge From="32" To="33" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
