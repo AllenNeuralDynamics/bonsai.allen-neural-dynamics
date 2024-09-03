@@ -17,7 +17,7 @@ namespace AllenNeuralDynamics.Core
             Binning = 1;
             PixelFormat = PixelFormatEnums.Mono8;
             Gamma = null;
-
+            AdcBitDepth = AdcBitDepthEnums.Bit8;
         }
 
         [Description("The duration of each individual exposure, in microseconds. In general, this should be 1 / frameRate - 1 millisecond to prepare for next trigger.")]
@@ -35,13 +35,18 @@ namespace AllenNeuralDynamics.Core
         [Description("Sensor pixel format.")]
         public PixelFormatEnums PixelFormat { get; set; }
 
+        [Description("Region of interest to crop the sensor with.")]
         public Rect RegionOfInterest { get; set; } = new Rect(0,0,0,0);
+
+        [Description("Sensor ADC bit depth used to acquired data.")]
+        public AdcBitDepthEnums AdcBitDepth { get; set; }
 
         protected override void Configure(IManagedCamera camera)
         {
             try { camera.AcquisitionStop.Execute(); }
             catch { }
             camera.PixelFormat.Value = PixelFormat.ToString();
+            camera.AdcBitDepth.Value = AdcBitDepth.ToString();
             camera.BinningSelector.Value = BinningSelectorEnums.All.ToString();
             camera.BinningHorizontalMode.Value = BinningHorizontalModeEnums.Sum.ToString();
             camera.BinningVerticalMode.Value = BinningVerticalModeEnums.Sum.ToString();
