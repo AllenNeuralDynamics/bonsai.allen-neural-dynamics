@@ -13,12 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="**\*.bonsai" />
-    <EmbeddedResource Include="Shaders\*.frag" />
-    <EmbeddedResource Include="Shaders\*.vert" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
