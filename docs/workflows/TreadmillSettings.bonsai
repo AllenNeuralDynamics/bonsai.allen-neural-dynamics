@@ -33,7 +33,7 @@
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
         <harp:Payload xsi:type="p1:CreateTareSensorsPayload">
-          <p1:TareSensors>Encoder Torque BreakCurrent</p1:TareSensors>
+          <p1:TareSensors>Encoder Torque BrakeCurrent</p1:TareSensors>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -52,7 +52,7 @@
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
         <harp:Payload xsi:type="p1:CreateResetTareSensorsPayload">
-          <p1:ResetTareSensors>Encoder Torque BreakCurrent</p1:ResetTareSensors>
+          <p1:ResetTareSensors>Encoder Torque BrakeCurrent</p1:ResetTareSensors>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">

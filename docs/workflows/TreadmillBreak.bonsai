@@ -34,7 +34,7 @@
       </Expression>
       <Expression xsi:type="p1:Format">
         <harp:MessageType>Write</harp:MessageType>
-        <harp:Register xsi:type="p1:BreakCurrentSetPoint" />
+        <harp:Register xsi:type="p1:BrakeCurrentSetPoint" />
       </Expression>
       <Expression xsi:type="MulticastSubject">
         <Name>Commands</Name>
