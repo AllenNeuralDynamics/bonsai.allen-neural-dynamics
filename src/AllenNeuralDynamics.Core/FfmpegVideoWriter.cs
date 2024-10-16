@@ -24,11 +24,16 @@ namespace AllenNeuralDynamics.Core
         [Description("The playback frame rate of the image sequence.")]
         public int FrameRate { get; set; }
 
-        [Description("The optional set of command-line arguments to use for configuring the video codec.")]
-        public string OutputArguments { get; set; }
+        [Description("Verbosity")]
+        public Verbosity Verbosity { get; set; } = Verbosity.Verbose;
 
+        [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
+        [Description("The optional set of command-line arguments to use for configuring the video codec.")]
+        public string OutputArguments { get; set; } = @"-vf ""scale=out_color_matrix=bt709:out_range=full"" -c:v h264_nvenc -pix_fmt nv12 -color_range full -colorspace bt709 -color_trc linear -tune hq -preset p4 -rc vbr -cq 12 -b:v 0M -maxrate 700M -bufsize 350M";
+
+        [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
         [Description("The optional set of command-line arguments to use for configuring the input video stream.")]
-        public string InputArguments { get; set; }
+        public string InputArguments { get; set; } = "-colorspace rgb -color_primaries bt709 -color_trc linear";
 
         public override IObservable<IplImage> Process(IObservable<IplImage> source)
         {
@@ -42,17 +47,18 @@ namespace AllenNeuralDynamics.Core
                 }
 
                 PathHelper.EnsureDirectory(fileName);
-                var pipe = @"\\.\pipe\" + Path.GetFileNameWithoutExtension(fileName) + "_" + ((int)fileName.GetHashCode()).ToString();
+                var pipe = @"\\.\pipe\" + Path.GetFileNameWithoutExtension(fileName) + "_" + ((uint)fileName.GetHashCode()).ToString();
                 var writer = new ImageWriter { Path = pipe };
                 return writer.Process(ps).Merge(ps.Take(1).Delay(TimeSpan.FromSeconds(1)).SelectMany(image =>
                 {
+                    var inputArguments = string.Format("-v {0} {1}", Verbosity.ToString().ToLower(), InputArguments);
                     var args = string.Format("-f rawvideo -vcodec rawvideo {0}-s {1}x{2} -r {3} -pix_fmt {4} {5} -i {6} {7} {8}",
                         overwrite ? "-y " : string.Empty,
                         image.Width,
                         image.Height,
                         FrameRate,
                         image.Channels == 1 ? "gray" : "bgr24",
-                        InputArguments,
+                        inputArguments,
                         pipe,
                         OutputArguments,
                         fileName);
@@ -63,6 +69,19 @@ namespace AllenNeuralDynamics.Core
                 }));
             });
         }
+    }
+
+    public enum Verbosity
+    {
+        Quiet,
+        Panic,
+        Fatal,
+        Error,
+        Warning,
+        Info,
+        Verbose,
+        Debug,
+        Trace
     }
 }
 
