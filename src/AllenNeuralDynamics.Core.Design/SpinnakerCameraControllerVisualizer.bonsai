@@ -9,7 +9,6 @@
                  xmlns:p2="clr-namespace:AllenNeuralDynamics.Core.Design;assembly=AllenNeuralDynamics.Core.Design"
                  xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
                  xmlns:p3="clr-namespace:Bonsai.Vision.Design;assembly=Bonsai.Vision.Design"
-                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -33,7 +32,7 @@
               <Selector>Key</Selector>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:AccumulateToList" />
+              <Combinator xsi:type="p2:AccumulateToImmutableList" />
             </Expression>
             <Expression xsi:type="gui:ListBoxDataSourceBuilder">
               <gui:Enabled>true</gui:Enabled>
@@ -133,12 +132,6 @@
               <VisualizerType xsi:type="TypeMapping" TypeArguments="p3:IplImageVisualizer" />
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="cv:ImageHistogram" />
-            </Expression>
-            <Expression xsi:type="VisualizerMapping">
-              <VisualizerType xsi:type="TypeMapping" TypeArguments="p3:ScalarHistogramVisualizer" />
-            </Expression>
-            <Expression xsi:type="Combinator">
               <Combinator xsi:type="BooleanProperty">
                 <Value>false</Value>
               </Combinator>
@@ -170,7 +163,7 @@
               <gui:Enabled>true</gui:Enabled>
               <gui:Visible>true</gui:Visible>
               <gui:ColumnCount>1</gui:ColumnCount>
-              <gui:RowCount>3</gui:RowCount>
+              <gui:RowCount>2</gui:RowCount>
               <gui:ColumnStyles />
               <gui:RowStyles>
                 <gui:RowStyle>
@@ -179,11 +172,7 @@
                 </gui:RowStyle>
                 <gui:RowStyle>
                   <gui:SizeType>Percent</gui:SizeType>
-                  <gui:Height>0.6</gui:Height>
-                </gui:RowStyle>
-                <gui:RowStyle>
-                  <gui:SizeType>Percent</gui:SizeType>
-                  <gui:Height>0.3</gui:Height>
+                  <gui:Height>0.9</gui:Height>
                 </gui:RowStyle>
               </gui:RowStyles>
               <gui:CellSpans />
@@ -197,23 +186,20 @@
             <Edge From="4" To="5" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="22" Label="Source1" />
+            <Edge From="7" To="20" Label="Source1" />
             <Edge From="8" To="10" Label="Source1" />
             <Edge From="9" To="10" Label="Source2" />
             <Edge From="10" To="11" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
             <Edge From="12" To="13" Label="Source1" />
-            <Edge From="12" To="14" Label="Source1" />
-            <Edge From="13" To="22" Label="Source2" />
+            <Edge From="13" To="20" Label="Source2" />
             <Edge From="14" To="15" Label="Source1" />
-            <Edge From="15" To="22" Label="Source3" />
+            <Edge From="15" To="18" Label="Source1" />
             <Edge From="16" To="17" Label="Source1" />
-            <Edge From="17" To="20" Label="Source1" />
+            <Edge From="17" To="18" Label="Source2" />
             <Edge From="18" To="19" Label="Source1" />
-            <Edge From="19" To="20" Label="Source2" />
+            <Edge From="19" To="20" Label="Source3" />
             <Edge From="20" To="21" Label="Source1" />
-            <Edge From="21" To="22" Label="Source4" />
-            <Edge From="22" To="23" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
