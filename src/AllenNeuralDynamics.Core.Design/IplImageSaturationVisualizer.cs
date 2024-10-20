@@ -5,13 +5,11 @@ using OpenTK.Graphics.OpenGL;
 using OpenCV.Net;
 using System.Windows.Forms;
 using AllenNeuralDynamics.Core.Design;
-using Bonsai.Design;
 
 [assembly: TypeVisualizer(typeof(IplImageSaturationVisualizer), Target = typeof(IplImage))]
 
 namespace AllenNeuralDynamics.Core.Design
 {
-
     public class IplImageSaturationVisualizer : IplImageVisualizer
     {
         int shaderProgram;
@@ -23,20 +21,6 @@ namespace AllenNeuralDynamics.Core.Design
         NumericUpDown maxSaturationInput;
         public byte minSaturation { get; set; } = 0;
         public byte maxSaturation { get; set; } = 255;
-
-        private byte? SanitizeInput(string value)
-        {
-            return byte.TryParse(value, out byte parsed) ? parsed : null;
-        }
-
-        private NumericUpDown NumericUpDownFactory(byte val, byte min = byte.MinValue, byte max = byte.MaxValue)
-        {
-            var numericUpDown = new NumericUpDown();
-            numericUpDown.Maximum = max;
-            numericUpDown.Minimum = min;
-            numericUpDown.Value = val;
-            return numericUpDown;
-        }
 
         public override void Load(IServiceProvider provider)
         {
@@ -77,7 +61,6 @@ namespace AllenNeuralDynamics.Core.Design
 
         protected override void RenderFrame()
         {
-
             GL.PushMatrix();
             GL.UseProgram(shaderProgram);
 
@@ -87,81 +70,51 @@ namespace AllenNeuralDynamics.Core.Design
             GL.BindTexture(TextureTarget.Texture2D, 1);
 
             GL.Uniform1(textureLocation, 0);
-            GL.Uniform1(minSaturationLocation, (float) minSaturation / byte.MaxValue);
-            GL.Uniform1(maxSaturationLocation, (float) maxSaturation / byte.MaxValue);
+            GL.Uniform1(minSaturationLocation, (float)minSaturation / byte.MaxValue);
+            GL.Uniform1(maxSaturationLocation, (float)maxSaturation / byte.MaxValue);
 
             GL.PopMatrix();
             GL.UseProgram(0);
+        }
 
+        private byte? SanitizeInput(string value)
+        {
+            return byte.TryParse(value, out byte parsed) ? parsed : null;
+        }
+
+        private NumericUpDown NumericUpDownFactory(byte val, byte min = byte.MinValue, byte max = byte.MaxValue)
+        {
+            var numericUpDown = new NumericUpDown();
+            numericUpDown.Maximum = max;
+            numericUpDown.Minimum = min;
+            numericUpDown.Value = val;
+            return numericUpDown;
         }
 
         int CompileShader(string vertexCode, string fragmentCode)
         {
-            // Compile vertex shader
             int vertexShader = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShader, vertexCode);
             GL.CompileShader(vertexShader);
             GL.GetShader(vertexShader, ShaderParameter.CompileStatus, out int vertexCompiled);
 
-            if (vertexCompiled == (int)All.False)
-            {
-                string vertexLog = GL.GetShaderInfoLog(vertexShader);
-                Console.WriteLine($"Vertex shader compilation failed:\n{vertexLog}");
-                GL.DeleteShader(vertexShader);
-                return -1;
-            }
-
-            // Compile fragment shader
             int fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(fragmentShader, fragmentCode);
             GL.CompileShader(fragmentShader);
             GL.GetShader(fragmentShader, ShaderParameter.CompileStatus, out int fragmentCompiled);
 
-            if (fragmentCompiled == (int)All.False)
-            {
-                string fragmentLog = GL.GetShaderInfoLog(fragmentShader);
-                Console.WriteLine($"Fragment shader compilation failed:\n{fragmentLog}");
-                GL.DeleteShader(vertexShader);
-                GL.DeleteShader(fragmentShader);
-                return -1;
-            }
-
-            // Link shaders to program
             int shaderProgram = GL.CreateProgram();
             GL.AttachShader(shaderProgram, vertexShader);
             GL.AttachShader(shaderProgram, fragmentShader);
             GL.LinkProgram(shaderProgram);
             GL.GetProgram(shaderProgram, GetProgramParameterName.LinkStatus, out int programLinked);
 
-            if (programLinked == (int)All.False)
-            {
-                string programLog = GL.GetProgramInfoLog(shaderProgram);
-                Console.WriteLine($"Shader program linking failed:\n{programLog}");
-                GL.DeleteShader(vertexShader);
-                GL.DeleteShader(fragmentShader);
-                GL.DeleteProgram(shaderProgram);
-                return -1;
-            }
-
-            // Clean up shaders
             GL.DeleteShader(vertexShader);
             GL.DeleteShader(fragmentShader);
 
             return shaderProgram;
         }
-        const string fragShaderCode2 = @"
-#version 330 core
 
-in vec2 TexCoords;
-uniform sampler2D imageTexture;
-
-out vec4 FragColor;
-
-void main()
-{
-    FragColor = vec4(TexCoords.x, TexCoords.y, 0, 1.0);
-}
-";
         const string fragShaderCode = @"
 #version 330 core
 
