@@ -13,19 +13,10 @@ namespace AllenNeuralDynamics.AindManipulator
     [WorkflowElementCategory(ElementCategory.Combinator)]
     public class MoveAbsoluteSingleAxis
     {
-        private Axis axis = Axis.Y1;
-        public Axis Axis
-        {
-            get { return axis; }
-            set { axis = value; }
-        }
+        public Axis? Axis { get; set; }
 
         private MessageType messageType = MessageType.Write;
-        public MessageType MessageType
-        {
-            get { return messageType; }
-            set { messageType = value; }
-        }
+
 
         public IObservable<HarpMessage> Process(IObservable<ManipulatorPosition> source)
         {
@@ -66,7 +57,11 @@ namespace AllenNeuralDynamics.AindManipulator
         {
             return source.Select(value =>
             {
-                return BuildMessage(axis, messageType, value);
+                if (!Axis.HasValue)
+                {
+                    throw new ArgumentNullException("Axis value is null.");
+                }
+                return BuildMessage(Axis.Value, messageType, value);
             });
         }
 
@@ -74,13 +69,13 @@ namespace AllenNeuralDynamics.AindManipulator
         {
             switch (axis)
             {
-                case Axis.X:
+                case AindManipulator.Axis.X:
                     return Motor0MoveAbsolute.FromPayload(messageType, position);
-                case Axis.Y1:
+                case AindManipulator.Axis.Y1:
                     return Motor1MoveAbsolute.FromPayload(messageType, position);
-                case Axis.Y2:
+                case AindManipulator.Axis.Y2:
                     return Motor2MoveAbsolute.FromPayload(messageType, position);
-                case Axis.Z:
+                case AindManipulator.Axis.Z:
                     return Motor3MoveAbsolute.FromPayload(messageType, position);
                 default:
                     throw new InvalidOperationException("Invalid axis selection.");
