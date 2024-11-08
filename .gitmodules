@@ -16,3 +16,6 @@
 [submodule "docs/harp_devices_src/harp.device.white-rabbit"]
 	path = docs/harp_devices_src/harp.device.white-rabbit
 	url = https://github.com/AllenNeuralDynamics/harp.device.white-rabbit
+[submodule "docs/harp_devices_src/harp.device.environment-sensor"]
+	path = docs/harp_devices_src/harp.device.environment-sensor
+	url = https://github.com/AllenNeuralDynamics/harp.device.environment-sensor
