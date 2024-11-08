@@ -1,9 +1,15 @@
 # Build device tables
 $files = Get-ChildItem .\harp_devices_src\harp.device.*\software\bonsai\device.yml
+$files_root = Get-ChildItem .\harp_devices_src\harp.device.*\device.yml
+$files += $files_root
+
 foreach ($file in $files)
 {
     Write-Output "Generating schema tables for $file..."
-    $readmePath =  (get-item $file ).Directory.Parent.Parent.FullName + "\README.md"
+    $readmePath = (Get-Item $file).Directory.Parent.Parent.FullName + "\README.md"
+    if (-Not (Test-Path $readmePath)) {
+        $readmePath = (Get-Item $file).Directory.FullName + "\README.md"
+    }
     $readmePath = ("." + (Resolve-Path -Relative $readmePath))
     $readmePath = $readmePath.Replace("\", "/")
     dotnet run --project .\harp_devices_src\harp.schemaprocessor $file .\harp_devices_spec $readmePath

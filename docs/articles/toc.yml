@@ -16,3 +16,5 @@
     href: treadmill.md
   - name: AIND Manipulator
     href: aind-manipulator.md
+  - name: EnvironmentSensor
+    href: environment-sensor.md
