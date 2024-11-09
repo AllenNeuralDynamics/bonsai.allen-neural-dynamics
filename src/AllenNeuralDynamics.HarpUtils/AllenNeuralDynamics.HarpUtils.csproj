@@ -9,7 +9,7 @@
     <PackageTags>Bonsai Rx Core AllenNeuralDynamics</PackageTags>
     <TargetFramework>net472</TargetFramework>
     <Features>strict</Features>
-    <Version>0.1.7</Version>
+    <Version>0.1.8</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AllenNeuralDynamics.LicketySplit" Version="0.1.0" />
-    <PackageReference Include="AllenNeuralDynamics.SniffDetector" Version="0.1.0-preview06032024" />
-    <PackageReference Include="AllenNeuralDynamics.Treadmill" Version="0.1.0" />
+    <PackageReference Include="AllenNeuralDynamics.EnvironmentSensor" Version="0.2.0" />
+    <PackageReference Include="AllenNeuralDynamics.LicketySplit" Version="0.2.0" />
+    <PackageReference Include="AllenNeuralDynamics.SniffDetector" Version="0.2.0" />
+    <PackageReference Include="AllenNeuralDynamics.Treadmill" Version="0.2.0" />
+    <PackageReference Include="AllenNeuralDynamics.WhiteRabbit" Version="0.2.0" />
     <PackageReference Include="Bonsai.Core" Version="2.8.0" />
     <PackageReference Include="Bonsai.Harp" Version="3.5.2" />
     <PackageReference Include="Bonsai.Harp.Design" Version="3.5.0" />
