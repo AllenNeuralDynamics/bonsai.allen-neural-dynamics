@@ -109,6 +109,73 @@ namespace AllenNeuralDynamics.Core
                 camera.OffsetY.Value = RegionOfInterest.Y;
             }
         }
+
+        static Func<IManagedImage, IplImage> GetConverter(PixelFormatEnums pixelFormat, Bonsai.Spinnaker.ColorProcessingAlgorithm colorProcessing)
+        {
+            int outputChannels;
+            IplDepth outputDepth;
+            if (pixelFormat < PixelFormatEnums.BayerGR8 || pixelFormat == PixelFormatEnums.BGR8 ||
+                pixelFormat <= PixelFormatEnums.BayerBG16 && colorProcessing == Bonsai.Spinnaker.ColorProcessingAlgorithm.NoColorProcessing)
+            {
+                if (pixelFormat == PixelFormatEnums.BGR8)
+                {
+                    outputChannels = 3;
+                    outputDepth = IplDepth.U8;
+                }
+                else
+                {
+                    outputChannels = 1;
+                    var depthFactor = (int)pixelFormat;
+                    if (pixelFormat > PixelFormatEnums.Mono16) depthFactor = (depthFactor - 3) / 4;
+                    outputDepth = (IplDepth)(8 * (depthFactor + 1));
+                }
+
+                return image =>
+                {
+                    var width = (int)image.Width;
+                    var height = (int)image.Height;
+                    using (var bitmapHeader = new IplImage(new Size(width, height), outputDepth, outputChannels, image.DataPtr))
+                    {
+                        var output = new IplImage(bitmapHeader.Size, outputDepth, outputChannels);
+                        CV.Copy(bitmapHeader, output);
+                        return output;
+                    }
+                };
+            }
+
+            PixelFormatEnums outputFormat;
+            if (pixelFormat == PixelFormatEnums.Mono10p ||
+                pixelFormat == PixelFormatEnums.Mono10Packed ||
+                pixelFormat == PixelFormatEnums.Mono12p ||
+                pixelFormat == PixelFormatEnums.Mono12Packed)
+            {
+                outputFormat = PixelFormatEnums.Mono16;
+                outputDepth = IplDepth.U16;
+                outputChannels = 1;
+            }
+            else if (pixelFormat >= PixelFormatEnums.BayerGR8 && pixelFormat <= PixelFormatEnums.BayerBG16)
+            {
+                outputFormat = PixelFormatEnums.BGR8;
+                outputDepth = IplDepth.U8;
+                outputChannels = 3;
+            }
+            else throw new InvalidOperationException(string.Format("Unable to convert pixel format {0}.", pixelFormat));
+
+            return image =>
+            {
+                var width = (int)image.Width;
+                var height = (int)image.Height;
+                var output = new IplImage(new Size(width, height), outputDepth, outputChannels);
+                unsafe
+                {
+                    using (var destination = new ManagedImage((uint)width, (uint)height, 0, 0, outputFormat, output.ImageData.ToPointer()))
+                    {
+                        image.Convert(destination, outputFormat, (SpinnakerNET.ColorProcessingAlgorithm)colorProcessing);
+                        return output;
+                    }
+                }
+            };
+        }
     }
 }
 
