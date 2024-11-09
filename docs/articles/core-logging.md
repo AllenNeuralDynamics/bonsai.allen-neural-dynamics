@@ -14,8 +14,18 @@ The first thing that should be defined is the root where all data will be saved 
 ## Harp data
 Once this `Subject` is created, other nodes can access to it. For instance, if one would like to save the data from a `Harp Device`:
 
+### Without metadata
 :::workflow
 ![SaveHarpData](~/workflows/SaveHarpData.bonsai)
+:::
+
+### With Metadata
+
+Each device can be saved with metadata by providing the `device.yml` file information to the operator. This string can be passed manually or by using the `GetMetadata` node from the device-specific package.
+For example, to log data from a `LicketySplit` device:
+
+:::workflow
+![SaveHarpDataWithMetadata](~/workflows/SaveHarpDataWithMetadata.bonsai)
 :::
 
 ## Spinnaker camera
