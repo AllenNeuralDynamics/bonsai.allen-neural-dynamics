@@ -29,11 +29,11 @@ namespace AllenNeuralDynamics.Core
 
         [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
         [Description("The optional set of command-line arguments to use for configuring the video codec.")]
-        public string OutputArguments { get; set; } = @"-vf ""scale=out_color_matrix=bt709:out_range=full"" -c:v h264_nvenc -pix_fmt nv12 -color_range full -colorspace bt709 -color_trc linear -tune hq -preset p4 -rc vbr -cq 12 -b:v 0M -maxrate 700M -bufsize 350M";
+        public string OutputArguments { get; set; } = @"-vf ""scale=out_color_matrix=bt709:out_range=full"" -c:v h264_nvenc -pix_fmt nv12 -color_range full -colorspace bt709 -color_trc linear -tune hq -preset p4 -rc vbr -cq 12 -b:v 0M -metadata author=""Allen Institute for Neural Dynamics"" -maxrate 700M -bufsize 350M";
 
         [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
         [Description("The optional set of command-line arguments to use for configuring the input video stream.")]
-        public string InputArguments { get; set; } = "-colorspace rgb -color_primaries bt709 -color_trc linear";
+        public string InputArguments { get; set; } = "-colorspace bt709 -color_primaries bt709 -color_range full -color_trc linear";
 
         public override IObservable<IplImage> Process(IObservable<IplImage> source)
         {
