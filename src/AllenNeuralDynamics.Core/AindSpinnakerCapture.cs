@@ -32,20 +32,23 @@ namespace AllenNeuralDynamics.Core
         [Description("Parameter used for gamma correction. If null, gamma correction is disabled.")]
         public double? Gamma { get; set; }
 
-        [Description("Sensor pixel format.")]
-        public PixelFormatEnums PixelFormat { get; set; }
+        [Description("Sensor pixel format. If null, the currently set value in the camera will be used.")]
+        public PixelFormatEnums? PixelFormat { get; set; }
 
         [Description("Region of interest to crop the sensor with.")]
         public Rect RegionOfInterest { get; set; } = new Rect(0,0,0,0);
 
-        [Description("Sensor ADC bit depth used to acquired data.")]
+        [Description("Sensor ADC bit depth used to acquired data. If null the currently set value in the camera will be used.")]
         public AdcBitDepthEnums? AdcBitDepth { get; set; }
 
         protected override void Configure(IManagedCamera camera)
         {
             try { camera.AcquisitionStop.Execute(); }
             catch { }
-            camera.PixelFormat.Value = PixelFormat.ToString();
+            if (PixelFormat.HasValue)
+            {
+                camera.PixelFormat.Value = PixelFormat.Value.ToString();
+            }
             if (AdcBitDepth.HasValue)
             {
                 camera.AdcBitDepth.Value = AdcBitDepth.Value.ToString();
