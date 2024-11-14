@@ -51,13 +51,20 @@ namespace AllenNeuralDynamics.Core
                 var writer = new ImageWriter { Path = pipe };
                 return writer.Process(ps).Merge(ps.Take(1).Delay(TimeSpan.FromSeconds(1)).SelectMany(image =>
                 {
+                    string pixelFormat;
+                    if (image.Channels == 1 && image.Depth==IplDepth.U8) pixelFormat = "gray";
+                    else if (image.Channels == 3 && image.Depth == IplDepth.U8) pixelFormat = "bgr24";
+                    else if (image.Channels == 1 && image.Depth == IplDepth.U16) pixelFormat = "gray16le";
+                    else if (image.Channels == 3 && image.Depth == IplDepth.U16) pixelFormat = "bgr48le";
+                    else throw new InvalidOperationException(string.Format("Unsupported image format. Got {0} channels and depth {1}", image.Channels, image.Depth));
+
                     var inputArguments = string.Format("-v {0} {1}", Verbosity.ToString().ToLower(), InputArguments);
                     var args = string.Format("-f rawvideo -vcodec rawvideo {0}-s {1}x{2} -r {3} -pix_fmt {4} {5} -i {6} {7} {8}",
                         overwrite ? "-y " : string.Empty,
                         image.Width,
                         image.Height,
                         FrameRate,
-                        image.Channels == 1 ? "gray" : "bgr24",
+                        pixelFormat,
                         inputArguments,
                         pipe,
                         OutputArguments,
