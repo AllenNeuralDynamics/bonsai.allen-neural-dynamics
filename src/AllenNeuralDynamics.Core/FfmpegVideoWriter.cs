@@ -29,7 +29,7 @@ namespace AllenNeuralDynamics.Core
 
         [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
         [Description("The optional set of command-line arguments to use for configuring the video codec.")]
-        public string OutputArguments { get; set; } = @"-vf ""scale=out_color_matrix=bt709:out_range=full"" -c:v h264_nvenc -pix_fmt nv12 -color_range full -colorspace bt709 -color_trc linear -tune hq -preset p4 -rc vbr -cq 12 -b:v 0M -metadata author=""Allen Institute for Neural Dynamics"" -maxrate 700M -bufsize 350M";
+        public string OutputArguments { get; set; } = @"-vf ""scale=out_color_matrix=bt709:out_range=full:sws_dither=none,format=yuv420p10le,colorspace=ispace=bt709:all=bt709:dither=none,scale=out_range=tv:sws_dither=none,format=yuv420p"" -c:v libx264 -preset veryslow -crf 18 -pix_fmt yuv420p -metadata author=""Allen Institute for Neural Dynamics"" -movflags +faststart+write_colr";
 
         [Editor(DesignTypes.MultilineStringEditor, DesignTypes.UITypeEditor)]
         [Description("The optional set of command-line arguments to use for configuring the input video stream.")]
