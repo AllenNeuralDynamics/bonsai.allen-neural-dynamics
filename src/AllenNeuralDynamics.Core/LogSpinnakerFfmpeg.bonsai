@@ -80,6 +80,7 @@ Value.Image as Image)
           <p1:InputArguments>-colorspace rgb -color_primaries bt709 -color_trc linear</p1:InputArguments>
         </Combinator>
       </Expression>
+      <Expression xsi:type="WorkflowOutput" />
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -94,6 +95,7 @@ Value.Image as Image)
       <Edge From="10" To="11" Label="Source1" />
       <Edge From="11" To="13" Label="Source2" />
       <Edge From="12" To="13" Label="Source3" />
+      <Edge From="13" To="14" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
