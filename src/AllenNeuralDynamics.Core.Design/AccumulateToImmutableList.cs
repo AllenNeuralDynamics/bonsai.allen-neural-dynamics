@@ -1,7 +1,6 @@
 ﻿using Bonsai;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Collections.Immutable;
 
@@ -14,11 +13,7 @@ namespace AllenNeuralDynamics.Core.Design
     {
         public IObservable<ImmutableList<T>> Process<T>(IObservable<T> source)
         {
-            var list = ImmutableList<T>.Empty;
-            return source.Select(value =>
-            {
-                return list.Add(value);
-            });
+            return source.Scan(ImmutableList<T>.Empty, (arr, value) => arr.Add(value));
         }
     }
 }
