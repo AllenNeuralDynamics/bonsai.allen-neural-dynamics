@@ -3,29 +3,29 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
-                 xmlns:beh="clr-namespace:Harp.Behavior;assembly=Harp.Behavior"
+                 xmlns:p1="clr-namespace:AllenNeuralDynamics.EnvironmentSensor;assembly=AllenNeuralDynamics.EnvironmentSensor"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
       <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
-        <rx:Name>HarpBehaviorCommands</rx:Name>
+        <rx:Name>HarpEnvironmentSensorCommands</rx:Name>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
         <Property Name="PortName" />
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="beh:Device">
+        <Combinator xsi:type="p1:Device">
           <harp:OperationMode>Active</harp:OperationMode>
-          <harp:OperationLed>On</harp:OperationLed>
-          <harp:DumpRegisters>false</harp:DumpRegisters>
-          <harp:VisualIndicators>On</harp:VisualIndicators>
+          <harp:OperationLed>Off</harp:OperationLed>
+          <harp:DumpRegisters>true</harp:DumpRegisters>
+          <harp:VisualIndicators>Off</harp:VisualIndicators>
           <harp:Heartbeat>Enabled</harp:Heartbeat>
           <harp:IgnoreErrors>false</harp:IgnoreErrors>
-          <harp:PortName>COM5</harp:PortName>
+          <harp:PortName>COMx</harp:PortName>
         </Combinator>
       </Expression>
       <Expression xsi:type="rx:PublishSubject">
-        <Name>HarpBehaviorEvents</Name>
+        <Name>HarpEnvironmentSensorEvents</Name>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
         <Property Name="Name" DisplayName="TriggerHarpReadDumpSubjectName" />
@@ -39,30 +39,13 @@
           <harp:OperationMode>Active</harp:OperationMode>
           <harp:DumpRegisters>true</harp:DumpRegisters>
           <harp:MuteReplies>false</harp:MuteReplies>
-          <harp:VisualIndicators>On</harp:VisualIndicators>
-          <harp:OperationLed>On</harp:OperationLed>
+          <harp:VisualIndicators>Off</harp:VisualIndicators>
+          <harp:OperationLed>Off</harp:OperationLed>
           <harp:Heartbeat>Enabled</harp:Heartbeat>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
-        <Name>HarpBehaviorCommands</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>HarpBehaviorEvents</Name>
-      </Expression>
-      <Expression xsi:type="beh:CreateMessage">
-        <harp:MessageType>Write</harp:MessageType>
-        <harp:Payload xsi:type="beh:CreateEventEnablePayload">
-          <beh:EventEnable>PortDI PortDIO AnalogData Camera0 Camera1</beh:EventEnable>
-        </harp:Payload>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Take">
-          <rx:Count>1</rx:Count>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="MulticastSubject">
-        <Name>HarpBehaviorCommands</Name>
+        <Name>HarpEnvironmentSensorCommands</Name>
       </Expression>
     </Nodes>
     <Edges>
@@ -72,9 +55,6 @@
       <Edge From="4" To="5" Label="Source1" />
       <Edge From="5" To="6" Label="Source1" />
       <Edge From="6" To="7" Label="Source1" />
-      <Edge From="8" To="9" Label="Source1" />
-      <Edge From="9" To="10" Label="Source1" />
-      <Edge From="10" To="11" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
